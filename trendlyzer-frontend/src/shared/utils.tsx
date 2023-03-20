@@ -1,2 +1,0 @@
-// Example
-export const commonUtil = () => {}
