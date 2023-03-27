@@ -1,15 +1,9 @@
 const express = require("express");
-const {
-  getAllBlogs,
-  // createBlog,
-  // getBlogById,
-  // updateBlog,
-  // deleteBlog,
-} = require("../controllers/TrendsController");
-
 const router = express.Router();
+const trendsController = require("../controllers/TrendsController");
 
-router.route("/").get(getAllBlogs);
+
+router.get("/getTweets/:keyword", trendsController.getTweets);
 // router.route("/:id").get(getBlogById).put(updateBlog).delete(deleteBlog);
  
 module.exports = router;
