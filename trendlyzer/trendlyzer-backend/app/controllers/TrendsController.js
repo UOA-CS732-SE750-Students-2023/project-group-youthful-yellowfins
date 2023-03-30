@@ -1,10 +1,12 @@
 const blogService = require("../services/TrendsService");
+const TwitterService = require("../services/TwitterContentService");
 
 
-exports.getAllBlogs = async (req, res) => {
+exports.getTweets = async (req, res) => {
     try {
-      const blogs = await blogService.getAllBlogs();
-      res.json({ data: blogs, status: "success" });
+      console.log(req.params)
+      const blogs = await TwitterService.GetTweetsByKeywords(req.params.keyword);
+      res.json({  status: "success" });
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
