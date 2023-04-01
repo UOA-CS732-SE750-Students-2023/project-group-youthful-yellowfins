@@ -1,9 +1,12 @@
 .App {
   text-align: center;
+  color: white;
+  background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
+  background-size: contain;
 }
 
 .App-header {
-  min-height: 100vh;
+  min-height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
+import Who from './components/Landing/Who/Who';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Trendlyzer</h1>
-      </header>
+      <Who></Who>
     </div>
   );
 }
