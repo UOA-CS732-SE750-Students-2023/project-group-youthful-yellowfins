@@ -9,7 +9,9 @@ function Who() {
             <div className="Container">
                 <div className="Left">
                     <h1>Who we are?</h1>
-                    <p>We the Trendlyzer</p>
+                    <p>We Trendlyzer will unlock the full potential of the data and help you to make smarter decisions, gain knowledge with our data analysis by knowing about what is trending at your place or across globe.
+Our intuitive platform provides powerful insights and customizable visualizations, allowing you to extract meaningful insights and take action with confidence. 
+So why to wait? Join a community of forward-thinking businesses who rely on our website to transform their data into success.</p>
                 </div>
                 <div className="Right">
                         <img className="Img" src = "./img/who-pikachu.png"></img>
