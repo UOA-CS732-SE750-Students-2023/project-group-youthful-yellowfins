@@ -1,3 +1,10 @@
+.card {
+  background-color: lightblue;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
 .Section {
     scroll-snap-align: center;
     display: flex;

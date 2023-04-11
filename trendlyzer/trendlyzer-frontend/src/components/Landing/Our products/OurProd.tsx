@@ -8,8 +8,9 @@ function Ourprod() {
         <div className="Section">
             <div className="Container">
                 <div className="Left">
-                    <h1>Our products</h1>
-                    <p>Trend research 
+                    <div className="card">
+                     <h1>Our products</h1>
+                     <p>Trend research 
                          |- Browse across the globe
                          |- In your language
                          |- Know in detail of it is excalty
@@ -19,7 +20,8 @@ function Ourprod() {
                         Export at your comfort
                          |- In pdf, xcel, csv format
 
-                    </p>
+                     </p>
+                    </div>
                 </div>
                    <div className="Right">
                    <div className= "Container1">
