@@ -13,11 +13,11 @@ function Ourprod() {
                      <p>Trend research 
                          |- Browse across the globe
                          |- In your language
-                         |- Know in detail of it is excalty. <br>
+                         |- Know in detail of it is excalty. 
                         Sentimental analysis
                          |- What people across globe think of it?
-                         |- Is it posiitve or negative? </br>
-                        Export at your comfort
+                         |- Is it posiitve or negative? 
+                         Export at your comfort
                          |- In pdf, xcel, csv format
 
                      </p>
