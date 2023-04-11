@@ -7,7 +7,11 @@ function NavBar() {
   const navigate = useNavigate();
 
   const navigateToLogin = () => {
-    navigate('../Login');
+    navigate('/login');
+  };
+
+  const navigateToRegister = () => {
+    navigate('/register');
   };
   return (
     <div className='Section'>
@@ -20,7 +24,7 @@ function NavBar() {
           <Button onClick={navigateToLogin} variant='contained' color='primary'>
             Login
           </Button>
-          <Button variant='contained' color='primary'>
+          <Button onClick={navigateToRegister}  variant='contained' color='primary'>
             Sign Up
           </Button>
         </div>
