@@ -4,6 +4,8 @@ const trendsController = require("../controllers/TrendsController");
 
 
 router.get("/getTweets/:keyword", trendsController.getTweets);
-// router.route("/:id").get(getBlogById).put(updateBlog).delete(deleteBlog);
+router.get('/getTrendsByDate', trendsController.getTrendsByDate);
+router.post('/getTrendByRegion', trendsController.getTrendByRegion);
+
  
 module.exports = router;

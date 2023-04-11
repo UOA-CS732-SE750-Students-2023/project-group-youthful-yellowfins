@@ -1,5 +1,7 @@
-const blogService = require("../services/TrendsService");
+const { response } = require("express");
+const TrendsService = require("../services/TrendsService");
 const TwitterService = require("../services/TwitterContentService");
+const Constants = require("../helper/Constants");
 
 
 exports.getTweets = async (req, res) => {
@@ -13,7 +15,61 @@ exports.getTweets = async (req, res) => {
   };
  
 
-  
+  exports.getTrendsByDate = async (req, res) => {
+    try {
+      let response = null;
+      if(!req.query?.geocode){
+        throw new MyCustomError(Constants.GEOCODE_MISSING_ERROR_MESSAGE, Constants.BAD_REQUEST_ERROR_CODE);   
+      }
+      if(req.query.date){
+         response = await TrendsService.getDailyTrends(req.query);
+      } else {
+         response = await TrendsService.getRealTimeTrends(req.query);
+      }
+      // response null code to be added
+      res.json({  status: true, result : response , message : 'success'});
+    } catch (err) {
+      if(err instanceof MyCustomError){
+        res.status(err.statusCode).json({ message: err.message , status : false});
+      } else {
+        res.status(Constants.INTERNAL_SERVER_ERROR_CODE).json({ message: err.message , status : false});
+      }
+    }
+  };
+
+
+  exports.getTrendByRegion = async (req, res) => {
+    try {
+      let response = null;
+      if(!req.body?.keyword){
+        throw new MyCustomError(Constants.SEARCH_KEYWORD_MISSING_ERROR_MESSAGE, 
+          Constants.BAD_REQUEST_ERROR_CODE);   
+      }
+      response = await TrendsService.getTrendsByRegion(req.body);
+      // response null code to be added
+      res.json({  status: true, message: 'success', result : response });
+    } catch (err) {
+      if(err instanceof MyCustomError){
+        res.status(err.statusCode).json({ message: err.message , status : false});
+      } else {
+        res.status(Constants.INTERNAL_SERVER_ERROR_CODE).json({ message: err.message , status : false});
+      }
+    }
+  };
+
+
+
+
+
+
+  class MyCustomError extends Error {
+    constructor(msg, statusCode) {
+      super(msg);
+      this.statusCode = statusCode;
+      this.name = MyCustomError.name;
+    }
+  }
+
 // exports.createBlog = async (req, res) => {
 //   try {
 //     const blog = await blogService.createBlog(req.body);
