@@ -29,6 +29,7 @@ exports.getRealTimeTrends = async (req) => {
 // Search top 20 trending search keywords in past 24 hrs - segregation by date, adds 7 articles hyperlinks per trending keyword
 exports.getDailyTrends = async (req) => {
   let response = null;
+  console.log(req.date)
     let data = await googleTrends.dailyTrends({
         trendDate: new Date(req.date),
         geo: req.geocode
@@ -43,7 +44,7 @@ exports.getDailyTrends = async (req) => {
 // gives list of places/countries (based on input) where popularity of keyword - Doubt - ordering how?
 exports.getTrendsByRegion = async (req) => {
   let response = null;
-  let startTime = new Date('07-04-2004');
+  let startTime = new Date('2004-04-04');
   let endTime =  new Date().toISOString();
   endTime = new Date(endTime);
   if(req.startTime){
@@ -60,9 +61,7 @@ exports.getTrendsByRegion = async (req) => {
       endTime: endTime
     });
     if(data){
-      
       response =  JSON.parse(data);
-      console.log(response);
       response = translateTrendsByRegionResponse(response);
     }
     return response;
