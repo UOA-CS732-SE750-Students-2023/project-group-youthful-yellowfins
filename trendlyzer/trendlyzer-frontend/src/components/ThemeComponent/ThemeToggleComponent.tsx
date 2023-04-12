@@ -20,4 +20,4 @@ const ThemeToggleComponent = () => {
   );
 }
 
-export default ThemeToggleComponent;
+export default ThemeToggleComponent
