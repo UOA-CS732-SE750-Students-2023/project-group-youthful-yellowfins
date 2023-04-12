@@ -1,4 +1,11 @@
-.Section {
+.card {
+  background-color: lightblue;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.section {
     scroll-snap-align: center;
     display: flex;
     flex-direction: column;
@@ -6,25 +13,20 @@
     justify-content: space-between;
 }
 
-.Container{
+.container{
     scroll-snap-align: center;
     width: 1400px;
     display: flex;
     justify-content: space-between;
 }
 
-.Left {
-    flex: 2;
-    height: 90vh;
-    flex-direction: column;
-    scroll-snap-align: center;
-    width: 1400px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-} 
-
-.Right {
+.container1{
+    
+    background-image: black;
+      
+}
+      
+.left {
     flex: 3;
     height: 90vh;
     scroll-snap-align: center;
@@ -32,6 +34,18 @@
     display: flex;
     position: relative;
     justify-content: space-between;
+} 
+
+.right {
+    flex: 2;
+    height: 90vh;
+    flex-direction: row;
+    scroll-snap-align: center;
+    width: 1400px;
+    display: flex;
+    justify-content: center;
+    gap: 20px
+    
 }
 
 .h1 {
@@ -44,7 +58,7 @@
 }
 
 
-.Img {
+.img {
     width: 700px;
     height: 600px;
     object-fit: contain;
@@ -86,3 +100,5 @@
     -o-animation-name: bounce;
     animation-name: bounce;
 }
+
+

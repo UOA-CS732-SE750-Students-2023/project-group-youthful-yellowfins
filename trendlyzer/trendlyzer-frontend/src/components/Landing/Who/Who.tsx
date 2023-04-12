@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../NavBar/NavBar';
-import './Who.css';
+import './Who.module.css';
 
 function Who() {
     return(
