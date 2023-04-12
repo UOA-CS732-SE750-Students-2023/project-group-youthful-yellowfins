@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { type IAuth, type IAuthContext } from '../models/AuthProp';
+import { IAuth, IAuthContext } from '../models/AuthProp';
 
 const defaultState: IAuthContext = {
   auth: { userId: '', isAuthenticated: false },

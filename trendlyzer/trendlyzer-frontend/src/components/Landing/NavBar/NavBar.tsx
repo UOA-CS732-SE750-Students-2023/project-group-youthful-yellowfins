@@ -24,7 +24,7 @@ function NavBar() {
           <Button onClick={navigateToLogin} variant='contained' color='primary'>
             Login
           </Button>
-          <Button onClick={navigateToRegister}  variant='contained' color='primary'>
+          <Button onClick={navigateToRegister} variant='contained' color='primary'>
             Sign Up
           </Button>
         </div>

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import { type IThemeContext } from '../models/ThemeProp';
+import { IThemeContext } from '../models/ThemeProp';
 
 const defaultState: IThemeContext = {
   dark: false,
