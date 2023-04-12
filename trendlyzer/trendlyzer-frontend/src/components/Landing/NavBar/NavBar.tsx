@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import React from 'react';
-import './NavBar.css';
+import './NavBar.module.css';
 
 function NavBar() {
     return(
