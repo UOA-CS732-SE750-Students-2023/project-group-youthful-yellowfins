@@ -1,8 +1,7 @@
 const axios = require('axios');
 
-const CHATGPT_API_KEY = process.env.CHATGPT_API_KEY;
-const CHATGPT_API_URL = 'https://api.openai.com/v1/engines/davinci-codex/completions';
-
+const CHATGPT_API_KEY = process.env.CHATGPT_API_KEY; 
+girconst CHATGPT_API_URL ='https://api.openai.com/v1/completions';
 async function generateResponse(message) {
   const prompt = `User: ${message}\nChatbot:`;
 
