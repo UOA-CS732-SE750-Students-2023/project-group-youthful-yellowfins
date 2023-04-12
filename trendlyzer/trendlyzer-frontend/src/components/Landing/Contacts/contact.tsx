@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from '../NavBar/NavBar';
-import './contact.css';
+import './contact.module.css';
 import { Card, CardContent, Typography} from '@mui/material';
 
 function contact()
