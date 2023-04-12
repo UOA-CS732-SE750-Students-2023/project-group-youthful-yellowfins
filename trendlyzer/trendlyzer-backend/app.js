@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const TrendsRouter = require("./app/routes/TrendsRoutes");
-const ChatgptRoutes = require('./app/routes/ChatgptRoutes');
 
 const app = express();
 
@@ -10,8 +9,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/Trends", TrendsRouter);
-app.use("/api/chatgpt", ChatgptRoutes);
-
  
 //configure mongoose
 // mongoose.connect(
