@@ -6,6 +6,13 @@
     justify-content: space-between;
 }
 
+.card {
+    background-color: lightblue;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+  }
+  
 .container{
     scroll-snap-align: center;
     width: 1400px;

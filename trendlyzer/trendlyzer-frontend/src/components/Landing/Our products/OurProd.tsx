@@ -1,14 +1,12 @@
 import React from 'react';
-import NavBar from '../NavBar/NavBar';
 import './OurProd.module.css';
-import { Card, CardContent, Typography} from '@mui/material';
 
 function Ourprod() {
     return(
         <div className="Section">
             <div className="Container">
                 <div className="Left">
-                    <div className="card">
+                    <div className="Card">
                      <h1>Our products</h1>
                      <p>Trend research 
                          |- Browse across the globe
