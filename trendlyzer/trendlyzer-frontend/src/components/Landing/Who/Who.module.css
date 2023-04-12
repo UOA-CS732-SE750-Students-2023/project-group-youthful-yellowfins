@@ -1,0 +1,88 @@
+.section {
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container{
+    scroll-snap-align: center;
+    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left {
+    flex: 2;
+    height: 90vh;
+    flex-direction: column;
+    scroll-snap-align: center;
+    width: 1400px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+} 
+
+.right {
+    flex: 3;
+    height: 90vh;
+    scroll-snap-align: center;
+    width: 1400px;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+}
+
+.h1 {
+    font-size: 74px;
+}
+
+.p {
+    font-size: 24px;
+    color: lightgray;
+}
+
+
+.img {
+    width: 700px;
+    height: 600px;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    animation: 1s infinite ease alternate bounce;
+}
+
+@-webkit-keyframes bounce {
+    100%{
+        transform: translateY(20px)
+      }
+}
+
+@-moz-keyframes bounce {
+    100%{
+        transform: translateY(20px)
+      }
+}
+
+@-o-keyframes bounce {
+    100%{
+        transform: translateY(20px)
+      }
+}
+@keyframes bounce {
+    100%{
+        transform: translateY(20px)
+      }
+}
+
+.animated.bounce {
+    -webkit-animation-name: bounce;
+    -moz-animation-name: bounce;
+    -o-animation-name: bounce;
+    animation-name: bounce;
+}
