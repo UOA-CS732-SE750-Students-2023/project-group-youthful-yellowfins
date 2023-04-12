@@ -1,0 +1,10 @@
+.layoutMenu {
+  width: 20%;
+  background-color: #560badff;
+  color: #fff;
+}
+
+.layoutMenu a {
+  color: #fff;
+  text-decoration: none;
+}
