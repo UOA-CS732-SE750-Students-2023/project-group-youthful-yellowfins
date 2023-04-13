@@ -2,7 +2,27 @@ const { response } = require("express");
 const TrendsService = require("../services/TrendsService");
 const TwitterService = require("../services/TwitterContentService");
 const Constants = require("../helper/Constants");
+const chatgptService = require('../services/ChatgptService');
 
+
+exports.sendMessage = async (req, res) => {
+  
+  try {
+    if (!req.query?.message) {
+      throw new MyCustomError(Constants.SEARCH_KEYWORD_MISSING_ERROR_MESSAGE, 
+      Constants.BAD_REQUEST_ERROR_CODE);
+    }
+    const response = await chatgptService.generateResponse(req.query?.message);
+    res.json({   status: true, message : 'success', result : response});
+
+} catch (err) {
+  if(err instanceof MyCustomError){
+    res.status(err.statusCode).json({ message: err.message , status : false});
+  } else {
+    res.status(Constants.INTERNAL_SERVER_ERROR_CODE).json({ message: err.message , status : false});
+  }
+}
+};
 
 exports.getTweets = async (req, res) => {
     try {
@@ -21,7 +41,7 @@ exports.getTweets = async (req, res) => {
       if(!req.query?.geocode){
         throw new MyCustomError(Constants.GEOCODE_MISSING_ERROR_MESSAGE, Constants.BAD_REQUEST_ERROR_CODE);   
       }
-      if(req.query.date){
+      if(req.query?.date){
          response = await TrendsService.getDailyTrends(req.query);
       } else {
          response = await TrendsService.getRealTimeTrends(req.query);
@@ -56,11 +76,6 @@ exports.getTweets = async (req, res) => {
       }
     }
   };
-
-
-
-
-
 
   class MyCustomError extends Error {
     constructor(msg, statusCode) {
