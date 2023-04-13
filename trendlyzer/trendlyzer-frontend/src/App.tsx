@@ -15,6 +15,5 @@ function App() {
       </LocalizationProvider>
     </AuthProvider>
   );
-}
 
 export default App;
