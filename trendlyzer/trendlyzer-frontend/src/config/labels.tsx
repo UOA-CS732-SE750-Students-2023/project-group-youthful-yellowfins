@@ -1,5 +1,5 @@
-import DailyTrendsComponent from '../components/DailyTrends';
-import InterestByRegionComponent from '../components/InterestByRegion';
+import DailyTrendsComponent from '../components/DailyTrends/DailyTrendscomponent';
+import InterestByRegionComponent from '../components/InterestByRegion/interestByRegionComponent';
 import RealTimeTrendsComponent from '../components/RealTimeTrends';
 
 export const headingsLabels = {
