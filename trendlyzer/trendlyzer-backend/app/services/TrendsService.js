@@ -129,9 +129,9 @@ function translateTrendsByDateResponse(response){
       let trendingStory = [];
       if(element.trendingSearches?.length){
         for (const item of element.trendingSearches) {
-           const model = {
+          const model = {
             title : item.title?.query,
-            trafficCount : item.title,
+            trafficCount : item?.formattedTraffic,
             image : item.image,
             articles : item.articles
           }
