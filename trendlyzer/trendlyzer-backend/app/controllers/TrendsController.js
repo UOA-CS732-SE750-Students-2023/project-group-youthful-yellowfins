@@ -3,7 +3,19 @@ const TrendsService = require("../services/TrendsService");
 const TwitterService = require("../services/TwitterContentService");
 const Constants = require("../helper/Constants");
 const chatgptService = require('../services/ChatgptService');
+const CountryCode = require('../services/CountryCodesService');
 
+
+exports.getCountryCodes = async (req, res) => {
+  
+  try {
+    const countryCodes = await CountryCode.fetchCountryCodes();
+    res.json(countryCodes);
+  } catch (err) {
+    console.error('Error fetching country data:', err);
+    res.status(500).json({ error: err.message });
+  }
+};
 
 exports.sendMessage = async (req, res) => {
   
