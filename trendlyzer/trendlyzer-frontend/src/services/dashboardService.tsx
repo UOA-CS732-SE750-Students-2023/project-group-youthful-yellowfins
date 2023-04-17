@@ -7,3 +7,7 @@ export const getAllCountriesCode = async () => {
 export const getDailyTrends = async (queryParams: any) => {
   return await http.get<any>('Trends/getTrendsByDate', { params: queryParams });
 };
+
+export const getRegionTrends = async (queryParams: any) => {
+  return await http.post<any>('Trends/getTrendByRegion', queryParams);
+};

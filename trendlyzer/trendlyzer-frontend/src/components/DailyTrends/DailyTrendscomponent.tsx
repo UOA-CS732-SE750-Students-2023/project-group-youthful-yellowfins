@@ -1,32 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { headingsLabels } from '../../config/labels';
-import { getAllCountriesCode } from '../../services/dashboardService';
-import { ICountry, ICountryResponse } from '../../models/common';
-import DailyTrendsDetailsComponent from './Details/DailyTrendsDetailsComponent';
 import dayjs from 'dayjs';
 
+import { headingsLabels } from '../../config/labels';
+import DailyTrendsDetailsComponent from './Details/DailyTrendsDetailsComponent';
+import { CountriesContext } from '../../context/CountriesContext';
+import { ICountry } from '../../models/ContextModel';
+
 const DailyTrendsComponent = () => {
-  const [selectedCountry, setSelectedCountry] = useState('FR');
-  const [countriesList, setCountriesList] = useState([]);
   const [selectedDate, setSelectedDate] = useState(dayjs());
-
-  const handleCountryChange = () => {
-    setSelectedCountry('NZ');
-  };
-
-  useEffect(() => {
-    getAllCountriesCode()
-      .then((response) => {
-        const list = response.data.map((country: ICountryResponse) => ({
-          code: country.cca2,
-          name: country.name.common,
-        }));
-        setCountriesList(list);
-      })
-      .catch(() => {});
-  }, []);
+  const { countriesList, selectedCountry, handleCountryChange } = useContext(CountriesContext);
 
   return (
     <>
@@ -51,17 +35,12 @@ const DailyTrendsComponent = () => {
           <DatePicker
             defaultValue={dayjs('2022/04/17')}
             value={selectedDate}
-            onChange={(newValue) => {
-              console.log('newValue', newValue);
-              setSelectedDate(dayjs(newValue));
-            }}
+            label={headingsLabels.DATE}
+            onChange={(newValue) => setSelectedDate(dayjs(newValue))}
           />
         </FormControl>
       </div>
       <DailyTrendsDetailsComponent country={selectedCountry} date={selectedDate} />
-      {/* <DailyTrendsDetailsComponent />
-
-      <DailyTrendsDetailsComponent /> */}
     </>
   );
 };

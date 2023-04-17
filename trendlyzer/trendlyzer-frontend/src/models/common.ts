@@ -1,8 +1,3 @@
-export interface ICountry {
-  code: string;
-  name: string;
-}
-
 export interface ICountryResponse {
   cca2: string;
   name: { common: string };
@@ -21,17 +16,37 @@ export interface IArticle {
   image: IImage;
   url: string;
   snippet: string;
+  articleTitle?: string;
+}
+
+export interface IRealTimeArticle {
+  title?: string;
+  articleTitle: string;
+  snippet: string;
+  source: string;
+  time: string;
+  url: string;
+  timeAgo?: string;
 }
 export interface WrapperProps {
   title: string;
-  trafficCount: object;
+  trafficCount?: string;
   image: IImage;
-  articles: IArticle[];
+  articles: IArticle[] | IRealTimeArticle[];
   id: number;
+  entityNames?: [];
 }
 
 export interface TrendsListResponse {
   date: string;
   formattedDate: string;
   trendingStories: WrapperProps[];
+}
+
+export interface RealTimeListResponse {
+  articles: IRealTimeArticle[];
+  entityNames: [];
+  image: IImage;
+  title: string;
+  id: number;
 }

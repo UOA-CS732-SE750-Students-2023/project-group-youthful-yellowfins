@@ -1,9 +1,9 @@
 import React, { createContext, useState } from 'react';
-import { IAuth, IAuthContext } from '../models/AuthProp';
+import { IAuth, IAuthContext } from '../models/ContextModel';
 
 const defaultState: IAuthContext = {
   auth: { userId: '', isAuthenticated: false },
-  handleAuth: () => {}
+  handleAuth: () => {},
 };
 
 export const AuthContext = createContext<IAuthContext>(defaultState);
@@ -13,11 +13,7 @@ const AuthProvider = ({ children }: any) => {
 
   const handleAuth = (value: IAuth) => setAuth(value);
 
-  return (
-    <AuthContext.Provider value={{ auth, handleAuth }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ auth, handleAuth }}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;
