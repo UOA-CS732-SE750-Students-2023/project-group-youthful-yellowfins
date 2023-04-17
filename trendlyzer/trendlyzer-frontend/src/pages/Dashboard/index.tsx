@@ -16,6 +16,7 @@ const Dashboard = () => {
         textColor='secondary'
         indicatorColor='secondary'
         aria-label='secondary tabs example'
+        sx={{ padding: '20px' }}
       >
         {tabsList.map((tab) => (
           <Tab value={tab.value} label={tab.label} key={tab.value} />

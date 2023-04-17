@@ -1,56 +1,52 @@
-import React, { useEffect, useState } from 'react';
-import { FormControl, InputBase, InputLabel, MenuItem, Select } from '@mui/material';
+import React, { useContext } from 'react';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { headingsLabels } from '../../config/labels';
-import { getAllCountriesCode } from '../../services/dashboardService';
-import { ICountry, ICountryResponse } from '../../models/common';
+import { CountriesContext } from '../../context/CountriesContext';
+import { CategoryContext } from '../../context/CategoryContext';
+import { ICategory, ICountry } from '../../models/ContextModel';
+import RealTimeDetailsComponent from './Details/RealTimeDetailsComponent';
 
 const RealTimeTrendsComponent = () => {
-  const [selectedCountry, setSelectedCountry] = useState('US');
-  const [countriesList, setCountriesList] = useState([]);
-
-  const handleCountryChange = () => {
-    setSelectedCountry('NZ');
-  };
-
-  useEffect(() => {
-    getAllCountriesCode()
-      .then((response) => {
-        const list = response.data.map((country: ICountryResponse) => ({
-          code: country.cca2,
-          name: country.name.common,
-        }));
-        setCountriesList(list);
-      })
-      .catch(() => {});
-  }, []);
+  const { countriesList, selectedCountry, handleCountryChange } = useContext(CountriesContext);
+  const { categoryList, selectedCategory, handleCategoryChange } = useContext(CategoryContext);
 
   return (
     <>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <InputLabel id='country-label'>{headingsLabels.COUNTRY}</InputLabel>
-        <Select
-          labelId='country-label'
-          id='country-select'
-          value={selectedCountry}
-          label={headingsLabels.COUNTRY}
-          onChange={handleCountryChange}
-        >
-          {countriesList.map((country: ICountry) => (
-            <MenuItem key={country.code} value={country.code}>
-              {country.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <FormControl sx={{ display: 'inline-block', alignSelf: 'center' }}>
-          <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            placeholder='Category'
-            inputProps={{ 'aria-label': 'category' }}
-          />
+      <div>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id='country-label'>{headingsLabels.COUNTRY}</InputLabel>
+          <Select
+            labelId='country-label'
+            id='country-select'
+            value={selectedCountry}
+            label={headingsLabels.COUNTRY}
+            onChange={handleCountryChange}
+          >
+            {countriesList.map((country: ICountry) => (
+              <MenuItem key={country.code} value={country.code}>
+                {country.name}
+              </MenuItem>
+            ))}
+          </Select>
         </FormControl>
-      </FormControl>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id='category-label'>{headingsLabels.CATEGORY}</InputLabel>
+          <Select
+            labelId='category-label'
+            id='category-select'
+            value={selectedCategory}
+            label={headingsLabels.CATEGORY}
+            onChange={handleCategoryChange}
+          >
+            {categoryList.map((category: ICategory) => (
+              <MenuItem key={category.code} value={category.code}>
+                {category.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </div>
+      <RealTimeDetailsComponent country={selectedCountry} category={selectedCategory} />
     </>
   );
 };

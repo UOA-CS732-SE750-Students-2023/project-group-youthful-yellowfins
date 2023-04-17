@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
 import { Box } from '@mui/material';
 import CardWrapperComponent from '../../UIComponents/Card/CardWrapper';
 import { getDailyTrends } from '../../../services/dashboardService';
-import { TrendsListResponse, WrapperProps } from '../../../models/common';
+import { RealTimeListResponse, WrapperProps } from '../../../models/common';
 
-const DailyTrendsDetailsComponent = ({ country, date }: any) => {
-  const [trendsList, setTrendsList] = useState<TrendsListResponse[]>([
-    {
-      date: '',
-      formattedDate: '',
-      trendingStories: [],
-    },
-  ]);
+const RealTimeDetailsComponent = ({ country, category }: any) => {
+  const [trendsList, setTrendsList] = useState<RealTimeListResponse[]>([]);
 
   useEffect(() => {
     getDailyTrends({
       geocode: country,
       category: 'All',
-      date: dayjs(date).format('YYYY-MM-DD'),
     })
       .then((response) => {
         if (response.data.status) {
@@ -26,15 +18,15 @@ const DailyTrendsDetailsComponent = ({ country, date }: any) => {
         }
       })
       .catch(() => {});
-  }, [country, date]);
+  }, [country]);
 
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-      {trendsList[0].trendingStories.map((story: WrapperProps, index) => {
+      {trendsList.map((story: WrapperProps, index) => {
         return <CardWrapperComponent key={index} {...story} id={index + 1} />;
       })}
     </Box>
   );
 };
 
-export default DailyTrendsDetailsComponent;
+export default RealTimeDetailsComponent;

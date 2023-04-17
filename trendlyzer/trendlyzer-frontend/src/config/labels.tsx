@@ -1,19 +1,21 @@
 import DailyTrendsComponent from '../components/DailyTrends/DailyTrendscomponent';
-import InterestByRegionComponent from '../components/InterestByRegion/interestByRegionComponent';
+import InterestByRegionComponent from '../components/InterestByRegion/InterestByRegionComponent';
 import RealTimeTrendsComponent from '../components/RealTimeTrends';
 
 export const headingsLabels = {
   COUNTRY: 'Country',
-  DAILY_TRENDS: 'Daily Trends',
+  CATEGORY: 'Category',
+  DAILY_TRENDS: 'Daily Search Trends',
   DASHBOARD: 'Dashboard',
   DATE: 'Date',
   INTEREST_BY_REGION: 'Interest by region',
   LOGOUT: 'Logout',
-  REAL_TIME_TRENDS: 'Real time Trends',
+  REAL_TIME_TRENDS: 'Real-Time Search Trends',
   SENTIMENT: 'Sentiment',
   TREND_DETAILS: 'Trend Details',
   START_DATE: 'Start Date',
   END_DATE: 'End Date',
+  SEARCH_KEYWORD: 'Search Keyword'
 };
 
 export const headingsValue = {

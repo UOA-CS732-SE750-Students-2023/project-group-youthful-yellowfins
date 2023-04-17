@@ -10,7 +10,15 @@ const Navigation = () => {
   return (
     <>
       <div className={classes.layoutMenu}>
-        <Stack direction='column' sx={{ alignItems: 'center' }}>
+        <Stack
+          direction='column'
+          sx={{
+            alignItems: 'center',
+            position: 'fixed',
+            width: 'inherit',
+            flexWrap: 'wrap-reverse',
+          }}
+        >
           <ListItemButton>
             <Link to={'/dashboard'}>
               <img src='logo-trendlyzer.png' alt='Trendlyzer' height={150} width={350} />
