@@ -10,11 +10,9 @@ exports.getCountryCodes = async (req, res) => {
   
   try {
     const countryCodes = await CountryCode.fetchCountryCodes();
-    res.json(countryCodes);
+    res.json({   status: true, message : 'success', result : countryCodes});
   } catch (err) {
-    console.error('Error fetching country data:', err);
-    res.status(500).json({ error: err.message });
-  }
+    res.status(Constants.INTERNAL_SERVER_ERROR_CODE).json({ message: err.message , status : false});  }
 };
 
 exports.sendMessage = async (req, res) => {
