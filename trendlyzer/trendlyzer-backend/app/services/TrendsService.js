@@ -1,17 +1,12 @@
 const BlogModel = require("../models/Trends");
 const googleTrends = require("google-trends-api");
-
-exports.TrendsService = async () => {
-
-  return null;
-};
-
-
+const axios = require('axios');
+const URLs = require("../helper/URLs");
 
 
 // function for searching top 13 articles for given geography and given category (coudl be b-> business, e-> economics etc, 'all'-> all)
 
-exports.getRealTimeTrends = async (req) => {
+async function getRealTimeTrends(req) {
   let response = null;
     let data = await googleTrends.realTimeTrends({
         geo: req.geocode,
@@ -27,7 +22,7 @@ exports.getRealTimeTrends = async (req) => {
   }
 
 // Search top 20 trending search keywords in past 24 hrs - segregation by date, adds 7 articles hyperlinks per trending keyword
-exports.getDailyTrends = async (req) => {
+async function getDailyTrends (req)  {
   let response = null;
   console.log(req.date)
     let data = await googleTrends.dailyTrends({
@@ -42,27 +37,35 @@ exports.getDailyTrends = async (req) => {
 }
 
 // gives list of places/countries (based on input) where popularity of keyword - Doubt - ordering how?
-exports.getTrendsByRegion = async (req) => {
+async function getTrendsByRegion(req) {
   let response = null;
-  let startTime = new Date('2004-04-04');
-  let endTime =  new Date().toISOString();
-  endTime = new Date(endTime);
-  if(req.startTime){
-    startTime = new Date(req.startTime)
-  } 
-  if(req.endTime) {
-    endTime = new Date(req.endTime)
-  }
-  let data = await googleTrends.interestByRegion(
-    {
-      keyword : req.keyword,
-      geo :  req.geocode,
-      startTime: startTime,
-      endTime: endTime
-    });
-    if(data){
-      response =  JSON.parse(data);
-      response = translateTrendsByRegionResponse(response);
+  try {
+    let startTime = new Date('2004-04-04');
+    let endTime =  new Date().toISOString();
+    endTime = new Date(endTime);
+    if(req.startTime){
+      startTime = new Date(req.startTime)
+    } 
+    if(req.endTime) {
+      endTime = new Date(req.endTime)
+    }
+    let data = await googleTrends.interestByRegion(
+      {
+        keyword : req.keyword,
+        geo :  req.geocode,
+        startTime: startTime,
+        endTime: endTime
+      });
+      console.log(data)
+      if(data) {
+        response =  JSON.parse(data);
+        response = translateTrendsByRegionResponse(response);
+      }
+    }
+    catch (error) {
+      console.log("Error in calling the Country Codes API");
+      console.dir(error);
+      response = null;
     }
     return response;
 }
@@ -149,6 +152,36 @@ function translateTrendsByDateResponse(response){
   return trendingItemsList;
 }
 
+
+
+async function fetchCountryCodes() {
+  try {
+      const response = await axios.get(URLs.COUNTRY_API_URL);
+      if (response?.data) {
+          const countries = response.data;
+          const countryCodes = countries.map(country => {
+              return {
+                  name: country.name.common,
+                  cca2: country.cca2,
+              };
+          });
+          return countryCodes;
+      } else {
+          console.log("The server returned no data or the data is undefined.");
+          return;
+      }
+  } catch (error) {
+      console.log("Error in calling the Country Codes API");
+      console.dir(error);
+  }
+};
+
+module.exports = {
+  getRealTimeTrends,
+  getDailyTrends,
+  getTrendsByRegion,
+  fetchCountryCodes
+};
 
 // interestByRegion();
  
