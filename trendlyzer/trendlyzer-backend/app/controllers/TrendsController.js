@@ -76,8 +76,8 @@ exports.sendMessage = async (req, res) => {
       }
       response = await TrendsService.getTrendsByRegion(req.body);
       if(!response){
-        throw new ApiException(Constants.INTERNAL_SERVER_ERROR_CODE, 
-          Constants.BAD_REQUEST_ERROR_CODE);   
+        throw new ApiException(Constants.SOMETHING_WENT_WRONG, 
+          Constants.INTERNAL_SERVER_ERROR_CODE);   
       }
       // response null code to be added
       res.json({  status: true, message: 'success', result : response });
