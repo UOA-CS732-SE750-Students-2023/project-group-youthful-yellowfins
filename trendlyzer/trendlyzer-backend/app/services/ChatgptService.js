@@ -1,7 +1,7 @@
 const axios = require('axios');
+const URLs = require('../helper/URLs');
 
 const CHATGPT_API_KEY = process.env.CHATGPT_API_KEY;
-const CHATGPT_API_URL = 'https://api.openai.com/v1/engines/text-davinci-003/completions';
 
 async function generateResponse(message) {
   const prompt1 = `Can you give me some background information on ${message}`;
@@ -14,8 +14,7 @@ async function generateResponse(message) {
     },
   };
 
-  const promptBackground = await axios.post(
-    CHATGPT_API_URL,
+  const promptBackground = await axios.post( URLs.CHATGPT_API_URL,
     {
       prompt: prompt1,
       max_tokens: 4000,
@@ -29,7 +28,7 @@ async function generateResponse(message) {
   );
 
   const promptTrendingReason = await axios.post(
-    CHATGPT_API_URL,
+    URLs.CHATGPT_API_URL,
     {
       prompt: prompt2,
       max_tokens: 4000,
