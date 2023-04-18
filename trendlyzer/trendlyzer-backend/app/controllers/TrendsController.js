@@ -3,7 +3,17 @@ const TrendsService = require("../services/TrendsService");
 const TwitterService = require("../services/TwitterContentService");
 const Constants = require("../helper/Constants");
 const chatgptService = require('../services/ChatgptService');
+const CountryCode = require('../services/CountryCodesService');
 
+
+exports.getCountryCodes = async (req, res) => {
+  
+  try {
+    const countryCodes = await CountryCode.fetchCountryCodes();
+    res.json({   status: true, message : 'success', result : countryCodes});
+  } catch (err) {
+    res.status(Constants.INTERNAL_SERVER_ERROR_CODE).json({ message: err.message , status : false});  }
+};
 
 exports.sendMessage = async (req, res) => {
   
