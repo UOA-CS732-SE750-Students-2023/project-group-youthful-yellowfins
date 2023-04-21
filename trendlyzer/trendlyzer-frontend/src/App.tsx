@@ -1,19 +1,12 @@
 import React from 'react';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { RouterProvider } from 'react-router';
-
 import './App.css';
+import { RouterProvider } from 'react-router';
+import routes from './config/routes';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Trendlyzer</h1>
-      </header>
-    </div>
-  );
+  return <RouterProvider router={routes} />;
 }
 
 export default App;
+
 
