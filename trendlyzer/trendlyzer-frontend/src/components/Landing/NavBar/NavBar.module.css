@@ -1,0 +1,28 @@
+.section {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+}
+.links {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.logo {
+    height: 50px;
+    width: 50px;
+}
+
+.button-div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+}
