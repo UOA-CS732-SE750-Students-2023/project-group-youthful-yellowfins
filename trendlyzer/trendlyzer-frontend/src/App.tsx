@@ -8,6 +8,7 @@ import routes from './config/routes';
 import AuthProvider from './context/AuthContext';
 import CountryProvider from './context/CountriesContext';
 import CategoryProvider from './context/CategoryContext';
+import TrendDetailsProvider from './context/TrendDetailsContext';
 
 function App() {
   return (
@@ -15,7 +16,9 @@ function App() {
       <CountryProvider>
         <CategoryProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <RouterProvider router={routes} />
+            <TrendDetailsProvider>
+              <RouterProvider router={routes} />
+            </TrendDetailsProvider>
           </LocalizationProvider>
         </CategoryProvider>
       </CountryProvider>

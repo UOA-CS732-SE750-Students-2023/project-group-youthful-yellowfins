@@ -1,5 +1,4 @@
 import DailyTrendsComponent from '../components/DailyTrends/DailyTrendscomponent';
-import InterestByRegionComponent from '../components/InterestByRegion/InterestByRegionComponent';
 import RealTimeTrendsComponent from '../components/RealTimeTrends';
 
 export const headingsLabels = {
@@ -15,7 +14,8 @@ export const headingsLabels = {
   TREND_DETAILS: 'Trend Details',
   START_DATE: 'Start Date',
   END_DATE: 'End Date',
-  SEARCH_KEYWORD: 'Search Keyword'
+  SEARCH_KEYWORD: 'Search trend keyword',
+  EXPLORE_TRENDS: 'Explore Trends',
 };
 
 export const headingsValue = {
@@ -30,12 +30,6 @@ export const tabsList = [
     label: headingsLabels.DAILY_TRENDS,
     value: headingsValue.DAILY_TRENDS,
     element: <DailyTrendsComponent />,
-  },
-  {
-    id: 1,
-    label: headingsLabels.INTEREST_BY_REGION,
-    value: headingsValue.INTEREST_BY_REGION,
-    element: <InterestByRegionComponent />,
   },
   {
     id: 2,
