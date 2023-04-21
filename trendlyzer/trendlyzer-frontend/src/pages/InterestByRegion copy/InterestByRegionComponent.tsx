@@ -1,11 +1,17 @@
 import React, { useContext, useState } from 'react';
-import { FormControl, IconButton, TextField, InputLabel, MenuItem, Select } from '@mui/material';
+import {
+  Box,
+  FormControl,
+  TextField,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import SearchIcon from '@mui/icons-material/Search';
 import dayjs from 'dayjs';
 
 import { headingsLabels } from '../../config/labels';
-import classes from './InterestByRegion.module.css';
 import { CountriesContext } from '../../context/CountriesContext';
 import { ICountry } from '../../models/ContextModel';
 import RegionDetailsComponent from './Details/RegionDetailsComponent';
@@ -20,23 +26,29 @@ const InterestByRegionComponent = () => {
 
   return (
     <>
-      <div className={classes.filtersBox}>
-        <FormControl sx={{ display: 'inline-block', alignSelf: 'center' }}>
-          <TextField
-            id='outlined-basic'
-            label={headingsLabels.SEARCH_KEYWORD}
-            variant='outlined'
-            sx={{ ml: 1, flex: 1 }}
-            placeholder={headingsLabels.SEARCH_KEYWORD}
-            inputProps={{ 'aria-label': headingsLabels.SEARCH_KEYWORD }}
-            onChange={(value: any) => handleKeywordChange(value)}
-            value={selectedKeyword}
-            required
-          />
-          <IconButton type='button' sx={{ p: '10px' }} aria-label='search'>
-            <SearchIcon />
-          </IconButton>
-        </FormControl>
+      <Box sx={{ p: 2, m: 2 }}>
+        <Typography
+          variant='h5'
+          component='h3'
+          gutterBottom
+          sx={{ display: 'flex', color: '#560badff' }}
+        >
+          {headingsLabels.EXPLORE_TRENDS}
+        </Typography>
+      </Box>
+      <FormControl fullWidth sx={{ mb: 3 }}>
+        <TextField
+          id='outlined-basic'
+          label={headingsLabels.SEARCH_KEYWORD}
+          variant='outlined'
+          sx={{ ml: 4, mr: 3, flex: 1 }}
+          placeholder={headingsLabels.SEARCH_KEYWORD}
+          inputProps={{ 'aria-label': headingsLabels.SEARCH_KEYWORD }}
+          onChange={(value: any) => handleKeywordChange(value)}
+          value={selectedKeyword}
+        />
+      </FormControl>
+      <Box sx={{ ml: 3 }}>
         <FormControl sx={{ m: 1, minWidth: 80 }}>
           <DatePicker
             label={headingsLabels.START_DATE}
@@ -69,7 +81,7 @@ const InterestByRegionComponent = () => {
             ))}
           </Select>
         </FormControl>
-      </div>
+      </Box>
       <RegionDetailsComponent
         country={selectedCountry}
         searchKeyword={selectedKeyword}

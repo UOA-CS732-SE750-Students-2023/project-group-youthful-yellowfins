@@ -27,5 +27,6 @@ export interface ICountry {
 export interface ICountryContext {
   countriesList: ICountry[];
   selectedCountry: string;
+  mapTopology: any;
   handleCountryChange: (value: any) => void;
 }

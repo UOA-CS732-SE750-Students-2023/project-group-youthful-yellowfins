@@ -27,6 +27,9 @@ const Navigation = () => {
           <Link to={'/dashboard'}>
             <ListItemButton sx={{ paddingBottom: '25px' }}>Dashboard</ListItemButton>
           </Link>
+          <Link to={'/exploreTrends'}>
+            <ListItemButton sx={{ paddingBottom: '25px' }}>Explore Trends</ListItemButton>
+          </Link>
           <Link to={'/trendsDetails'}>
             <ListItemButton sx={{ paddingBottom: '25px' }}>Trends Details</ListItemButton>
           </Link>
