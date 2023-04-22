@@ -19,7 +19,7 @@ const CardWrapperComponent = (trendsList: WrapperProps) => {
   // This function will fetch the starting few articles to display on the trending page
   const getFiveArticles = () => {
     const articles: IArticle[] | IRealTimeArticle[] = trendsList.articles;
-    const articleLength: number = articles.length > 5 ? 5 : articles.length;
+    const articleLength: number = articles.length > 2 ? 2 : articles.length;
     const content: any[] = [];
 
     for (let article = 0; article < articleLength; article++) {
@@ -54,7 +54,7 @@ const CardWrapperComponent = (trendsList: WrapperProps) => {
               sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
             >
               <Box>Source: {articles[article].source}</Box>
-              <Box>{articles[article].timeAgo}</Box>
+              <Box>{articles[article].timeAgo || articles[article].time}</Box>
             </Typography>
           </Box>
         </Box>,
@@ -105,10 +105,14 @@ const CardWrapperComponent = (trendsList: WrapperProps) => {
       </Box>
       <Divider />
       <CardActions sx={{ display: 'flex', justifyContent: 'space-between', color: '#f72585ff' }}>
-        <Typography component='p' variant='subtitle1'>
-          {trendsList.trafficCount} Searches
-        </Typography>
-        <Button size='small'>More Details</Button>
+        {trendsList.trafficCount && (
+          <Typography component='p' variant='subtitle1'>
+            {trendsList.trafficCount} Searches
+          </Typography>
+        )}
+        <Button size='small' onClick={(value: any) => trendsList.handleMoreDetails(value)}>
+          More Details
+        </Button>
       </CardActions>
     </Card>
   );

@@ -17,6 +17,7 @@ export interface IArticle {
   url: string;
   snippet: string;
   articleTitle?: string;
+  time?: string;
 }
 
 export interface IRealTimeArticle {
@@ -35,6 +36,7 @@ export interface WrapperProps {
   articles: IArticle[] | IRealTimeArticle[];
   id: number;
   entityNames?: [];
+  handleMoreDetails: (value: any) => void;
 }
 
 export interface TrendsListResponse {
@@ -49,4 +51,10 @@ export interface RealTimeListResponse {
   image: IImage;
   title: string;
   id: number;
+}
+
+export interface RegionTrendsResponse {
+  geoCode: string;
+  geoName: string;
+  value: number;
 }

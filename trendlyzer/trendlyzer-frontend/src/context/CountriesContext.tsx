@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { SelectChangeEvent } from '@mui/material';
-import { getAllCountriesCode } from '../services/dashboardService';
+import { getAllCountriesCode, getGeoJSON } from '../services/dashboardService';
 import { ICountryResponse } from '../models/common';
 import { ICountryContext } from '../models/ContextModel';
 
@@ -8,6 +8,7 @@ const defaultState = {
   countriesList: [],
   selectedCountry: 'NZ',
   handleCountryChange: () => {},
+  mapTopology: {},
 };
 
 export const CountriesContext = createContext<ICountryContext>(defaultState);
@@ -15,6 +16,7 @@ export const CountriesContext = createContext<ICountryContext>(defaultState);
 const CountryProvider = ({ children }: any) => {
   const [countriesList, setCountriesList] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('NZ');
+  const [mapTopology, setMapTopology] = useState({});
 
   const handleCountryChange = (value: SelectChangeEvent) => setSelectedCountry(value.target.value);
 
@@ -30,12 +32,21 @@ const CountryProvider = ({ children }: any) => {
       .catch(() => {});
   }, []);
 
+  useEffect(() => {
+    getGeoJSON(selectedCountry.toLowerCase())
+      .then((response) => {
+        setMapTopology(response.data);
+      })
+      .catch(() => {});
+  }, [selectedCountry]);
+
   return (
     <CountriesContext.Provider
       value={{
         countriesList,
         selectedCountry,
         handleCountryChange,
+        mapTopology,
       }}
     >
       {children}
