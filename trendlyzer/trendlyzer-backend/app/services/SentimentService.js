@@ -34,7 +34,6 @@ async function getSentimentStats(tweets) {
   let postiveSentimentMagnitude = 0;
   let negativeSentimentMagnitude = 0;
   for (let tweet of tweets) {
-    console.log(tweet)
     let text = cleanTweetText(tweet);
     // console.log(tweets)
   

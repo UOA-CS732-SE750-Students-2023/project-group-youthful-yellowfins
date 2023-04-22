@@ -40,9 +40,6 @@ async function generateResponse(message) {
     requestOptions
   );
 
-  console.log('Response 1:', promptBackground.data);
-  console.log('Response 2:', promptTrendingReason.data);
-
   
   let result = {
     promptBackground: "",

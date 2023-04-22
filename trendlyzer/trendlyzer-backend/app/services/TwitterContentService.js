@@ -20,10 +20,8 @@ async function GetTweetsByKeywords(keyword,limit,isSentimentAnalysis) {
             filter:'retweets'
         });
         let allTweets = [];
-        console.log(response.statuses.length)
 
         for (tweet of response.statuses) {
-            console.log(tweet.full_text)
             if (isSentimentAnalysis){
                 if(tweet?.retweeted_status && !allTweets.includes(tweet?.retweeted_status.full_text)){
                     allTweets.push(tweet.retweeted_status.full_text.trim());
@@ -34,7 +32,6 @@ async function GetTweetsByKeywords(keyword,limit,isSentimentAnalysis) {
                 allTweets.push(tweet)
             }
         }
-        console.log(allTweets.length)
 
         return allTweets;
 

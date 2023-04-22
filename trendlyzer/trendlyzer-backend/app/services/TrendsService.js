@@ -2,6 +2,7 @@ const BlogModel = require("../models/Trends");
 const googleTrends = require("google-trends-api");
 const axios = require('axios');
 const URLs = require("../helper/URLs");
+var redisClient = require('../models/redisClient');
 
 
 // function for searching top 13 articles for given geography and given category (coudl be b-> business, e-> economics etc, 'all'-> all)
@@ -24,7 +25,6 @@ async function getRealTimeTrends(req) {
 // Search top 20 trending search keywords in past 24 hrs - segregation by date, adds 7 articles hyperlinks per trending keyword
 async function getDailyTrends (req)  {
   let response = null;
-  console.log(req.date)
     let data = await googleTrends.dailyTrends({
         trendDate: new Date(req.date),
         geo: req.geocode
@@ -156,20 +156,27 @@ function translateTrendsByDateResponse(response){
 
 async function fetchCountryCodes() {
   try {
-      const response = await axios.get(URLs.COUNTRY_API_URL);
-      if (response?.data) {
-          const countries = response.data;
-          const countryCodes = countries.map(country => {
-              return {
-                  name: country.name.common,
-                  cca2: country.cca2,
-              };
-          });
-          return countryCodes;
-      } else {
-          console.log("The server returned no data or the data is undefined.");
-          return;
-      }
+    const cachedCountryResults = await redisClient.get('masterCountries');
+    if(cachedCountryResults){
+      const countryCodes = JSON.parse(cachedCountryResults);
+      return countryCodes;
+    } else {
+        const response = await axios.get(URLs.COUNTRY_API_URL);
+          if (response?.data) {
+              const countries = response.data;
+              const countryCodes = countries.map(country => {
+                  return {
+                      name: country.name.common,
+                      cca2: country.cca2,
+                  };
+              });
+              await redisClient.set('masterCountries', JSON.stringify(countryCodes));
+              return countryCodes;
+          } else {
+              console.log("The server returned no data or the data is undefined.");
+              return;
+          }
+    }
   } catch (error) {
       console.log("Error in calling the Country Codes API");
       console.dir(error);
