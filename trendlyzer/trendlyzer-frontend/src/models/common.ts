@@ -7,6 +7,7 @@ export interface IImage {
   imageUrl: string;
   newsUrl: string;
   source: string;
+  imgUrl: string;
 }
 
 export interface IArticle {
@@ -51,6 +52,7 @@ export interface RealTimeListResponse {
   image: IImage;
   title: string;
   id: number;
+  handleMoreDetails: (value: any) => void;
 }
 
 export interface RegionTrendsResponse {
