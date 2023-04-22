@@ -94,7 +94,7 @@ const CardWrapperComponent = (trendsList: WrapperProps) => {
           <CardMedia
             component='img'
             sx={{ width: 110, height: 70 }}
-            image={trendsList.image.imageUrl}
+            image={trendsList.image.imageUrl || trendsList.image.imgUrl}
             alt={trendsList.image.source}
           />
         </CardContent>
