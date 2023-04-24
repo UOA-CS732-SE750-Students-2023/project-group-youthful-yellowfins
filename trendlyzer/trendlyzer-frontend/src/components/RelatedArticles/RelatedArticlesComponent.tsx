@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const RelatedArticlesComponent = ({ articles }: any) => {
   return (
-    <Box sx={{ boxShadow: '0px 0px 5px 5px rgb(192,192,192)', borderRadius: '10px', mb: 1 }}>
+    <Box sx={{ boxShadow: '0px 0px 5px 5px rgb(192,192,192)', borderRadius: '10px', mb: 1, mt: 2 }}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   Box,
   FormControl,
@@ -14,15 +14,32 @@ import dayjs from 'dayjs';
 import { headingsLabels } from '../../config/labels';
 import { CountriesContext } from '../../context/CountriesContext';
 import { ICountry } from '../../models/ContextModel';
-import RegionDetailsComponent from './Details/RegionDetailsComponent';
+import RegionDetailsComponent from '../../components/RegionDetails/RegionDetailsComponent';
 
 const InterestByRegionComponent = () => {
   const { countriesList, selectedCountry, handleCountryChange } = useContext(CountriesContext);
   const [selectedStartDate, setSelectedStartDate] = useState(dayjs());
   const [selectedEndDate, setSelectedEndDate] = useState(dayjs());
   const [selectedKeyword, setSelectedKeyword] = useState('');
+  const [countryList, setCountryList] = useState<any>([]);
 
   const handleKeywordChange = (value: any) => setSelectedKeyword(value.target.value);
+
+  useEffect(() => {
+    const list = [
+      {
+        name: 'All',
+        code: 'All',
+      },
+      ...countriesList,
+    ];
+    setCountryList(list);
+    return () => {
+      if (selectedCountry === 'All') {
+        handleCountryChange({ target: { value: 'NZ' } });
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -74,7 +91,7 @@ const InterestByRegionComponent = () => {
             label={headingsLabels.COUNTRY}
             onChange={handleCountryChange}
           >
-            {countriesList.map((country: ICountry) => (
+            {countryList.map((country: ICountry) => (
               <MenuItem key={country.code} value={country.code}>
                 {country.name}
               </MenuItem>
