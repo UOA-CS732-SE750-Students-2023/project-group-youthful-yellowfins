@@ -104,15 +104,19 @@ const CardWrapperComponent = (trendsList: WrapperProps) => {
         {getFiveArticles()}
       </Box>
       <Divider />
-      <CardActions sx={{ display: 'flex', justifyContent: 'space-between', color: '#f72585ff' }}>
+      <CardActions
+        sx={{
+          display: 'flex',
+          justifyContent: trendsList.trafficCount ? 'space-between' : 'flex-end',
+          color: '#f72585ff',
+        }}
+      >
         {trendsList.trafficCount && (
           <Typography component='p' variant='subtitle1'>
             {trendsList.trafficCount} Searches
           </Typography>
         )}
-        <Button size='small' onClick={(value: any) => trendsList.handleMoreDetails(value)}>
-          More Details
-        </Button>
+        <Button onClick={(value: any) => trendsList.handleMoreDetails(value)}>More Details</Button>
       </CardActions>
     </Card>
   );

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { SelectChangeEvent } from '@mui/material';
-import { getAllCountriesCode, getGeoJSON } from '../services/dashboardService';
+import { getAllCountriesCode, getGeoJSON, getWorldGeoJSON } from '../services/dashboardService';
 import { ICountryResponse } from '../models/common';
 import { ICountryContext } from '../models/ContextModel';
 
@@ -27,17 +27,26 @@ const CountryProvider = ({ children }: any) => {
           code: country.cca2,
           name: country.name,
         }));
+        list.sort((a: any, b: any) => (a.name > b.name ? 1 : -1));
         setCountriesList(list);
       })
       .catch(() => {});
   }, []);
 
   useEffect(() => {
-    getGeoJSON(selectedCountry.toLowerCase())
-      .then((response) => {
-        setMapTopology(response.data);
-      })
-      .catch(() => {});
+    if (selectedCountry === 'All') {
+      getWorldGeoJSON()
+        .then((response) => {
+          setMapTopology(response.data);
+        })
+        .catch(() => {});
+    } else {
+      getGeoJSON(selectedCountry.toLowerCase())
+        .then((response) => {
+          setMapTopology(response.data);
+        })
+        .catch(() => {});
+    }
   }, [selectedCountry]);
 
   return (
