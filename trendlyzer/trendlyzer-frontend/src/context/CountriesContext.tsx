@@ -23,9 +23,9 @@ const CountryProvider = ({ children }: any) => {
   useEffect(() => {
     getAllCountriesCode()
       .then((response) => {
-        const list = response.data.map((country: ICountryResponse) => ({
+        const list = response.data.result.map((country: ICountryResponse) => ({
           code: country.cca2,
-          name: country.name.common,
+          name: country.name,
         }));
         setCountriesList(list);
       })

@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Card, CardContent, CardMedia, Typography, Stack, Avatar, Paper } from '@mui/material';
+import { Box, CardContent, CardMedia, Typography } from '@mui/material';
 import { TrendDetailsContext } from '../../context/TrendDetailsContext';
+import RelatedArticlesComponent from '../../components/RelatedArticles/RelatedArticlesComponent';
+import RelatedTweetsComponent from '../../components/RelatedTweets/RelatedTweetsComponent';
+import TrendReasonComponent from '../../components/TrendReason/TrendReasonComponent';
 
 const TrendsDetails = () => {
   const { id } = useParams();
@@ -10,114 +13,51 @@ const TrendsDetails = () => {
   return (
     <Box sx={{ ml: 3, mr: 3 }}>
       <h4>Trends Details</h4>
-      <Typography
-        key={trendDetails.title || trendDetails.articleTitle}
-        variant='h3'
-        color='text.secondary'
-        component='h3'
-        gutterBottom
-        sx={{ display: 'flex', color: '#560badff' }}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
       >
-        {trendDetails.title || trendDetails.articleTitle}
-      </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Card
-          sx={{
-            width: '30%',
-            boxShadow: '0px 0px 5px 5px rgb(192,192,192)',
-            borderRadius: '15px',
-          }}
+        <CardContent sx={{ textAlign: 'center', justifyContent: 'space-between' }}>
+          {trendDetails.trafficCount ? (
+            <>
+              <Typography variant='h4' color='#f72585ff'>
+                {trendDetails.trafficCount}
+              </Typography>
+              <Typography gutterBottom variant='subtitle2' component='p'>
+                Searches
+              </Typography>
+            </>
+          ) : (
+            <Typography variant='h4' component='h4'>
+              {id}
+            </Typography>
+          )}
+        </CardContent>
+        <Typography
+          component='h4'
+          key={trendDetails.title || trendDetails.articleTitle}
+          variant='h4'
+          sx={{ padding: '10px 30px', color: '#560badff' }}
         >
-          <CardContent sx={{ textAlign: 'center', justifyContent: 'space-between' }}>
-            <Typography gutterBottom variant='subtitle1' component='div'>
-              Searches
-            </Typography>
-            <Typography variant='h4' color='text.secondary'>
-              {trendDetails.trafficCount}
-            </Typography>
-          </CardContent>
-        </Card>
-        <Card
-          sx={{
-            width: '30%',
-            boxShadow: '0px 0px 5px 5px rgb(192,192,192)',
-            borderRadius: '15px',
-          }}
-        >
-          <CardContent
-            sx={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Typography gutterBottom variant='subtitle1' component='div'>
-              Source
-              <br />
-              {/* <Typography variant='h5' variant='subtitle2' color='text.secondary'> */}
-              {trendDetails.image.source}
-              {/* </Typography> */}
-            </Typography>
-
-            <CardMedia
-              component='img'
-              sx={{ width: 110, height: 70 }}
-              image={trendDetails.image.imageUrl}
-              alt={trendDetails.image.source}
-            />
-          </CardContent>
-        </Card>
-        <Card
-          sx={{
-            width: '30%',
-            boxShadow: '0px 0px 5px 5px rgb(192,192,192)',
-            borderRadius: '15px',
-          }}
-        >
-          <CardContent sx={{ textAlign: 'center', justifyContent: 'space-between' }}>
-            <Typography gutterBottom variant='subtitle1' component='div'>
-              Average Sentiment Score
-            </Typography>
-            <Typography variant='h4' color='text.secondary'>
-              0
-            </Typography>
-          </CardContent>
-        </Card>
+          {trendDetails.title || trendDetails.articleTitle}
+        </Typography>
+        <CardMedia
+          component='img'
+          sx={{ width: 110, height: 70 }}
+          image={trendDetails.image.imageUrl || trendDetails.image.imgUrl}
+          alt={trendDetails.image.source}
+        />
       </Box>
-      <Typography
-        key='relatedArticles'
-        variant='h3'
-        color='text.secondary'
-        component='h3'
-        gutterBottom
-        sx={{ display: 'flex', color: '#560badff' }}
-      >
-        Related Articles
-      </Typography>
-      {trendDetails.articles.map((article: any) => {
-        return (
-          <Box sx={{ flexGrow: 1, overflow: 'hidden', px: 3 }} key={article.title}>
-            <Paper
-              sx={{
-                my: 1,
-                mx: 'auto',
-                p: 2,
-              }}
-            >
-              <Stack spacing={2} direction='row' alignItems='center'>
-                <Avatar>{article.image.imageUrl}</Avatar>
-                <Box>
-                  <Typography>{article.title}</Typography>
-                  <Typography variant='body2' component='p'>
-                    {article.snippet}
-                  </Typography>
-                </Box>
-              </Stack>
-            </Paper>
-          </Box>
-        );
-      })}
+
+      <TrendReasonComponent message={trendDetails.title} />
+
+      <RelatedArticlesComponent articles={trendDetails.articles} />
+      <br />
+      <RelatedTweetsComponent keyword={trendDetails.title} />
     </Box>
   );
 };

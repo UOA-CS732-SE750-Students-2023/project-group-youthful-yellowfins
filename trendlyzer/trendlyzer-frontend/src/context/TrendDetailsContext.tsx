@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 
 const defaultState: any = {
+  trendDetails: {},
   handleTrendDetails: (value: any) => {},
 };
 

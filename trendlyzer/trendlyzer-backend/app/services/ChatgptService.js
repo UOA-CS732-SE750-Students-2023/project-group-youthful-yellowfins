@@ -22,7 +22,6 @@ async function generateResponse(message) {
       stop: null,
       temperature: 0.5,
       top_p: 0.5,
-      presence_penalty: 2.0,
     },
     requestOptions
   );
