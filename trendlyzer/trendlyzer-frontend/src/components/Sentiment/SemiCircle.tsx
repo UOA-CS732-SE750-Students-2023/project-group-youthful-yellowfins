@@ -4,18 +4,13 @@ import HighchartsReact from 'highcharts-react-official';
 
 const Piechart = ({ positive, negative, neutral }: any) => {
   const options: Highcharts.Options = {
-    colors: ['#3f37c9ff', '#7209b7ff', '#480ca8ff'],
+    colors: ['#b5179eff', '#7209b7ff', '#3a0ca3ff'],
     chart: {
-      plotBackgroundColor: null,
+      plotBackgroundColor: undefined,
       plotBorderWidth: 0,
       plotShadow: false,
     },
-    title: {
-      text: 'Sentiment Analysis',
-      align: 'center',
-      verticalAlign: 'middle',
-      y: 60,
-    },
+    title: undefined,
     tooltip: {
       pointFormat: '<b>{point.percentage:.1f}%</b>',
     },

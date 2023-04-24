@@ -3,17 +3,21 @@ import { Accordion, AccordionSummary, AccordionDetails, Box, Typography } from '
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getTweets } from '../../services/trendDetailsService';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
+import Loader from '../UIComponents/Loader/LoaderComponent';
 
 const RelatedTweetsComponent = ({ keyword }: string | any) => {
   const [tweets, setTweets] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     getTweets({
       keyword,
       limit: 10,
     })
       .then((response: any) => {
         setTweets(response.data.result);
+        setLoading(false);
       })
       .catch(() => {});
   }, []);
@@ -37,6 +41,7 @@ const RelatedTweetsComponent = ({ keyword }: string | any) => {
             Related Tweets
           </Typography>
         </AccordionSummary>
+        {loading && <Loader />}
         {tweets.map((tweet: any) => {
           return (
             <AccordionDetails key={tweet.title} sx={{ display: 'inline-flex' }}>

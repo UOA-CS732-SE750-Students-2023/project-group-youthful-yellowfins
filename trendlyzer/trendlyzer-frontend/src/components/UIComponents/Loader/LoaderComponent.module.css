@@ -1,0 +1,9 @@
+.loader {
+  width: 80%;
+  height: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 999;
+}
