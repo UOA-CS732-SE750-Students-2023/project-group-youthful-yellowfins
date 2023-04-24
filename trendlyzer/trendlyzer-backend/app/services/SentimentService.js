@@ -65,10 +65,10 @@ async function getSentimentStats(tweets) {
     }
   }
   // if(postiveSentimentMagnitude){
-  //   response.postiveSentimentMagnitude = postiveSentimentMagnitude/tweets.length
+  //   response.postiveSentimentMagnitude = postiveSentimentMagnitude/response.positiveSentiments;
   // }
   // if(negativeSentimentMagnitude){
-  //   response.negativeSentimentMagnitude = negativeSentimentMagnitude/tweets.length
+  //   response.negativeSentimentMagnitude = negativeSentimentMagnitude/response.negativeSentiments
   // }
   return response;
 }
