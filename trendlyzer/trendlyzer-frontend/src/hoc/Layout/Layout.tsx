@@ -8,12 +8,12 @@ const Layout = () => {
   const { auth } = useContext(AuthContext);
 
   return (
-    <div className={classes.containerFlex}>
-      {auth.isAuthenticated ? <Navigation /> : <></> }
-      <main className={classes.outlet}>
+    <>
+      {auth.isAuthenticated ? <Navigation /> : <></>}
+      <main className={auth.isAuthenticated ? classes.appOutlet : classes.outlet}>
         <Outlet />
       </main>
-    </div>
+    </>
   );
 };
 

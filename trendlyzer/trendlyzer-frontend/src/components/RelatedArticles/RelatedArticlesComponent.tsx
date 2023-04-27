@@ -35,7 +35,7 @@ const RelatedArticlesComponent = ({ articles }: any) => {
             <AccordionDetails key={article.title} sx={{ display: 'flex', alignItems: 'center' }}>
               <Avatar
                 sx={{ width: 56, height: 56 }}
-                src={article.image.imageUrl || article.image.imgUrl}
+                src={article.image ? article.image.imageUrl || article.image.imgUrl : ''}
               />
               <Box sx={{ ml: 2 }}>
                 <Typography variant='subtitle2' component='p' color='#f72585ff'>

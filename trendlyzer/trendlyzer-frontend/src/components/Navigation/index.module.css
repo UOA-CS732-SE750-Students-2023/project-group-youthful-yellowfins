@@ -2,9 +2,25 @@
   width: 20%;
   background-color: #560badff;
   color: #fff;
+  position: fixed;
+  min-height: 100vh;
 }
 
 .layoutMenu a {
   color: #fff;
   text-decoration: none;
+  width: 100%;
+  text-align: center;
+}
+
+.layoutMenu a:active,
+.layoutMenu a:hover,
+.layoutMenu a:visited,
+.layoutMenu a:focus-visible {
+  background-color: #fff;
+  color: #560badff;
+}
+
+.logo {
+  width: 80%;
 }

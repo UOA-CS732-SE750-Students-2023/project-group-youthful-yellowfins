@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Box } from '@mui/material';
+import { Alert, Box, Snackbar } from '@mui/material';
 
 import Piechart from '../Sentiment/SemiCircle';
 import { getSentimentAnalysis } from '../../services/trendDetailsService';
@@ -10,6 +10,9 @@ import MagnitudeChartComponent from '../Sentiment/MagnitudeChart';
 const SentimentAnalysisComponent = () => {
   const { trendDetails, setShowNavigation } = useContext(TrendDetailsContext);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [showError, setShowError] = useState<boolean>(false);
+
   const [tweets, setTweets] = useState<any>({
     positiveSentiment: 0,
     neutralSentiments: 0,
@@ -27,7 +30,11 @@ const SentimentAnalysisComponent = () => {
         setTweets(response.data.result);
         setLoading(false);
       })
-      .catch(() => {});
+      .catch((error) => {
+        setLoading(false);
+        setError(error.message);
+        setShowError(true);
+      });
     return () => {
       setShowNavigation(false);
     };
@@ -36,7 +43,20 @@ const SentimentAnalysisComponent = () => {
   return (
     <>
       {loading && <Loader />}
-      {!loading && (
+      {error && (
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={showError}
+          key='topright'
+          onClose={() => setShowError(false)}
+          autoHideDuration={5000}
+        >
+          <Alert severity='error' sx={{ width: '100%' }}>
+            {error}
+          </Alert>
+        </Snackbar>
+      )}
+      {!loading && !error && (
         <Box sx={{ ml: 3, mr: 3 }}>
           <Piechart
             positive={tweets.positiveSentiments}

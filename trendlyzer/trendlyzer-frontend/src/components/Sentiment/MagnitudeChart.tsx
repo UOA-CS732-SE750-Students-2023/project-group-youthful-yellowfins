@@ -52,7 +52,11 @@ const MagnitudeChartComponent = ({ positive, negative }: any) => {
     ],
   };
 
-  return <HighchartsReact highcharts={Highcharts} allowChartUpdate={true} options={options} />;
+  return (
+    <div style={{ width: '50%' }}>
+      <HighchartsReact highcharts={Highcharts} allowChartUpdate={true} options={options} />
+    </div>
+  );
 };
 
 export default MagnitudeChartComponent;

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { useState, useEffect, useContext } from 'react';
 import dayjs from 'dayjs';
-import { Box } from '@mui/material';
+import { Alert, Box, Snackbar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import CardWrapperComponent from '../../UIComponents/Card/CardWrapper';
@@ -21,6 +21,8 @@ const DailyTrendsDetailsComponent = ({ country, date }: any) => {
   const { handleTrendDetails, setShowNavigation } = useContext(TrendDetailsContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [showError, setShowError] = useState(false);
 
   const handleMoreDetails = (value: any) => {
     handleTrendDetails(value);
@@ -43,13 +45,30 @@ const DailyTrendsDetailsComponent = ({ country, date }: any) => {
           setLoading(false);
         }
       })
-      .catch(() => {});
+      .catch((error) => {
+        setLoading(false);
+        setError(error.message);
+        setShowError(true);
+      });
   }, [country, date]);
 
   return (
     <>
       {loading && <Loader />}
-      {!loading && (
+      {error && (
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={showError}
+          key='topright'
+          onClose={() => setShowError(false)}
+          autoHideDuration={5000}
+        >
+          <Alert severity='error' sx={{ width: '100%' }}>
+            {error}
+          </Alert>
+        </Snackbar>
+      )}
+      {!loading && !error && (
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           {trendsList[0].trendingStories.map((story: WrapperProps, index) => {
             return (

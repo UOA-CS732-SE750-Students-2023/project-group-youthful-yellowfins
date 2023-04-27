@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -10,12 +10,18 @@ import {
   Divider,
   Tooltip,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import { IArticle, IRealTimeArticle, WrapperProps } from '../../../models/common';
 import classes from './CardWrapper.module.css';
 
 const CardWrapperComponent = (trendsList: WrapperProps) => {
+  const maxWidth9Matches = useMediaQuery('(max-width:991px) and (min-width: 767px)');
+  console.log('maxWidth9Matches', maxWidth9Matches);
+  const maxWidth7Matches = useMediaQuery('(max-width:576px');
+  const [width, setWidth] = useState('45%');
+
   // This function will fetch the starting few articles to display on the trending page
   const getFiveArticles = () => {
     const articles: IArticle[] | IRealTimeArticle[] = trendsList.articles;
@@ -63,18 +69,28 @@ const CardWrapperComponent = (trendsList: WrapperProps) => {
     return content;
   };
 
+  useEffect(() => {
+    if (maxWidth7Matches) {
+      setWidth('90%');
+    }
+    if (maxWidth9Matches) {
+      setWidth('42%');
+    }
+  }, [maxWidth7Matches, maxWidth9Matches]);
+
   return (
     <Card
       sx={{
         margin: '20px',
         padding: '10px',
-        width: '40%',
         justifyContent: 'space-between',
         boxShadow: '0px 0px 5px 5px rgb(192,192,192)',
-        borderRadius: '5%',
+        borderRadius: '3%',
         display: 'flex',
         flexDirection: 'column',
+        width,
       }}
+      className={classes.cardClass}
     >
       <Box sx={{ paddingBottom: '10px' }}>
         <CardContent
