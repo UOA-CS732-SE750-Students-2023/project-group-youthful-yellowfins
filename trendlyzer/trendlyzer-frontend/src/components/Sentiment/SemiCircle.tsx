@@ -49,7 +49,7 @@ const Piechart = ({ positive, negative, neutral }: any) => {
     ],
   };
   return (
-    <div>
+    <div style={{ width: '50%' }}>
       <HighchartsReact highcharts={Highcharts} allowChartUpdate={true} options={options} />
     </div>
   );

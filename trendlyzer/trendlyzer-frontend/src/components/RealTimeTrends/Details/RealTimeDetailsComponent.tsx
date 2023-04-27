@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Box } from '@mui/material';
+import { Alert, Box, Snackbar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import CardWrapperComponent from '../../UIComponents/Card/CardWrapper';
@@ -13,6 +13,8 @@ const RealTimeDetailsComponent = ({ country, category }: any) => {
   const { handleTrendDetails, setShowNavigation } = useContext(TrendDetailsContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [showError, setShowError] = useState(false);
 
   const handleMoreDetails = (value: any) => {
     const article = {
@@ -42,13 +44,30 @@ const RealTimeDetailsComponent = ({ country, category }: any) => {
           setLoading(false);
         }
       })
-      .catch(() => {});
+      .catch((error) => {
+        setLoading(false);
+        setError(error.message);
+        setShowError(true);
+      });
   }, [country]);
 
   return (
     <>
       {loading && <Loader />}
-      {!loading && (
+      {error && (
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={showError}
+          key='topright'
+          onClose={() => setShowError(false)}
+          autoHideDuration={5000}
+        >
+          <Alert severity='error' sx={{ width: '100%' }}>
+            {error}
+          </Alert>
+        </Snackbar>
+      )}
+      {!loading && !error && (
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
           {trendsList.map((story: WrapperProps, index) => {
             return (

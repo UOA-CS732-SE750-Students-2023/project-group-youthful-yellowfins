@@ -75,5 +75,11 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.4",
     "react-testing-library": "^8.0.1"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)/",
+      "/react-loaders-kit/"
+    ]
   }
 }

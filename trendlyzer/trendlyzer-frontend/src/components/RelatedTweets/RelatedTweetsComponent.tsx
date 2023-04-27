@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Box, Typography } from '@mui/material';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Alert,
+  Box,
+  Typography,
+  Snackbar,
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getTweets } from '../../services/trendDetailsService';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
@@ -7,7 +15,9 @@ import Loader from '../UIComponents/Loader/LoaderComponent';
 
 const RelatedTweetsComponent = ({ keyword }: string | any) => {
   const [tweets, setTweets] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState('');
+  const [showError, setShowError] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -19,11 +29,28 @@ const RelatedTweetsComponent = ({ keyword }: string | any) => {
         setTweets(response.data.result);
         setLoading(false);
       })
-      .catch(() => {});
+      .catch((error) => {
+        setLoading(false);
+        setError(error.message);
+        setShowError(true);
+      });
   }, []);
 
   return (
     <Box sx={{ boxShadow: '0px 0px 5px 5px rgb(192,192,192)', borderRadius: '10px' }}>
+      {error && (
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={showError}
+          key='topright'
+          onClose={() => setShowError(false)}
+          autoHideDuration={5000}
+        >
+          <Alert severity='error' sx={{ width: '100%' }}>
+            {error}
+          </Alert>
+        </Snackbar>
+      )}
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

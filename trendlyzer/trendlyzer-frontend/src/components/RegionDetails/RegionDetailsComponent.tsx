@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState, useEffect, useContext } from 'react';
 import dayjs from 'dayjs';
-import { Box, Typography } from '@mui/material';
+import { Alert, Box, Typography, Snackbar } from '@mui/material';
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid';
 
 import { getRegionTrends } from '../../services/dashboardService';
@@ -35,20 +35,21 @@ const RegionDetailsComponent = ({
   const [options, setOptions] = useState<any | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
   const { mapTopology } = useContext(CountriesContext);
+  const [error, setError] = useState('');
+  const [showError, setShowError] = useState<boolean>(false);
 
   const columns: GridColDef[] = [
     {
       field: 'region',
       headerName: 'Region',
       sortingOrder: ['desc', 'asc'],
-      width: 270,
+      width: 250,
       headerClassName: 'searchHeaderTable',
     },
     {
       field: 'searches',
       headerName: 'Searches',
       sortingOrder: ['desc', 'asc'],
-      width: 270,
       headerClassName: 'searchHeaderTable',
     },
   ];
@@ -130,7 +131,11 @@ const RegionDetailsComponent = ({
               setLoading(false);
             }
           })
-          .catch(() => {});
+          .catch((error) => {
+            setLoading(false);
+            setError(error.message);
+            setShowError(true);
+          });
       }, 500);
     }
   }, [searchKeyword, startDate, endDate, country, mapTopology]);
@@ -143,9 +148,28 @@ const RegionDetailsComponent = ({
         </Typography>
       )}
       {loading && showTable && <Loader />}
+      {error && (
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={showError}
+          key='topright'
+          onClose={() => setShowError(false)}
+          autoHideDuration={5000}
+        >
+          <Alert severity='error' sx={{ width: '100%' }}>
+            {error}
+          </Alert>
+        </Snackbar>
+      )}
       {!loading && trendsList.length > 1 && (
         <Box sx={{ display: 'flex', justifyContent: 'space-between', height: '400px' }}>
-          <HighchartsReact constructorType={'mapChart'} highcharts={Highcharts} options={options} />
+          <div style={{ width: '50%' }}>
+            <HighchartsReact
+              constructorType={'mapChart'}
+              highcharts={Highcharts}
+              options={options}
+            />
+          </div>
           {showTable && (
             <DataGrid
               rows={rows}

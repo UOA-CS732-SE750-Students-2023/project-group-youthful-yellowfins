@@ -20,6 +20,9 @@ export const headingsLabels = {
   EXPLORE_TRENDS: 'Explore Trends',
   TREND_ANALYSIS: 'Trend Analysis',
   SENTIMENT_ANALYSIS: 'Sentiment Analysis',
+  POSITIVE_TWEETS: 'Positive Tweets',
+  NEUTRAL_TWEETS: 'Neutral Tweets',
+  NEGATIVE_TWEETS: 'Negative Tweets',
 };
 
 export const headingsValue = {

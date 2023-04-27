@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Box } from '@mui/material';
+import { Alert, Box, Snackbar } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { TrendDetailsContext } from '../../context/TrendDetailsContext';
 import RelatedArticlesComponent from '../RelatedArticles/RelatedArticlesComponent';
@@ -17,6 +17,8 @@ const TrendAnalysisComponent = () => {
   const [loading, setLoading] = useState(false);
   const [trendReason, setTrendReason] = useState('');
   const [trendBackground, setTrendBackground] = useState('');
+  const [error, setError] = useState('');
+  const [showError, setShowError] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -27,7 +29,11 @@ const TrendAnalysisComponent = () => {
         setTrendBackground(response.data.result.promptBackground);
         setLoading(false);
       })
-      .catch(() => {});
+      .catch((error) => {
+        setLoading(false);
+        setError(error.message);
+        setShowError(true);
+      });
     return () => {
       setShowNavigation(false);
     };
@@ -36,7 +42,20 @@ const TrendAnalysisComponent = () => {
   return (
     <>
       {loading && <Loader />}
-      {!loading && (
+      {error && (
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={showError}
+          key='topright'
+          onClose={() => setShowError(false)}
+          autoHideDuration={5000}
+        >
+          <Alert severity='error' sx={{ width: '100%' }}>
+            {error}
+          </Alert>
+        </Snackbar>
+      )}
+      {!loading && !error && (
         <Box sx={{ ml: 3, mr: 3 }}>
           {Number(id) && trendDetails && (
             <>

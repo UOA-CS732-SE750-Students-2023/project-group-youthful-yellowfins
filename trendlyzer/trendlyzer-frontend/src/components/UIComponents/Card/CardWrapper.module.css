@@ -6,3 +6,7 @@
   max-width: 100%;
   padding: 1px 10px;
 }
+
+.cardClass {
+  width: '45%';
+}
