@@ -1,8 +1,3 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import { useNavigate } from 'react-router';
-
-
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -11,26 +6,21 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container'; 
 
 
-const Login = () => {
-  const { handleAuth } = useContext(AuthContext);
-  const navigate = useNavigate();
-
+export default function SignUp() {
   const handleSubmit = (event : any) => {
     event.preventDefault();
-    const isAuthenticated: any  = handleAuth({ username: event.email, password: event.password });
-    console.log('isAuthentical', isAuthenticated)
-    if (isAuthenticated) {
-      navigate('/dashboard');
-    }
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
   };
 
   return ( 
+    
     <>
-    <Container component="main" maxWidth = {false} > 
-
       <Box
         sx={{  
           marginTop: 8,
@@ -40,9 +30,21 @@ const Login = () => {
         }}
       >
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign Up
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          
+        <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            autoFocus
+          />
+          
           <TextField
             margin="normal"
             required
@@ -52,7 +54,8 @@ const Login = () => {
             name="email"
             autoComplete="email"
             autoFocus
-          />
+          /> 
+
           <TextField
             margin="normal"
             required
@@ -73,24 +76,18 @@ const Login = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2, background:'#800080' }}
           >
-            Sign In
+            Sign Up
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2" style={{ textDecoration:'#800080', color: '#800080'}}>
-                Forgot password?
-              </Link>
-            </Grid>
+        
             <Grid item>
-              <Link href="/register" variant="body2" style={{ textDecoration:'#800080', color: '#800080'}}>
-                {'Don\'t have an account? Sign Up'}
+              <Link href="/login" variant="body2" style={{ textDecoration:'#800080', color: '#800080'}}>
+                {'Already have an account?, sign in'}
               </Link>
             </Grid>
           </Grid>
         </Box>
       </Box>
-    </Container></>
+    </>
   );
 }
-
-export default Login;

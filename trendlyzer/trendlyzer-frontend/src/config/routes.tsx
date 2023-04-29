@@ -7,6 +7,7 @@ import Sentiment from '../pages/Sentiment/Sentiment';
 import TrendsDetails from '../pages/TrendsDetails/TrendsDetails';
 import Login from '../pages/Authentication/Login';
 import InterestByRegionComponent from '../pages/InterestByRegion/InterestByRegionComponent';
+import SignUp from '../components/Landing/Register-1';
 
 const routeDefinition: RouteObject[] = createRoutesFromElements(
   <Route path='/' element={<Layout />}>
@@ -15,6 +16,7 @@ const routeDefinition: RouteObject[] = createRoutesFromElements(
     <Route path='/sentiment' element={<Sentiment />} />
     <Route path='/trendsDetails/:id' element={<TrendsDetails />} />
     <Route path='/login' element={<Login />} />
+    <Route path='/register' element={<SignUp/>} />
     <Route path='/exploreTrends' element={<InterestByRegionComponent />} />
   </Route>,
 );
