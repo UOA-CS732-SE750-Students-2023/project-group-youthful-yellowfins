@@ -6,7 +6,8 @@
   min-height: 100vh;
 }
 
-.layoutMenu a {
+.layoutMenu a,
+.trendDetail {
   color: #fff;
   text-decoration: none;
   width: 100%;
@@ -14,6 +15,7 @@
 }
 
 .layoutMenu .currentPath,
+.currentPath,
 .layoutMenu a:hover,
 .layoutMenu a:visited,
 .layoutMenu a:focus-visible {

@@ -9,7 +9,7 @@ const Navigation = () => {
   const { showNavigation } = useContext(TrendDetailsContext);
   const { auth, handlelogout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const pathName = window.location.pathname;
+  const pathName = window.location.pathname.split('/')[1];
 
   const handleLogout = () => {
     handlelogout()
@@ -37,30 +37,32 @@ const Navigation = () => {
               <img src='logo3.png' alt='Trendlyzer' className={classes.logo} />
             </Link>
           </ListItemButton>
-          <Link to={'/dashboard'} className={pathName === '/dashboard' ? classes.currentPath : ''}>
+          <Link to={'/dashboard'} className={pathName === 'dashboard' ? classes.currentPath : ''}>
             <ListItemButton
               sx={{ p: 2, justifyContent: 'center', '&:focusVisible': { color: '#560badff' } }}
             >
               Dashboard
             </ListItemButton>
           </Link>
-          <Collapse in={showNavigation} timeout='auto' unmountOnExit>
-            <Link
-              to={'/trendsDetails/0'}
-              className={pathName === '/trendsDetails/' ? classes.currentPath : ''}
-            >
+          <Collapse
+            in={showNavigation}
+            timeout='auto'
+            unmountOnExit
+            className={classes.trendDetail}
+          >
+            <div className={pathName === 'trendsDetails' ? classes.currentPath : ''}>
               <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>
                 Trends Details
               </ListItemButton>
-            </Link>
+            </div>
           </Collapse>
           <Link
             to={'/exploreTrends'}
-            className={pathName === '/exploreTrends' ? classes.currentPath : ''}
+            className={pathName === 'exploreTrends' ? classes.currentPath : ''}
           >
             <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>Explore Trends</ListItemButton>
           </Link>
-          <Link to={'/sentiment'} className={pathName === '/sentiment' ? classes.currentPath : ''}>
+          <Link to={'/sentiment'} className={pathName === 'sentiment' ? classes.currentPath : ''}>
             <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>Sentiment</ListItemButton>
           </Link>
           <Link to=''>

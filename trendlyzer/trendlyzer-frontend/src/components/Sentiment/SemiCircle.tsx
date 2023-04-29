@@ -9,6 +9,7 @@ const Piechart = ({ positive, negative, neutral }: any) => {
       plotBackgroundColor: undefined,
       plotBorderWidth: 0,
       plotShadow: false,
+      type: 'pie',
     },
     title: {
       text: 'Sentiment Overview',
@@ -23,6 +24,8 @@ const Piechart = ({ positive, negative, neutral }: any) => {
     },
     plotOptions: {
       pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
         dataLabels: {
           enabled: true,
           distance: -50,

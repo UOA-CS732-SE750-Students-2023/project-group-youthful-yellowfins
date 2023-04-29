@@ -137,7 +137,7 @@ const AuthProvider = ({ children }: any) => {
 
   const handlelogout = async () => {
     try {
-      const result = await signOut(authInstance);
+      await signOut(authInstance);
       setAuth({
         userId: '',
         userName: '',

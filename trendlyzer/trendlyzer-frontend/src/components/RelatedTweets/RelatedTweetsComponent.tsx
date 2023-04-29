@@ -26,7 +26,7 @@ const RelatedTweetsComponent = ({ keyword }: string | any) => {
       limit: 10,
     })
       .then((response: any) => {
-        setTweets(response.data.result);
+        setTweets(response.data.result || []);
         setLoading(false);
       })
       .catch((error) => {
