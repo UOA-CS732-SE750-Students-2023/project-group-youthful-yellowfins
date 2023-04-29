@@ -10,7 +10,9 @@ const Piechart = ({ positive, negative, neutral }: any) => {
       plotBorderWidth: 0,
       plotShadow: false,
     },
-    title: undefined,
+    title: {
+      text: 'Sentiment Overview',
+    },
     tooltip: {
       pointFormat: '<b>{point.percentage:.1f}%</b>',
     },
@@ -48,10 +50,6 @@ const Piechart = ({ positive, negative, neutral }: any) => {
       },
     ],
   };
-  return (
-    <div style={{ width: '50%' }}>
-      <HighchartsReact highcharts={Highcharts} allowChartUpdate={true} options={options} />
-    </div>
-  );
+  return <HighchartsReact highcharts={Highcharts} allowChartUpdate={true} options={options} />;
 };
 export default Piechart;

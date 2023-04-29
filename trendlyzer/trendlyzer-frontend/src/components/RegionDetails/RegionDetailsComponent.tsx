@@ -31,112 +31,108 @@ const RegionDetailsComponent = ({
   title = '',
 }: any) => {
   const [trendsList, setTrendsList] = useState<RegionTrendsResponse[]>(defaultState);
-
   const [options, setOptions] = useState<any | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
   const { mapTopology } = useContext(CountriesContext);
   const [error, setError] = useState('');
   const [showError, setShowError] = useState<boolean>(false);
-
+  const [rows, setRows] = useState<GridRowsProp>([]);
   const columns: GridColDef[] = [
     {
       field: 'region',
       headerName: 'Region',
       sortingOrder: ['desc', 'asc'],
-      width: 250,
+      width: 500,
       headerClassName: 'searchHeaderTable',
     },
     {
       field: 'searches',
       headerName: 'Searches',
       sortingOrder: ['desc', 'asc'],
+      width: 450,
       headerClassName: 'searchHeaderTable',
     },
   ];
-
-  const [rows, setRows] = useState<GridRowsProp>([]);
 
   useEffect(() => {
     if (searchKeyword) {
       setLoading(true);
       setTrendsList(defaultState);
-      setTimeout(() => {
-        const params: any = {
-          keyword: searchKeyword,
-          startTime: dayjs(startDate).format('YYYY-MM-DD'),
-          endTime: dayjs(endDate).format('YYYY-MM-DD'),
-        };
-        if (country !== 'All') {
-          params.geocode = country;
-        }
-        getRegionTrends(params)
-          .then((response) => {
-            if (response.data.status) {
-              let newData: any;
-              mapTopology.features.forEach((feature: any) => {
-                newData = {
-                  ...newData,
-                  [feature.properties.name.replace(/\s+/g, '')]: {
-                    ...feature.properties,
-                    value: 0,
-                  },
-                };
-              });
+      const params: any = {
+        keyword: searchKeyword,
+        startTime: dayjs(startDate).format('YYYY-MM-DD'),
+        endTime: dayjs(endDate).format('YYYY-MM-DD'),
+      };
+      if (country !== 'All') {
+        params.geocode = country;
+      }
+      getRegionTrends(params)
+        .then((response) => {
+          if (response.data.status) {
+            let newData: any;
+            mapTopology.features.forEach((feature: any) => {
+              newData = {
+                ...newData,
+                [(feature.properties.name || feature.properties.region).replace(/\s+/g, '')]: {
+                  ...feature.properties,
+                  value: 0,
+                },
+              };
+            });
 
-              const x = response.data.result;
-              x.forEach((trend: any) => {
-                if (newData[trend.geoName.replace(/\s+/g, '')]) {
-                  newData[trend.geoName.replace(/\s+/g, '')].value = trend.value || 0;
-                }
+            const x = response.data.result;
+            x.forEach((trend: any) => {
+              if (newData[trend.geoName.replace(/\s+/g, '')]) {
+                newData[trend.geoName.replace(/\s+/g, '')].value = trend.value || 0;
+              }
+            });
+            const rowData: any = [];
+            const dataset: any = Object.values(newData).map((list: any, index) => {
+              rowData.push({
+                id: index + 1,
+                region: list.name,
+                searches: list.value,
               });
-              const rowData: any = [];
-              const dataset: any = Object.values(newData).map((list: any, index) => {
-                rowData.push({
-                  id: index + 1,
-                  region: list.name,
-                  searches: list.value,
-                });
-                return [list['hc-key'], list.value];
-              });
-              setTrendsList(x);
-              setRows(rowData);
-              setOptions({
-                title: {
-                  text: title || mapTopology.title,
-                },
-                colorAxis: {
-                  min: 0,
-                  stops: [
-                    [0, '#f72585ff'],
-                    [100, '#480ca8ff'],
-                  ],
-                  max: 100,
-                },
-                mapNavigation: {
-                  enabled: true,
-                },
-                series: [
-                  {
-                    mapData: mapTopology,
-                    data: dataset,
-                    name: 'Search trends',
-                    states: {
-                      hover: {
-                        color: '#4cc9f0ff',
-                      },
+              return [list['hc-key'], list.value];
+            });
+            setTrendsList(x);
+            setRows(rowData);
+            setOptions({
+              title: {
+                text: title || mapTopology.title,
+              },
+              colorAxis: {
+                min: 0,
+                stops: [
+                  [0, '#f72585ff'],
+                  [100, '#480ca8ff'],
+                ],
+                max: 100,
+              },
+              mapNavigation: {
+                enabled: true,
+              },
+              series: [
+                {
+                  mapData: mapTopology,
+                  data: dataset,
+                  name: 'Search trends',
+                  states: {
+                    hover: {
+                      color: '#4cc9f0ff',
                     },
                   },
-                ],
-              });
-              setLoading(false);
-            }
-          })
-          .catch((error) => {
+                },
+              ],
+            });
             setLoading(false);
-            setError(error.message);
-            setShowError(true);
-          });
-      }, 500);
+          }
+        })
+        .catch((error) => {
+          setLoading(false);
+          setError(error.message);
+          setShowError(true);
+        });
     }
   }, [searchKeyword, startDate, endDate, country, mapTopology]);
 
@@ -162,8 +158,8 @@ const RegionDetailsComponent = ({
         </Snackbar>
       )}
       {!loading && trendsList.length > 1 && (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', height: '400px' }}>
-          <div style={{ width: '50%' }}>
+        <>
+          <div style={{ width: '100%' }}>
             <HighchartsReact
               constructorType={'mapChart'}
               highcharts={Highcharts}
@@ -181,11 +177,13 @@ const RegionDetailsComponent = ({
                 },
               }}
               pageSizeOptions={[5, 10, 15]}
-              sx={{ ml: 3, mr: 3 }}
+              sx={{ m: 4 }}
               rowSelection={false}
+              autoHeight={true}
+              columnThreshold={2}
             />
           )}
-        </Box>
+        </>
       )}
     </Box>
   );

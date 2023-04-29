@@ -1,6 +1,14 @@
 import React from 'react';
-import { Accordion, AccordionSummary, AccordionDetails, Box, Typography } from '@mui/material';
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Box,
+  Typography,
+  ListItem,
+} from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DoubleArrowRoundedIcon from '@mui/icons-material/DoubleArrowRounded';
 
 const TweetDetailsComponent = ({ title, tweets = [] }: any) => {
   return (
@@ -18,15 +26,26 @@ const TweetDetailsComponent = ({ title, tweets = [] }: any) => {
             {title}
           </Typography>
         </AccordionSummary>
-        {tweets.map((tweet: string) => {
-          return (
-            <AccordionDetails key={tweet} sx={{ display: 'inline-flex' }}>
-              <Typography variant='body2' component='p' color='#f72585ff'>
-                {tweet}
-              </Typography>
-            </AccordionDetails>
-          );
-        })}
+        {tweets.length > 0 &&
+          tweets.map((tweet: string) => {
+            return (
+              <AccordionDetails key={tweet} sx={{ display: 'inline-flex' }}>
+                <ListItem>
+                  <Typography variant='body2' component='p' color='#f72585ff'>
+                    <DoubleArrowRoundedIcon fontSize='small' />
+                    {tweet}
+                  </Typography>
+                </ListItem>
+              </AccordionDetails>
+            );
+          })}
+        {!tweets.length && (
+          <AccordionDetails>
+            <Typography variant='body2' component='p' color='#f72585ff'>
+              No tweets found.
+            </Typography>
+          </AccordionDetails>
+        )}
       </Accordion>
     </Box>
   );

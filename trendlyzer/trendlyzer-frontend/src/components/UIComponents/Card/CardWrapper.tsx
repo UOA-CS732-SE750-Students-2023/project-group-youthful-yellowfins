@@ -46,7 +46,13 @@ const CardWrapperComponent = (trendsList: WrapperProps) => {
                 classes={classes.articleStyle}
                 sx={{ display: 'flex', color: '#560badff' }}
               >
-                {articles[article].title || articles[article].articleTitle}
+                <a
+                  href={articles[article].url}
+                  target='__blank'
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  {articles[article].title || articles[article].articleTitle}
+                </a>
               </Typography>
             </Tooltip>
           </Box>

@@ -13,7 +13,7 @@
   text-align: center;
 }
 
-.layoutMenu a:active,
+.layoutMenu .currentPath,
 .layoutMenu a:hover,
 .layoutMenu a:visited,
 .layoutMenu a:focus-visible {

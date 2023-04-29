@@ -9,8 +9,8 @@ const Layout = () => {
 
   return (
     <>
-      {auth.isAuthenticated ? <Navigation /> : <></>}
-      <main className={auth.isAuthenticated ? classes.appOutlet : classes.outlet}>
+      {auth.isAuthenticated && !auth.loading ? <Navigation /> : <></>}
+      <main className={auth.isAuthenticated && !auth.loading ? classes.appOutlet : classes.outlet}>
         <Outlet />
       </main>
     </>

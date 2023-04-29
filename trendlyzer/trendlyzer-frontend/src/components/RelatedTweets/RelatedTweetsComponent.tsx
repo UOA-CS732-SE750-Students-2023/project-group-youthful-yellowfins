@@ -72,7 +72,9 @@ const RelatedTweetsComponent = ({ keyword }: string | any) => {
         {tweets.map((tweet: any) => {
           return (
             <AccordionDetails key={tweet.title} sx={{ display: 'inline-flex' }}>
-              <TwitterTweetEmbed tweetId={tweet.id_str} key={tweet.id} />
+              <div style={{ height: '250px', overflow: 'scroll' }}>
+                <TwitterTweetEmbed tweetId={tweet.id_str} key={tweet.id} />
+              </div>
             </AccordionDetails>
           );
         })}
