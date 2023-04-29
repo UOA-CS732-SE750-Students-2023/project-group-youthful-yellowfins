@@ -1,11 +1,12 @@
 export interface IAuth {
-  userId: string;
+  username: string;
+  password: string;
   isAuthenticated: boolean;
 }
 
 export interface IAuthContext {
   auth: IAuth;
-  handleAuth: (value: IAuth) => void;
+  handleAuth: (value: any) => void;
 }
 
 export interface ICategory {
