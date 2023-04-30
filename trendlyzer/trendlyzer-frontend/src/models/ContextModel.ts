@@ -1,11 +1,19 @@
 export interface IAuth {
-  userId: string;
+  userId: string | null;
+  email: string | null;
+  userName: string | null;
+  password: string;
+  authError: string | null;
   isAuthenticated: boolean;
+  loading: boolean;
 }
 
 export interface IAuthContext {
   auth: IAuth;
-  handleAuth: (value: IAuth) => void;
+  handleGoogleAuth: () => any;
+  handleLogInMethod: (value: any) => any;
+  handleRegisterMethod: (value: any) => any;
+  handlelogout: () => any;
 }
 
 export interface ICategory {

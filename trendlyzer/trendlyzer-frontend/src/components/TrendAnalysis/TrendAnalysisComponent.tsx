@@ -8,12 +8,10 @@ import TrendReasonComponent from '../TrendReason/TrendReasonComponent';
 import Loader from '../UIComponents/Loader/LoaderComponent';
 import { getChatgptData } from '../../services/trendDetailsService';
 import RegionDetailsComponent from '../RegionDetails/RegionDetailsComponent';
-import { CountriesContext } from '../../context/CountriesContext';
 
 const TrendAnalysisComponent = () => {
   const { id } = useParams();
   const { trendDetails, setShowNavigation } = useContext(TrendDetailsContext);
-  const { selectedCountry } = useContext(CountriesContext);
   const [loading, setLoading] = useState(false);
   const [trendReason, setTrendReason] = useState('');
   const [trendBackground, setTrendBackground] = useState('');
@@ -64,7 +62,7 @@ const TrendAnalysisComponent = () => {
               <br />
               <RelatedTweetsComponent keyword={trendDetails.title} />
               <RegionDetailsComponent
-                country={selectedCountry}
+                country={'All'}
                 searchKeyword={trendDetails.title}
                 showTable={false}
                 title={'Region-wise Statistics'}

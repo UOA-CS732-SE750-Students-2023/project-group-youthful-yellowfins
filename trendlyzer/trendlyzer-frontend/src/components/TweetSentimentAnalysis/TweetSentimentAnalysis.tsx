@@ -7,12 +7,14 @@ import Loader from '../UIComponents/Loader/LoaderComponent';
 import MagnitudeChartComponent from '../Sentiment/MagnitudeChart';
 import { headingsLabels } from '../../config/labels';
 import TweetDetailsComponent from '../TweetsDetails/TweetsDetailsComponent';
+import useDebounce from '../../hooks/useDebounce';
 
 const TweetSentimentAnalysisComponent = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showError, setShowError] = useState<boolean>(false);
   const [selectedKeyword, setSelectedKeyword] = useState('');
+  const debouncedSearchTerm: string = useDebounce<string>(selectedKeyword, 500);
 
   const [tweets, setTweets] = useState<any>({
     positiveSentiment: 0,
@@ -23,10 +25,10 @@ const TweetSentimentAnalysisComponent = () => {
   const handleKeywordChange = (value: any) => setSelectedKeyword(value.target.value);
 
   useEffect(() => {
-    if (selectedKeyword) {
+    if (debouncedSearchTerm) {
       setLoading(true);
       getSentimentAnalysis({
-        keyword: selectedKeyword,
+        keyword: debouncedSearchTerm,
         limit: 5,
       })
         .then((response: any) => {
@@ -39,7 +41,7 @@ const TweetSentimentAnalysisComponent = () => {
           setShowError(true);
         });
     }
-  }, [selectedKeyword]);
+  }, [debouncedSearchTerm]);
 
   return (
     <>
@@ -79,9 +81,9 @@ const TweetSentimentAnalysisComponent = () => {
         />
       </FormControl>
       {loading && <Loader />}
-      {!loading && !error && selectedKeyword && (
+      {!loading && !error && debouncedSearchTerm && (
         <>
-          <Box sx={{ ml: 3, mr: 3, display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ ml: 3, mr: 3 }}>
             <Piechart
               positive={tweets.positiveSentiments}
               negative={tweets.negativeSentiments}

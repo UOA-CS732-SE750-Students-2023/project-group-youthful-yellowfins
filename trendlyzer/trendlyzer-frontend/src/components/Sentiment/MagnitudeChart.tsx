@@ -7,8 +7,7 @@ const MagnitudeChartComponent = ({ positive, negative }: any) => {
     chart: {
       type: 'column',
     },
-    title: undefined,
-    subtitle: {
+    title: {
       text: 'Sentiment Magnitude',
     },
     xAxis: {
@@ -52,11 +51,7 @@ const MagnitudeChartComponent = ({ positive, negative }: any) => {
     ],
   };
 
-  return (
-    <div style={{ width: '50%' }}>
-      <HighchartsReact highcharts={Highcharts} allowChartUpdate={true} options={options} />
-    </div>
-  );
+  return <HighchartsReact highcharts={Highcharts} allowChartUpdate={true} options={options} />;
 };
 
 export default MagnitudeChartComponent;

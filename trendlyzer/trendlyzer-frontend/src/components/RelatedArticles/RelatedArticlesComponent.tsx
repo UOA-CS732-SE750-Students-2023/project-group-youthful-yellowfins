@@ -39,7 +39,13 @@ const RelatedArticlesComponent = ({ articles }: any) => {
               />
               <Box sx={{ ml: 2 }}>
                 <Typography variant='subtitle2' component='p' color='#f72585ff'>
-                  {article.title || article.articleTitle}
+                  <a
+                    href={article.url}
+                    target='__blank'
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    {article.title || article.articleTitle}
+                  </a>
                   <Typography
                     variant='subtitle2'
                     component='span'

@@ -15,6 +15,7 @@ import { headingsLabels } from '../../config/labels';
 import { CountriesContext } from '../../context/CountriesContext';
 import { ICountry } from '../../models/ContextModel';
 import RegionDetailsComponent from '../../components/RegionDetails/RegionDetailsComponent';
+import useDebounce from '../../hooks/useDebounce';
 
 const InterestByRegionComponent = () => {
   const { countriesList, selectedCountry, handleCountryChange } = useContext(CountriesContext);
@@ -22,6 +23,12 @@ const InterestByRegionComponent = () => {
   const [selectedEndDate, setSelectedEndDate] = useState(dayjs());
   const [selectedKeyword, setSelectedKeyword] = useState('');
   const [countryList, setCountryList] = useState<any>([]);
+  // Debounce search term so that it only gives us latest value ...
+  // ... if searchTerm has not been updated within last 500ms.
+  // The goal is to only have the API call fire when user stops typing ...
+  // ... so that we aren't hitting our API rapidly.
+  // We pass generic type, this case string
+  const debouncedSearchTerm: string = useDebounce<string>(selectedKeyword, 500);
 
   const handleKeywordChange = (value: any) => setSelectedKeyword(value.target.value);
 
@@ -101,7 +108,7 @@ const InterestByRegionComponent = () => {
       </Box>
       <RegionDetailsComponent
         country={selectedCountry}
-        searchKeyword={selectedKeyword}
+        searchKeyword={debouncedSearchTerm}
         startDate={selectedStartDate}
         endDate={selectedEndDate}
       />

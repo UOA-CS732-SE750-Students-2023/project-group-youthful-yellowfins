@@ -1,35 +1,35 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import CountryProvider from '../../context/CountriesContext';
+import { render, screen, waitFor } from '@testing-library/react';
+import { CountriesContext } from '../../context/CountriesContext';
 import AuthProvider from '../../context/AuthContext';
-import CategoryProvider from '../../context/CategoryContext';
+import { CategoryContext } from '../../context/CategoryContext';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Dashboard from '.';
 import { BrowserRouter } from 'react-router-dom';
+import { mockCategoryContextData, mockCountryContextData } from '../../config/mockDataTesting';
+import { getDailyTrends } from '../../services/dashboardService';
 
-describe('<Dashboard page />', () => {
-  beforeEach(() => {
-    render(
-      <AuthProvider>
-        <CountryProvider>
-          <CategoryProvider>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <BrowserRouter>
-                <Dashboard />
-              </BrowserRouter>
-            </LocalizationProvider>
-          </CategoryProvider>
-        </CountryProvider>
-      </AuthProvider>,
-    );
-  });
+describe('Dashboard page', () => {
+  const { getByText } = render(
+    <AuthProvider>
+      <CountriesContext.Provider value={mockCountryContextData}>
+        <CategoryContext.Provider value={mockCategoryContextData}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <BrowserRouter>
+              <Dashboard />
+            </BrowserRouter>
+          </LocalizationProvider>
+        </CategoryContext.Provider>
+      </CountriesContext.Provider>
+    </AuthProvider>,
+  );
 
-  it('has daily trend search', () => {
-    expect(screen.getByText(/Daily search trends/i)).toBeTruthy();
-  });
-
-  it('has daily trend search', () => {
-    expect(screen.getByText(/Real-time search trends/i)).toBeTruthy();
+  it('renders dashboard page', async () => {
+    expect(getByText(/Daily Search Trends/i)).toBeTruthy();
+    expect(getByText(/Real-Time Search Trends/i)).toBeTruthy();
+    expect(screen.getAllByLabelText(/Country/i)).toBeTruthy();
+    expect(screen.getByRole('button', { name: /New Zealand/i })).toBeTruthy();
+    await waitFor(() => expect(getDailyTrends).toHaveBeenCalledTimes(1));
   });
 });

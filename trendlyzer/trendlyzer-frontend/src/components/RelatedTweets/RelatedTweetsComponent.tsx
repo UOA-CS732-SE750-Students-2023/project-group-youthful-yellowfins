@@ -26,7 +26,7 @@ const RelatedTweetsComponent = ({ keyword }: string | any) => {
       limit: 10,
     })
       .then((response: any) => {
-        setTweets(response.data.result);
+        setTweets(response.data.result || []);
         setLoading(false);
       })
       .catch((error) => {
@@ -72,7 +72,9 @@ const RelatedTweetsComponent = ({ keyword }: string | any) => {
         {tweets.map((tweet: any) => {
           return (
             <AccordionDetails key={tweet.title} sx={{ display: 'inline-flex' }}>
-              <TwitterTweetEmbed tweetId={tweet.id_str} key={tweet.id} />
+              <div style={{ height: '250px', overflow: 'scroll' }}>
+                <TwitterTweetEmbed tweetId={tweet.id_str} key={tweet.id} />
+              </div>
             </AccordionDetails>
           );
         })}
