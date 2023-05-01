@@ -5,9 +5,10 @@ require('dotenv').config();
 const mongoose = require("mongoose");
 const TrendsRouter = require("./app/routes/TrendsRoutes");
 const SentimentRouter = require("./app/routes/SentimentRoutes");
-
+const authMiddleware = require("./app/Middleware/AuthenticationService");
 
 //middleware
+app.use("/", authMiddleware);
 app.use(cors({origin: ['http://localhost:3000', 'http://127.0.0.1:3000']}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

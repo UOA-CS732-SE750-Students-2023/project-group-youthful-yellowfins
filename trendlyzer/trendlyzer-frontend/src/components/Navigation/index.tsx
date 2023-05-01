@@ -24,6 +24,9 @@ const Navigation = () => {
   return (
     <>
       <div className={classes.layoutMenu}>
+          {/* <Link to={'/dashboard'}> */}
+            <img src='logo-transparent.png' alt='Trendlyzer' className={classes.logo} />
+          {/* </Link> */}
         <Stack
           direction='column'
           sx={{
@@ -33,9 +36,6 @@ const Navigation = () => {
           }}
         >
           <ListItemButton>
-            <Link to={'/dashboard'}>
-              <img src='logo3.png' alt='Trendlyzer' className={classes.logo} />
-            </Link>
           </ListItemButton>
           <Link to={'/dashboard'} className={pathName === 'dashboard' ? classes.currentPath : ''}>
             <ListItemButton
@@ -63,20 +63,22 @@ const Navigation = () => {
             <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>Explore Trends</ListItemButton>
           </Link>
           <Link to={'/sentiment'} className={pathName === 'sentiment' ? classes.currentPath : ''}>
-            <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>Sentiment</ListItemButton>
+            <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>Analyze Sentiment</ListItemButton>
           </Link>
           <Link to=''>
             <ListItemButton sx={{ p: 2, justifyContent: 'center' }} onClick={() => handleLogout()}>
               Logout
             </ListItemButton>
           </Link>
-          <ListItemButton sx={{ position: 'fixed', bottom: 0, mb: 2 }}>
-            <Avatar sx={{ width: 24, height: 24 }} />
-            <Typography sx={{ ml: 2, overflowWrap: 'anywhere' }} variant='body2' component='p'>
+        </Stack>
+          <div  className={classes.userDetails}>
+          {/* <ListItemButton sx={{ position: 'fixed', bottom: 0, mb: 2 }}>
+          </ListItemButton> */}
+            <Avatar sx={{ width: 28, height: 28 }} />
+            <Typography sx={{ ml: 2, overflowWrap: 'anywhere', fontSize : '18px' }} variant='body2' component='p'>
               {auth.userName ? auth.userName : auth.email}
             </Typography>
-          </ListItemButton>
-        </Stack>
+          </div>
       </div>
     </>
   );

@@ -1,38 +1,56 @@
-
-.navSection{
+.navSection {
   display: flex;
   width: 100%;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
-  background: #edeff2;
+  background: white;
   z-index: 1;
-  height: 45px;
-  position: fixed;
+  margin-top: 15px;
+  height: 67px;
+  /* position: fixed; */
   padding: 15px;
-  }
-  .companyTitle{
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-family: 'Open Sans', sans-serif;
-    color: #69b9ff;
-    font-size: 20px;
-    line-height: 25px;
-    font-weight: 300;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-  }
-  .menuItemsBox{
-    display: inline-flexbox;
-  }
-  .menuItems{
-    position: relative;
-      display: inline-block;
-      vertical-align: top;
-      text-decoration: none;
-      color: #222222;
-      padding: 20px;
-      text-align: left;
-      margin-left: auto;
-      margin-right: auto;
-      cursor: pointer;
-  }
+}
+
+.logo-img{
+  height : 70px
+}
+
+.companyTitle {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: 'Open Sans', sans-serif;
+  color: #69b9ff;
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.logoSection{
+  align-self: center;
+}
+
+.menuItemsBox {
+  display: inline-flexbox;
+  align-self: flex-end;
+}
+
+.menuItems {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-decoration: none;
+  color: #4A4CF6;
+  padding: 20px;
+  text-align: left;
+  font-family: system-ui;
+  font-weight: 550;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+.menuItems:hover {
+  color: #F88379;
+}

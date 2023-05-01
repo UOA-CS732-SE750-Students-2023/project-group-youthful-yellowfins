@@ -13,27 +13,29 @@ function Why() {
               decisions, gain knowledge with our data analysis by knowing about what is trending at
               your place or across globe.</div>
           </div><div className="row">
+          <div className="col col-4">
+              <div className={classes.whiteBox}>
+                <img src="decode-sentiments.png" width="210" height="132" alt="" className={classes.gridImage}  />
+                <h3>Decode Sentiments</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+              </div>
+            </div>
             <div className="col col-4">
               <div className={`${classes.whiteBox} ${classes.pop}`}>
-                <img src="https://assets.website-files.com/5e4b18feebfd1a721bb930e6/5e4b18feebfd1a6bf8b930f3_feather-15-white.svg" alt="" className={classes.gridImage} />
-                <h3>Graphic Design</h3>
+                <img src="trends.jpg"   width="210" height="132" alt="" className={classes.gridImage} />
+                <h3>Explore Trends</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
               </div>
             </div>
             <div className="col col-4">
               <div className={classes.whiteBox}>
-                <img src="https://assets.website-files.com/5e4b18feebfd1a721bb930e6/5e4b18feebfd1abad7b93103_feather2-17-white.svg" width="210" alt="" className={classes.gridImage} />
-                <h3>Awesome code</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+                <img src="stats.jpg" alt="" height="132" width="210" className={classes.gridImage} />
+                <h3>Market Analysis</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros  elementum tristique.</p>
               </div>
             </div>
-            <div className="col col-4">
-              <div className={classes.whiteBox}>
-                <img src="https://assets.website-files.com/5e4b18feebfd1a721bb930e6/5e4b18feebfd1aa9b8b9312b_feather2-22-white.svg" alt="" className={classes.gridImage} />
-                <h3>free template</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
-              </div>
-            </div>
+
+
           </div>
         </div>
       </div>

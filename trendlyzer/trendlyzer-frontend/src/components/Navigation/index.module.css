@@ -25,4 +25,13 @@
 
 .logo {
   width: 80%;
+  margin: 30px 15px 30px 10px;
+}
+.userDetails{
+  display: flex;
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    align-items: center;
+    font-size: 19px !important;
 }

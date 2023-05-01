@@ -1,8 +1,8 @@
 const Twitter = require('twitter-lite');
 const URLs = require('../helper/URLs');
 const user = new Twitter({
-    consumer_key: "jv3Fu2nLLIgego7gGA1lsFqBP",
-    consumer_secret: "8OHhvxUI3CCDz2vHkSzVeEhnDi7LZvA8BGSuDHU0nS02ncZwvn",
+    consumer_key: "mLm51PhVD1pDuZVeu8Oqe5EjK",
+    consumer_secret: "6inmSuQEC5zkHLT1yhWZxv8QvfuCjjfpUjWKMRVjFj5qReYKBQ",
 });
 
 
