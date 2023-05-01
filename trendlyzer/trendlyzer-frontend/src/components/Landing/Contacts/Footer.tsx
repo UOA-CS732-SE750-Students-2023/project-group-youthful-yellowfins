@@ -1,5 +1,9 @@
 import React from 'react';
 import './Footer.css';
+import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined';
+import PrintOutlinedIcon from '@mui/icons-material/PrintOutlined';
 
 function Footer()
 {
@@ -8,19 +12,28 @@ function Footer()
         <div id="contacts" className= "footer">
         <div className= "container">
           <div className="row">
-            <div className="col col-4">
-              <h5>about velocity</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
+            <div className="col col-5">
+              <h5>About Us</h5>
+              <p> We are a group of highly skilled and passionate individuals who share a common goal: to build innovative technology solutions that make a real difference in people lives.
+              </p>
+              <p>
+              We are driven to push the boundaries of what`s possible and to create products that are not only technologically advanced, but also intuitive, user-friendly, and practical.
+              </p>
             </div>
             <div className="col col-4">
-              <h5>useful links</h5>
+              <h5>Contact</h5>
               <a href="#" className = "footerLink" >
-              <i className="bi bi-telephone"></i> +64-02108912356</a>
-              <a href="#" className = "footerLink" >Suspendisse nisl elit</a>
-              <a href="#" className = "footerLink" >Dellentesque habitant morbi</a>
-              <a href="#" className = "footerLink" >Etiam sollicitudin ipsum</a>
+              <PhoneOutlinedIcon/> +64-02108912356</a>
+              <a href="#" className = "footerLink" >
+              <EmailOutlinedIcon/> trendlyzerSupport@outlook.com</a>
+              <a href="#" className = "footerLink" >
+              <BusinessOutlinedIcon/> 
+              12 Grafton Road, Auckland CBD, Auckland 1010</a>
+              <a href="#" className = "footerLink" >
+              <PrintOutlinedIcon/> 
+              555-123-4567</a>
             </div>
-            <div className="col col-4">
+            <div className="col col-3 d-flex flex-column">
               <h5>social</h5>
               <div>
                 <img src="https://assets.website-files.com/5e4b18feebfd1a721bb930e6/5e4b18feebfd1a3b71b93135_social-18.svg" 
