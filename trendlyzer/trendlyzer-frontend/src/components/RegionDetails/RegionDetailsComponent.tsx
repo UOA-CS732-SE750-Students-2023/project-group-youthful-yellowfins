@@ -42,15 +42,17 @@ const RegionDetailsComponent = ({
       field: 'region',
       headerName: 'Region',
       sortingOrder: ['desc', 'asc'],
-      width: 500,
+      flex: 1,
       headerClassName: 'searchHeaderTable',
+      resizable: false,
     },
     {
       field: 'searches',
       headerName: 'Searches',
       sortingOrder: ['desc', 'asc'],
-      width: 450,
+      flex: 1,
       headerClassName: 'searchHeaderTable',
+      resizable: false,
     },
   ];
 
@@ -70,6 +72,7 @@ const RegionDetailsComponent = ({
         .then((response) => {
           if (response.data.status) {
             let newData: any;
+            mapTopology.title = 'Region wise trends heat map';
             mapTopology.features.forEach((feature: any) => {
               newData = {
                 ...newData,
@@ -167,21 +170,23 @@ const RegionDetailsComponent = ({
             />
           </div>
           {showTable && (
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              initialState={{
-                pagination: { paginationModel: { pageSize: 5 } },
-                sorting: {
-                  sortModel: [{ field: 'region', sort: 'asc' }],
-                },
-              }}
-              pageSizeOptions={[5, 10, 15]}
-              sx={{ m: 4 }}
-              rowSelection={false}
-              autoHeight={true}
-              columnThreshold={2}
-            />
+            <Box sx={{ height: 400, width: '100%' }}>
+              <DataGrid
+                rows={rows}
+                columns={columns}
+                initialState={{
+                  pagination: { paginationModel: { pageSize: 5 } },
+                  sorting: {
+                    sortModel: [{ field: 'region', sort: 'asc' }],
+                  },
+                }}
+                pageSizeOptions={[5, 10, 15]}
+                sx={{ m: 4 }}
+                rowSelection={false}
+                autoHeight={true}
+                columnThreshold={2}
+              />
+            </Box>
           )}
         </>
       )}

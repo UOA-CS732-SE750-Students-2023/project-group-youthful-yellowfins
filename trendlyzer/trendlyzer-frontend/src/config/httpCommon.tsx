@@ -1,9 +1,6 @@
 import axios from 'axios';
 
-// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-const token = sessionStorage.getItem('token') || '';
-
-export default axios.create({
+const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000/api',
   headers: {
     'Content-type': 'application/json',
@@ -12,6 +9,25 @@ export default axios.create({
     'Access-Control-Allow-Methods': 'GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, PATCH',
     'Access-Control-Allow-Headers':
       'Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization',
-    Authorization: `Bearer ${token}`,
   },
 });
+
+// Configure outbound request interceptor logic
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = window.sessionStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  async (error) => await Promise.reject(error),
+);
+
+// Configure incoming response interceptor logic
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => await Promise.reject(error),
+);
+
+export default axiosInstance;

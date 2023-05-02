@@ -8,7 +8,9 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
+import { IUser } from '../models/common';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyB6e095KfXmT9siWND-3SvdjUsrD1TXGoI',
@@ -46,31 +48,44 @@ const AuthProvider = ({ children }: any) => {
   const googleProvider = new GoogleAuthProvider();
 
   useEffect(() => {
-    authInstance.onAuthStateChanged((user: any) => {
-      const { uid, displayName, email, accessToken } = user || '';
-      sessionStorage.setItem('token', accessToken);
-      setAuth({
-        userId: uid,
-        userName: displayName,
-        password: '',
-        email,
-        authError: null,
-        isAuthenticated: !!accessToken,
-        loading: false,
-      });
+    authInstance.onAuthStateChanged(async (user: any) => {
+      if (user) {
+        const { uid, displayName, email, accessToken } = user || '';
+        sessionStorage.setItem('token', accessToken);
+        setAuth({
+          userId: uid,
+          userName: displayName,
+          password: '',
+          email,
+          authError: null,
+          isAuthenticated: !!accessToken,
+          loading: false,
+        });
+      } else {
+        setAuth({
+          userId: '',
+          userName: '',
+          password: '',
+          email: '',
+          authError: null,
+          isAuthenticated: false,
+          loading: false,
+        });
+      }
     });
   }, []);
 
-  const handleRegisterMethod = async ({ email, password }: any) => {
+  const handleRegisterMethod = async ({ firstName, lastName, email, password }: IUser) => {
     try {
       setAuth({ ...auth, loading: true });
       const result = await createUserWithEmailAndPassword(authInstance, email, password);
       const { user } = result;
       if (user) {
         sessionStorage.setItem('token', await user.getIdToken());
+        await updateProfile(user, { displayName: `${firstName} ${lastName}` });
         setAuth({
           userId: user.uid,
-          userName: '',
+          userName: `${firstName} ${lastName}`,
           email: user.email,
           password: '',
           authError: null,

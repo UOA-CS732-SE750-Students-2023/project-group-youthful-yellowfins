@@ -1,8 +1,9 @@
 import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { IChartValues } from '../../models/common';
 
-const Piechart = ({ positive, negative, neutral }: any) => {
+const Piechart = ({ positive, negative, neutral }: IChartValues) => {
   const options: Highcharts.Options = {
     colors: ['#b5179eff', '#7209b7ff', '#3a0ca3ff'],
     chart: {
@@ -13,6 +14,12 @@ const Piechart = ({ positive, negative, neutral }: any) => {
     },
     title: {
       text: 'Sentiment Overview',
+    },
+    subtitle: {
+      text: '10 Tweets Analyzed',
+      align: 'center',
+      verticalAlign: 'middle',
+      y: 80,
     },
     tooltip: {
       pointFormat: '<b>{point.percentage:.1f}%</b>',
@@ -46,9 +53,9 @@ const Piechart = ({ positive, negative, neutral }: any) => {
         name: 'Sentiment',
         innerSize: '50%',
         data: [
-          ['Positive', positive],
-          ['Neutral', neutral],
-          ['Negative', negative],
+          [`Positive ${positive}%`, positive],
+          [`Neutral ${neutral}%`, neutral],
+          [`Negative ${negative}%`, negative],
         ],
       },
     ],

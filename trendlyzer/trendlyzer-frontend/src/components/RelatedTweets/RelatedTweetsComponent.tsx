@@ -69,15 +69,28 @@ const RelatedTweetsComponent = ({ keyword }: string | any) => {
           </Typography>
         </AccordionSummary>
         {loading && <Loader />}
-        {tweets.map((tweet: any) => {
-          return (
-            <AccordionDetails key={tweet.title} sx={{ display: 'inline-flex' }}>
-              <div style={{ height: '250px', overflow: 'scroll' }}>
-                <TwitterTweetEmbed tweetId={tweet.id_str} key={tweet.id} />
-              </div>
-            </AccordionDetails>
-          );
-        })}
+        {tweets.length > 0 &&
+          tweets.map((tweet: any) => {
+            return (
+              <AccordionDetails key={tweet.title} sx={{ display: 'inline-flex' }}>
+                <div style={{ height: '250px', overflow: 'scroll' }}>
+                  <TwitterTweetEmbed tweetId={tweet.id_str} key={tweet.id} />
+                </div>
+              </AccordionDetails>
+            );
+          })}
+        {!tweets.length && (
+          <Typography
+            key='noTweets'
+            variant='subtitle2'
+            color='text.secondary'
+            component='p'
+            gutterBottom
+            sx={{ ml: 2 }}
+          >
+            No tweets found
+          </Typography>
+        )}
       </Accordion>
     </Box>
   );
