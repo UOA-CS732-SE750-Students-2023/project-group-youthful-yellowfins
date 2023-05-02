@@ -47,6 +47,8 @@ async function generateResponse(message) {
     if(promptBackground?.data?.choices?.length && promptTrendingReason?.data?.choices?.length){
       result.promptBackground = promptBackground.data.choices[0]?.text?.trim()
       result.promptTrendingReason = promptTrendingReason.data.choices[0]?.text?.trim()
+      result.promptBackground = result.promptBackground.replace('\?', ' ');
+      result.promptTrendingReason = result.promptTrendingReason.replace('\?', ' ');
     }
     return result;
 
