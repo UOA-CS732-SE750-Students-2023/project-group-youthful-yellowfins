@@ -5,11 +5,11 @@ const checkIfAuthenticated = require( '../Middleware/AuthenticationService');
 
 /* Google Trends Route */
 router.get('/getTrendsByDate', checkIfAuthenticated,trendsController.getTrendsByDate);
-router.post('/getTrendByRegion', trendsController.getTrendByRegion);
+router.post('/getTrendByRegion',checkIfAuthenticated, trendsController.getTrendByRegion);
 
 /* Chatgpt Route */
-router.get('/getTrendingReasons', trendsController.sendMessage);
+router.get('/getTrendingReasons',checkIfAuthenticated, trendsController.sendMessage);
 
 /* Country Codes Route */
-router.get('/getCountryCodes', trendsController.getCountryCodes);
+router.get('/getCountryCodes', checkIfAuthenticated,trendsController.getCountryCodes);
 module.exports = router;
