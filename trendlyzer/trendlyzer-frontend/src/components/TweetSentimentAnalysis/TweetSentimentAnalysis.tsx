@@ -83,16 +83,20 @@ const TweetSentimentAnalysisComponent = () => {
       {loading && <Loader />}
       {!loading && !error && debouncedSearchTerm && (
         <>
-          <Box sx={{ ml: 3, mr: 3 }}>
-            <Piechart
-              positive={tweets.positiveSentiments}
-              negative={tweets.negativeSentiments}
-              neutral={tweets.neutralSentiments}
-            />
-            <MagnitudeChartComponent
-              positive={[tweets.postiveSentimentMagnitude]}
-              negative={[tweets.negativeSentimentMagnitude]}
-            />
+          <Box sx={{ ml: 3, mr: 3, display: 'flex' }}>
+            <div style={{ width: '50%' }}>
+              <Piechart
+                positive={tweets.positiveSentiments}
+                negative={tweets.negativeSentiments}
+                neutral={tweets.neutralSentiments}
+              />
+            </div>
+            <div style={{ width: '50%' }}>
+              <MagnitudeChartComponent
+                positive={[tweets.postiveSentimentMagnitude]}
+                negative={[tweets.negativeSentimentMagnitude]}
+              />
+            </div>
           </Box>
           <Box sx={{ m: 4, display: 'flex', justifyContent: 'space-between' }}>
             <div>

@@ -24,9 +24,7 @@ const Navigation = () => {
   return (
     <>
       <div className={classes.layoutMenu}>
-          {/* <Link to={'/dashboard'}> */}
-            <img src='logo-transparent.png' alt='Trendlyzer' className={classes.logo} />
-          {/* </Link> */}
+        <img src='logo-transparent.png' alt='Trendlyzer' className={classes.logo} />
         <Stack
           direction='column'
           sx={{
@@ -35,8 +33,6 @@ const Navigation = () => {
             width: 'inherit',
           }}
         >
-          <ListItemButton>
-          </ListItemButton>
           <Link to={'/dashboard'} className={pathName === 'dashboard' ? classes.currentPath : ''}>
             <ListItemButton
               sx={{ p: 2, justifyContent: 'center', '&:focusVisible': { color: '#560badff' } }}
@@ -63,7 +59,9 @@ const Navigation = () => {
             <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>Explore Trends</ListItemButton>
           </Link>
           <Link to={'/sentiment'} className={pathName === 'sentiment' ? classes.currentPath : ''}>
-            <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>Analyze Sentiment</ListItemButton>
+            <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>
+              Analyze Sentiment
+            </ListItemButton>
           </Link>
           <Link to=''>
             <ListItemButton sx={{ p: 2, justifyContent: 'center' }} onClick={() => handleLogout()}>
@@ -71,14 +69,18 @@ const Navigation = () => {
             </ListItemButton>
           </Link>
         </Stack>
-          <div  className={classes.userDetails}>
+        <div className={classes.userDetails}>
           {/* <ListItemButton sx={{ position: 'fixed', bottom: 0, mb: 2 }}>
           </ListItemButton> */}
-            <Avatar sx={{ width: 28, height: 28 }} />
-            <Typography sx={{ ml: 2, overflowWrap: 'anywhere', fontSize : '18px' }} variant='body2' component='p'>
-              {auth.userName ? auth.userName : auth.email}
-            </Typography>
-          </div>
+          <Avatar sx={{ width: 28, height: 28 }} />
+          <Typography
+            sx={{ ml: 2, overflowWrap: 'anywhere', fontSize: '18px' }}
+            variant='body2'
+            component='p'
+          >
+            {auth.userName ? auth.userName : auth.email}
+          </Typography>
+        </div>
       </div>
     </>
   );

@@ -20,7 +20,7 @@ const DailyTrendsComponent = () => {
           <Select
             labelId='country-label'
             id='country-select'
-            value={selectedCountry}
+            value={countriesList.length ? selectedCountry : ''}
             label={headingsLabels.COUNTRY}
             onChange={handleCountryChange}
           >

@@ -56,17 +56,21 @@ const SentimentAnalysisComponent = () => {
           </Alert>
         </Snackbar>
       )}
-      {!loading && !error && (
-        <Box sx={{ ml: 3, mr: 3 }}>
-          <Piechart
-            positive={tweets.positiveSentiments}
-            negative={tweets.negativeSentiments}
-            neutral={tweets.neutralSentiments}
-          />
-          <MagnitudeChartComponent
-            positive={[tweets.postiveSentimentMagnitude]}
-            negative={[tweets.negativeSentimentMagnitude]}
-          />
+      {!loading && (
+        <Box sx={{ ml: 3, mr: 3, display: 'flex' }}>
+          <div style={{ width: '50%' }}>
+            <Piechart
+              positive={tweets.positiveSentiments}
+              negative={tweets.negativeSentiments}
+              neutral={tweets.neutralSentiments}
+            />
+          </div>
+          <div style={{ width: '50%' }}>
+            <MagnitudeChartComponent
+              positive={[tweets.postiveSentimentMagnitude]}
+              negative={[tweets.negativeSentimentMagnitude]}
+            />
+          </div>
         </Box>
       )}
     </>

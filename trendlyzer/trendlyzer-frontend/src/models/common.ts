@@ -60,3 +60,16 @@ export interface RegionTrendsResponse {
   geoName: string;
   value: number;
 }
+
+export interface IChartValues {
+  positive: number;
+  neutral: number;
+  negative: number;
+}
+
+export interface IUser {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}

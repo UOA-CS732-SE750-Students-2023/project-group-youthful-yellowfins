@@ -19,7 +19,12 @@ const Register = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    handleRegisterMethod({ email: event.target[2].value, password: event.target[4].value })
+    handleRegisterMethod({
+      firstName: event.target[0].value,
+      lastName: event.target[2].value,
+      email: event.target[6].value,
+      password: event.target[8].value,
+    })
       .then((response: any) => {
         navigate('/dashboard');
       })
@@ -50,13 +55,30 @@ const Register = () => {
             margin='normal'
             required
             fullWidth
+            id='firstname'
+            label='First name'
+            name='firstname'
+            autoComplete='firstname'
+            autoFocus
+          />
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            id='lastname'
+            label='Last name'
+            name='lastname'
+            autoComplete='lastname'
+          />
+          <TextField
+            margin='normal'
+            required
+            fullWidth
             id='username'
             label='Username'
             name='username'
             autoComplete='username'
-            autoFocus
           />
-
           <TextField
             margin='normal'
             required
@@ -65,13 +87,11 @@ const Register = () => {
             label='Email Address'
             name='email'
             autoComplete='email'
-            autoFocus
             onChange={handleChange}
             {...(!isEmailValid ? { error: true } : {})}
             variant='outlined'
             helperText={!isEmailValid ? 'Enter valid email' : ''}
           />
-
           <TextField
             margin='normal'
             required
