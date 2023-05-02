@@ -111,6 +111,11 @@ function translateRealTimeTrendsResponse(response){
   if(response?.storySummaries?.trendingStories.length){
     let trendingModel = {}
     for (const element of response?.storySummaries?.trendingStories) {
+      if(element.articles?.length){
+        element.articles.forEach(article => {
+          article.articleTitle = article.articleTitle.replace('#39', ' ');
+        });
+      }
         trendingModel = {
           title : element?.title,
           entityNames : element?.entityNames,
@@ -132,6 +137,11 @@ function translateTrendsByDateResponse(response){
       let trendingStory = [];
       if(element.trendingSearches?.length){
         for (const item of element.trendingSearches) {
+          if(item.articles?.length){
+            item.articles.forEach(article => {
+              article.title = article.title.replace('#39', ' ');
+            });
+          }
           const model = {
             title : item.title?.query,
             trafficCount : item?.formattedTraffic,

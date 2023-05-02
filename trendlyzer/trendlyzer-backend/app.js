@@ -9,18 +9,17 @@ const authMiddleware = require("./app/Middleware/AuthenticationService");
 
 //middleware
 /** CORS setting with OPTIONS pre-flight handling */
-app.use(function(req, res, next){
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, accept, access-control-allow-origin');
-  
-  if ('OPTIONS' == req.method) res.send(200);
-  else next();
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Headers, Content-Type, Authorization, Origin, Accept");
+  res.setHeader('Access-Control-Allow-Credentials', true)
+  next();
 });
 app.use(cors({origin: ['http://localhost:3000', 'http://127.0.0.1:3000']}));
-app.use("/", authMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/", authMiddleware);
 app.use("/api/Trends", TrendsRouter);
 app.use("/api/Sentiment", SentimentRouter);
 
