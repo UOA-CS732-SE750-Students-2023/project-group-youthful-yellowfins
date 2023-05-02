@@ -40,8 +40,6 @@ exports.sendMessage = async (req, res) => {
   }
 }
 };
-
-
  
 
   exports.getTrendsByDate = async (req, res) => {

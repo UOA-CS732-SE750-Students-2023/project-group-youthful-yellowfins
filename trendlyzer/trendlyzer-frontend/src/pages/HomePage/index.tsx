@@ -35,7 +35,7 @@ const HomePage = () => {
           <div className={classes.heroSection}>
         <div className={classes.leftSection} >
           <h1 className={classes.pageTitle}>Welcome, Trendlyzers</h1>
-          <h4 className={classes.subTitle}>Your place to deep dive down into the analytics and sentiments behind the Buzzing topics</h4>
+          <h4 className={classes.subTitle}>Your place to deep dive down into the analytics and sentiments behind the buzzing topics !</h4>
           <button className={classes.getStartedBtn}
            onClick={navigateToRegister}> Get Started</button>
         </div>
