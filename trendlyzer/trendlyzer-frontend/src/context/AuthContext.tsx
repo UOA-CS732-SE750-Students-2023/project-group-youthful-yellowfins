@@ -48,6 +48,7 @@ const AuthProvider = ({ children }: any) => {
   useEffect(() => {
     authInstance.onAuthStateChanged((user: any) => {
       const { uid, displayName, email, accessToken } = user || '';
+      sessionStorage.setItem('token', accessToken);
       setAuth({
         userId: uid,
         userName: displayName,
@@ -66,6 +67,7 @@ const AuthProvider = ({ children }: any) => {
       const result = await createUserWithEmailAndPassword(authInstance, email, password);
       const { user } = result;
       if (user) {
+        sessionStorage.setItem('token', await user.getIdToken());
         setAuth({
           userId: user.uid,
           userName: '',
@@ -91,6 +93,7 @@ const AuthProvider = ({ children }: any) => {
       const result = await signInWithEmailAndPassword(authInstance, email, password);
       const { user } = result;
       if (user) {
+        sessionStorage.setItem('token', await user.getIdToken());
         setAuth({
           ...auth,
           userId: user.uid,
@@ -116,6 +119,7 @@ const AuthProvider = ({ children }: any) => {
       const result = await signInWithPopup(authInstance, googleProvider);
       const { user } = result;
       if (user) {
+        sessionStorage.setItem('token', await user.getIdToken());
         setAuth({
           ...auth,
           userId: user.uid,
@@ -138,6 +142,7 @@ const AuthProvider = ({ children }: any) => {
   const handlelogout = async () => {
     try {
       await signOut(authInstance);
+      sessionStorage.removeItem('token');
       setAuth({
         userId: '',
         userName: '',
