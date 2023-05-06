@@ -59,7 +59,7 @@ const Navigation = () => {
             <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>Explore Trends</ListItemButton>
           </Link>
           <Link to={'/sentiment'} className={pathName === 'sentiment' ? classes.currentPath : ''}>
-            <ListItemButton sx={{ p: 2, justifyContent: 'center' }}>
+            <ListItemButton sx={{ p: 2, justifyContent: 'center', textAlign: 'center' }}>
               Analyze Sentiment
             </ListItemButton>
           </Link>

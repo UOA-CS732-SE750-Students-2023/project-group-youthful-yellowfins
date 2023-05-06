@@ -26,7 +26,7 @@ const RegionDetailsComponent = ({
   searchKeyword,
   startDate,
   endDate,
-  country,
+  country = 'All',
   showTable = true,
   title = '',
 }: any) => {

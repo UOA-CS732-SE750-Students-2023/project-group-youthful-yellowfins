@@ -16,14 +16,13 @@ import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import { IArticle, IRealTimeArticle, WrapperProps } from '../../../models/common';
 import classes from './CardWrapper.module.css';
 
+// Reusable component for showing details in card format
 const CardWrapperComponent = (trendsList: WrapperProps) => {
-  const maxWidth9Matches = useMediaQuery('(max-width:991px) and (min-width: 767px)');
-  console.log('maxWidth9Matches', maxWidth9Matches);
-  const maxWidth7Matches = useMediaQuery('(max-width:576px');
+  const maxWidth7Matches = useMediaQuery('(max-width:768px)');
   const [width, setWidth] = useState('45%');
 
   // This function will fetch the starting few articles to display on the trending page
-  const getFiveArticles = () => {
+  const getArticles = () => {
     const articles: IArticle[] | IRealTimeArticle[] = trendsList.articles;
     const articleLength: number = articles.length > 2 ? 2 : articles.length;
     const content: any[] = [];
@@ -78,11 +77,10 @@ const CardWrapperComponent = (trendsList: WrapperProps) => {
   useEffect(() => {
     if (maxWidth7Matches) {
       setWidth('90%');
-    }
-    if (maxWidth9Matches) {
+    } else {
       setWidth('42%');
     }
-  }, [maxWidth7Matches, maxWidth9Matches]);
+  }, [maxWidth7Matches]);
 
   return (
     <Card
@@ -123,7 +121,7 @@ const CardWrapperComponent = (trendsList: WrapperProps) => {
         <Divider />
       </Box>
       <Box sx={{ display: 'flex', flexDirection: 'column', paddingBottom: '10px' }}>
-        {getFiveArticles()}
+        {getArticles()}
       </Box>
       <Divider />
       <CardActions
