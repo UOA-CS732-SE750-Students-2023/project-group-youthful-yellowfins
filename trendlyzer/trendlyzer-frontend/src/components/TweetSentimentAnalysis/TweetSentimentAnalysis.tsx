@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Box, FormControl, TextField, Typography, Snackbar } from '@mui/material';
+import { Alert, Box, Button, FormControl, TextField, Typography, Snackbar } from '@mui/material';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 import Piechart from '../Sentiment/SemiCircle';
 import { getSentimentAnalysis } from '../../services/trendDetailsService';
@@ -8,12 +9,15 @@ import MagnitudeChartComponent from '../Sentiment/MagnitudeChart';
 import { headingsLabels } from '../../config/labels';
 import TweetDetailsComponent from '../TweetsDetails/TweetsDetailsComponent';
 import useDebounce from '../../hooks/useDebounce';
+import ModalComponent from '../UIComponents/Modals';
+import { sentimentInfo } from '../../config/sentimentInformation';
 
 const TweetSentimentAnalysisComponent = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showError, setShowError] = useState<boolean>(false);
   const [selectedKeyword, setSelectedKeyword] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const debouncedSearchTerm: string = useDebounce<string>(selectedKeyword, 500);
 
   const [tweets, setTweets] = useState<any>({
@@ -23,6 +27,8 @@ const TweetSentimentAnalysisComponent = () => {
   });
 
   const handleKeywordChange = (value: any) => setSelectedKeyword(value.target.value);
+
+  const handleOnIconClicked = () => setShowModal(!showModal);
 
   useEffect(() => {
     if (debouncedSearchTerm) {
@@ -58,7 +64,8 @@ const TweetSentimentAnalysisComponent = () => {
           </Alert>
         </Snackbar>
       )}
-      <Box sx={{ p: 2, m: 2 }}>
+      {showModal && <ModalComponent isModalOpen={showModal} data={sentimentInfo} />}
+      <Box sx={{ p: 2, m: 2, display: 'flex', justifyContent: 'space-between' }}>
         <Typography
           variant='h5'
           component='h3'
@@ -67,6 +74,9 @@ const TweetSentimentAnalysisComponent = () => {
         >
           {headingsLabels.SENTIMENT_ANALYSIS}
         </Typography>
+        <Button variant='text' onClick={handleOnIconClicked}>
+          <HelpOutlineOutlinedIcon />
+        </Button>
       </Box>
       <FormControl fullWidth sx={{ mb: 3 }}>
         <TextField

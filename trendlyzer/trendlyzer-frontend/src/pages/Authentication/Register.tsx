@@ -88,7 +88,7 @@ const Register = () => {
             name='email'
             autoComplete='email'
             onChange={handleChange}
-            {...(!isEmailValid ? { error: true } : {})}
+            {...(!isEmailValid && isEmailValid !== undefined ? { error: true } : {})}
             variant='outlined'
             helperText={!isEmailValid ? 'Enter valid email' : ''}
           />

@@ -62,7 +62,6 @@ const TrendAnalysisComponent = () => {
               <br />
               <RelatedTweetsComponent keyword={trendDetails.title} />
               <RegionDetailsComponent
-                country={'All'}
                 searchKeyword={trendDetails.title}
                 showTable={false}
                 title={'Region-wise Statistics'}

@@ -18,7 +18,7 @@ const RealTimeTrendsComponent = () => {
           <Select
             labelId='country-label'
             id='country-select'
-            value={selectedCountry}
+            value={selectedCountry === 'All' ? 'NZ' : selectedCountry}
             label={headingsLabels.COUNTRY}
             onChange={handleCountryChange}
           >
@@ -46,7 +46,10 @@ const RealTimeTrendsComponent = () => {
           </Select>
         </FormControl>
       </div>
-      <RealTimeDetailsComponent country={selectedCountry} category={selectedCategory} />
+      <RealTimeDetailsComponent
+        country={selectedCountry === 'All' ? 'NZ' : selectedCountry}
+        category={selectedCategory}
+      />
     </>
   );
 };
