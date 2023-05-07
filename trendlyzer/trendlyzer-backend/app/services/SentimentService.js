@@ -7,10 +7,10 @@ const spellCorrector = new SpellCorrector();
 spellCorrector.loadDictionary();
 var ml = require('ml-sentiment')();
 const { htmlToText } = require("html-to-text");
-//const language = require('@google-cloud/language');
+const language = require('@google-cloud/language');
 
 // Instantiates a client
-//const client = new language.LanguageServiceClient();
+const client = new language.LanguageServiceClient();
 const ignoreWords = ['\\brt\\b','\\bfor\\b', '\\bon\\b', '\\ban\\b', '\\ba\\b'
 , '\\bof\\b', '\\band\\b', '\\bin\\b', '\\bthe\\b', '\\bto\\b', '\\bfrom\\b']
 const ignoreWordRegex = new RegExp(ignoreWords.join("|"), "gi");
@@ -36,40 +36,38 @@ async function getSentimentStats(tweets) {
   for (let tweet of tweets) {
     let text = cleanTweetText(tweet);
     // console.log(tweets)
-  
       const document = {
         content: text,
         type: 'PLAIN_TEXT',
       };
-    
       // Detects the sentiment of the text
-      // const [result] = await client.analyzeSentiment({document: document});
-      // const sentiment = result.documentSentiment;
-      // sentimentScore = sentiment.score;
+      const [result] = await client.analyzeSentiment({document: document});
+      const sentiment = result.documentSentiment;
+      sentimentScore = sentiment.score;
      
       // console.log(`Text: ${text}`);
       // console.log(`Sentiment score: ${sentiment.score}`);
       // console.log(`Sentiment magnitude: ${sentiment.magnitude}`);
-      sentimentScore = ml.classify(text);
+      // sentimentScore = ml.classify(text);
     if(sentimentScore > 0){
       response.positiveSentiments++;
       response.positiveTweets.push(tweet);
-      // postiveSentimentMagnitude +=  sentiment.magnitude
+      postiveSentimentMagnitude +=  sentiment.magnitude
     } else if(sentimentScore < 0){
       response.negativeSentiments++;
       response.negativeTweets.push(tweet);
-      // negativeSentimentMagnitude +=  sentiment.magnitude
+      negativeSentimentMagnitude +=  sentiment.magnitude
     } else {
       response.neutralSentiments++;
       response.neutralTweets.push(tweet)
     }
   }
-  // if(postiveSentimentMagnitude){
-  //   response.postiveSentimentMagnitude = postiveSentimentMagnitude/response.positiveSentiments;
-  // }
-  // if(negativeSentimentMagnitude){
-  //   response.negativeSentimentMagnitude = negativeSentimentMagnitude/response.negativeSentiments
-  // }
+  if(postiveSentimentMagnitude){
+    response.postiveSentimentMagnitude = postiveSentimentMagnitude/response.positiveSentiments;
+  }
+  if(negativeSentimentMagnitude){
+    response.negativeSentimentMagnitude = negativeSentimentMagnitude/response.negativeSentiments
+  }
   return response;
 }
 
