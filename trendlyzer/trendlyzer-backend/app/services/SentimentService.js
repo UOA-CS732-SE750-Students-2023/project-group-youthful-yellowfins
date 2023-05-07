@@ -18,6 +18,15 @@ const ignoreWordRegex = new RegExp(ignoreWords.join("|"), "gi");
 
 // function for searching top 13 articles for given geography and given category (coudl be b-> business, e-> economics etc, 'all'-> all)
 
+
+
+/**
+ * Author:  Shubham Gujare
+ * Created: 17.04.2023
+ * Purpose: This function gets tweets regarding requested keyword, cleans tweets and calls google nlp and 
+ * performs sentiment analysis calculations.
+ **/
+
 async function getSentimentStats(tweets) {
   let response = {
     positiveSentiments : 0,
