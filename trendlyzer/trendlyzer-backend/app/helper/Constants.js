@@ -1,6 +1,4 @@
 module.exports = Object.freeze({
-    MY_CONSTANT: 'some value',
-    ANOTHER_CONSTANT: 'another value',
     BAD_REQUEST_ERROR_CODE : 400,
     INTERNAL_SERVER_ERROR_CODE : 500,
     THIRD_PARTY_SERVICE_ERROR_CODE : 201,

@@ -53,6 +53,9 @@ exports.sendMessage = async (req, res) => {
       } else {
          response = await TrendsService.getRealTimeTrends(req.query);
       }
+      if(!response){
+        throw new ApiException(Constants.SOMETHING_WENT_WRONG_W_THIRD_PARTY, Constants.THIRD_PARTY_SERVICE_ERROR_CODE);   
+      }
       // response null code to be added
       res.json({  status: true, result : response , message : 'success'});
     } catch (err) {

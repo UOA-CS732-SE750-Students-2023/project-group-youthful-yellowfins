@@ -30,8 +30,12 @@ async function getDailyTrends (req)  {
         geo: req.geocode
     });
     if(data){
-      response =  JSON.parse(data);
-      response = translateTrendsByDateResponse(response);
+      try {
+        response =  JSON.parse(data);
+        response = translateTrendsByDateResponse(response);
+      } catch (e) {
+        response = null;
+      }
     }
     return response;
 }
@@ -56,7 +60,6 @@ async function getTrendsByRegion(req) {
         startTime: startTime,
         endTime: endTime
       });
-      console.log(data)
       if(data) {
         response =  JSON.parse(data);
         response = translateTrendsByRegionResponse(response);
@@ -77,7 +80,6 @@ async function relatedQueries(){
         geo: "NZ"
     });
 
-    console.log(data);
 }
 
 // just gives related topics - no further hyperlinks - title, topic segregation - potential use if use with dailyTrends api (but user has to mention country)
@@ -86,7 +88,6 @@ async function autoComplete(){
         keyword: "DONALD "
     });
 
-    console.log(data);
 }
 
 
@@ -113,7 +114,7 @@ function translateRealTimeTrendsResponse(response){
     for (const element of response?.storySummaries?.trendingStories) {
       if(element.articles?.length){
         element.articles.forEach(article => {
-          article.articleTitle = article.articleTitle.replace('#39', ' ');
+          article.articleTitle = article.articleTitle.replace(/(#39|&#39|&amp)/g, ' ');
         });
       }
         trendingModel = {
@@ -139,7 +140,7 @@ function translateTrendsByDateResponse(response){
         for (const item of element.trendingSearches) {
           if(item.articles?.length){
             item.articles.forEach(article => {
-              article.title = article.title.replace('#39', ' ');
+              article.title = article.title.replace(/(#39|&#39|&amp)/g, ' ');
             });
           }
           const model = {
@@ -175,6 +176,7 @@ async function fetchCountryCodes() {
           if (response?.data) {
               const countries = response.data;
               const countryCodes = countries.map(country => {
+                
                   return {
                       name: country.name.common,
                       cca2: country.cca2,
