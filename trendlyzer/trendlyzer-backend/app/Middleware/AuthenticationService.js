@@ -6,11 +6,11 @@ const firebase = require("./FirebaseAdmin");
 function authMiddleware(request, response, next) {
   const headerToken = request.headers.authorization;
   if (!headerToken) {
-    return response.send({ status: false ,message: "No token provided" }).status(401);
+    return response.status(403).json({ message: 'No token provided' , status : false});
   }
 
   if (headerToken && headerToken.split(" ")[0] !== "Bearer") {
-    response.send({  status: false , message: "Invalid token" }).status(401);
+    return response.status(403).json({ message: 'Invalid Token' , status : false});
   }
 
   const token = headerToken.split(" ")[1];
@@ -18,7 +18,7 @@ function authMiddleware(request, response, next) {
     .auth()
     .verifyIdToken(token)
     .then(() => next())
-    .catch(() => response.send({ status : false, message: "Unauthorized User" }).status(403));
+    .catch(() =>  response.status(403).json({ message: 'Unauthorized User' , status : false}));
 }
 
 module.exports = authMiddleware;

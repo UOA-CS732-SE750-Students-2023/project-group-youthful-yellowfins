@@ -20,7 +20,7 @@ const DailyTrendsComponent = () => {
           <Select
             labelId='country-label'
             id='country-select'
-            value={countriesList.length ? selectedCountry : ''}
+            value={selectedCountry === 'All' ? 'NZ' : selectedCountry}
             label={headingsLabels.COUNTRY}
             onChange={handleCountryChange}
           >
@@ -40,7 +40,10 @@ const DailyTrendsComponent = () => {
           />
         </FormControl>
       </div>
-      <DailyTrendsDetailsComponent country={selectedCountry} date={selectedDate} />
+      <DailyTrendsDetailsComponent
+        country={selectedCountry === 'All' ? 'NZ' : selectedCountry}
+        date={selectedDate}
+      />
     </>
   );
 };
