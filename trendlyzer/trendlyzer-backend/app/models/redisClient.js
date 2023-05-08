@@ -1,3 +1,11 @@
+
+/**
+ * Author:  Shubham Gujare
+ * Created: 25.04.2023
+ * Purpose: This file has the code to connect to cloud based redis client
+ **/
+
+
 var redis = require('redis');
 
 (async () => {

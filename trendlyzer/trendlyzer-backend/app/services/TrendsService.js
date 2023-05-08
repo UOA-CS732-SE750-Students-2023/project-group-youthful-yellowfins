@@ -14,8 +14,12 @@ async function getRealTimeTrends(req) {
         category: "all"
     });
     if(data){
-      response =  JSON.parse(data);
-      return translateRealTimeTrendsResponse(response)
+       try {
+        response =  JSON.parse(data);
+        return translateRealTimeTrendsResponse(response)
+      } catch (e) {
+        response = null;
+      }
     } else {
       return null;
     }
@@ -66,8 +70,6 @@ async function getTrendsByRegion(req) {
       }
     }
     catch (error) {
-      console.log("Error in calling the Country Codes API");
-      console.dir(error);
       response = null;
     }
     return response;
