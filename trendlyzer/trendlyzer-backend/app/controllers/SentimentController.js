@@ -1,8 +1,20 @@
+/**
+ * Author:  Shubham Gujare
+ * Created: 17.04.2023
+ * Purpose: This controller contains all the APIs related to sentiment analysis module
+ **/
+
 const TwitterService = require("../services/TwitterContentService");
 const Constants = require("../helper/Constants");
 const SentimentAnalysisService = require("../services/SentimentService");
 var ApiException = require('././../models/Error');
 
+
+/**
+ * Author:  Shubham Gujare
+ * Created: 01.04.2023
+ * Purpose: This method takes tweet limit and tweet keyword and returns response of all the tweets.
+ **/
 
 exports.getTweets = async (req, res) => {
   try {
@@ -24,6 +36,14 @@ exports.getTweets = async (req, res) => {
     }
   }
 }
+
+
+
+/**
+ * Author:  Shubham Gujare
+ * Created: 17.04.2023
+ * Purpose: This method takes tweet limit and  keyword and returns response of sentiment statistics.
+ **/
 
   exports.GetSentimentAnalysis = async (req, res) => {
     try {

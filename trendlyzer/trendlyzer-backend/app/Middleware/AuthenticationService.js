@@ -1,6 +1,10 @@
-/*
-    auth-middleware.js
-*/
+
+/**
+ * Author:  Shubham Gujare
+ * Created: 26.04.2023
+ * Purpose: This file is related to all the middleware level authentication logics and connects with firebase to do
+ **/
+
 const firebase = require("./FirebaseAdmin");
 
 function authMiddleware(request, response, next) {

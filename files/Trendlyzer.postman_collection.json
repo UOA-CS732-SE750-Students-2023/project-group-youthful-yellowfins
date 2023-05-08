@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "39552ef1-30a8-4b1f-b212-e5fab70414f2",
+		"name": "Trendlyzer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26027097",
+		"_collection_link": "https://galactic-capsule-918485.postman.co/workspace/Team-732~b6c39aea-5613-4428-ac29-a99451ee3e90/collection/26027097-39552ef1-30a8-4b1f-b212-e5fab70414f2?action=share&creator=26027097&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Get Trends By Date",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/Trends/getTrendsByDate?geocode=FR&date=2023-04-07",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"Trends",
+						"getTrendsByDate"
+					],
+					"query": [
+						{
+							"key": "geocode",
+							"value": "FR"
+						},
+						{
+							"key": "category",
+							"value": "All",
+							"disabled": true
+						},
+						{
+							"key": "date",
+							"value": "2023-04-07"
+						},
+						{
+							"key": "trendType",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTrendByRegion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"keyword\" : \"anzac\",\r\n    \"geocode\" : \"NZ\",\r\n    \"startTime\": \"2004-01-01\",\r\n    \"endTime\": \"2005-04-11\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/Trends/getTrendByRegion?geocode=FR",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"Trends",
+						"getTrendByRegion"
+					],
+					"query": [
+						{
+							"key": "geocode",
+							"value": "FR"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Master countries (Google Trends)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/Trends/getCountryCodes",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"Trends",
+						"getCountryCodes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Country Codes - All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://restcountries.com/v3.1/all",
+					"protocol": "https",
+					"host": [
+						"restcountries",
+						"com"
+					],
+					"path": [
+						"v3.1",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ChatGpt Trends",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImU3OTMwMjdkYWI0YzcwNmQ2ODg0NGI4MDk2ZTBlYzQzMjYyMjIwMDAiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vdHJlbmRseXplciIsImF1ZCI6InRyZW5kbHl6ZXIiLCJhdXRoX3RpbWUiOjE2ODI5OTYzNTUsInVzZXJfaWQiOiJQdjdjM3FQS0JVUzZGdE9LZk1XdzNqZEpwbGwyIiwic3ViIjoiUHY3YzNxUEtCVVM2RnRPS2ZNV3czamRKcGxsMiIsImlhdCI6MTY4Mjk5NjM1NSwiZXhwIjoxNjgyOTk5OTU1LCJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJhZG1pbkBhZG1pbi5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.ESraeKZHfTNv90oOi3pgIWAV4HYuVPZyE4ypuVZTZjP2cWnJptRWs8niAEJmq8bsWIgyKDuK4rdUUaZnyxcaMr3dbkwfBQc8ztRLQukkVBFZHPM-v-MiFIVQqhQuyISNuOA_soyasLHqUVu1SBrjWBbajJ0DoEXZ902rm1FcVnWkBqxdFxwkNBgifEzCg4hbDZS6ClbnpNQ3jfe4QSHe5xFCffXZ9zT8C4_A_dxXHUfQDyGLBY6nzYrRpTWaJjtsAvgxpMwQcEQnIHZC_-MKP87jX8by2eOH-qivjlpI2vfu0HlY97SlYo3W3RDzOpvWVbZqn0ayzIzhU2Rb3m_UmQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/Trends/getTrendingReasons?message=spark",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"Trends",
+						"getTrendingReasons"
+					],
+					"query": [
+						{
+							"key": "message",
+							"value": "spark"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sentiment Analysis",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImI2NzE1ZTJmZjcxZDIyMjQ5ODk1MDAyMzY2ODMwNDc3Mjg2Nzg0ZTMiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiU2h1YmggR3VqYXJlIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hL0FHTm15eGFHeVhiazJJT25XZlVqcmdxY2VUSGpiQTRjTDdDNVZSekl1eUZ4PXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL3RyZW5kbHl6ZXIiLCJhdWQiOiJ0cmVuZGx5emVyIiwiYXV0aF90aW1lIjoxNjgzNDQxNjY3LCJ1c2VyX2lkIjoiakxvYjBFOXN3VVd2RjNhZHJCbmh0aU9NVW9DMyIsInN1YiI6ImpMb2IwRTlzd1VXdkYzYWRyQm5odGlPTVVvQzMiLCJpYXQiOjE2ODM0NDE2NjcsImV4cCI6MTY4MzQ0NTI2NywiZW1haWwiOiJzcGFhbW05MzBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZ29vZ2xlLmNvbSI6WyIxMDk3Njg5NzgxNTgxNzg2MDkxNTYiXSwiZW1haWwiOlsic3BhYW1tOTMwQGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.EnWnS5jpFBcU8bNHZUnG2g4uEdfLeieRaeQOaJsdMyta69rROiaLEDzGtG-V91mDl9kGJl1JcdEP-k0-c1iP-1Y3uvKpCQrxTZ5enyhREbQQott4gzmyYSN4M6Q-N5Je66OiLMPSibbtYCdnafIm_0mBKmd9bJ38ySoroDwLNRZcek70seUUwKNneK75gcIXeIF1dInUmYZqksLf-asLlLupO4jBKr0T2vJfIAPMBW0RHzXn0CFlzorht6Vp0aYtPsqLGemvZwy-fT7RhfTAUtLSGhdRdWbEx4d_9FnqsatcCnUVLz4Hy7aFxS-11F6mrbgW7mzKvg_6a8FI0axNNg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/Sentiment/GetSentimentAnalysis?keyword=pentagon&limit=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"Sentiment",
+						"GetSentimentAnalysis"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "pentagon"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tweets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/Sentiment/getTweets?keyword=pentagon&limit=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"Sentiment",
+						"getTweets"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "pentagon"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

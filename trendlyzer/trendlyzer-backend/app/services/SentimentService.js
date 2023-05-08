@@ -16,9 +16,6 @@ const ignoreWords = ['\\brt\\b','\\bfor\\b', '\\bon\\b', '\\ban\\b', '\\ba\\b'
 const ignoreWordRegex = new RegExp(ignoreWords.join("|"), "gi");
 
 
-// function for searching top 13 articles for given geography and given category (coudl be b-> business, e-> economics etc, 'all'-> all)
-
-
 
 /**
  * Author:  Shubham Gujare

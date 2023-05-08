@@ -1,3 +1,11 @@
+
+/**
+ * Author:  Shubham Gujare, Ashish Agnihotri
+ * Created: 10.04.2023
+ * Purpose: This file has the code related to trends module APIs
+ **/
+
+
 const TrendsService = require("../services/TrendsService");
 const Constants = require("../helper/Constants");
 const chatgptService = require('../services/ChatgptService');
@@ -77,10 +85,8 @@ exports.sendMessage = async (req, res) => {
       }
       response = await TrendsService.getTrendsByRegion(req.body);
       if(!response){
-        throw new ApiException(Constants.SOMETHING_WENT_WRONG, 
-          Constants.INTERNAL_SERVER_ERROR_CODE);   
+        throw new ApiException(Constants.SOMETHING_WENT_WRONG_W_THIRD_PARTY, Constants.THIRD_PARTY_SERVICE_ERROR_CODE);   
       }
-      // response null code to be added
       res.json({  status: true, message: 'success', result : response });
     } catch (err) {
       if(err instanceof ApiException){
