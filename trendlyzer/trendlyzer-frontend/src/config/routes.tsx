@@ -9,7 +9,7 @@ import Login from '../pages/Authentication/Login';
 import InterestByRegionComponent from '../pages/InterestByRegion/InterestByRegionComponent';
 import Register from '../pages/Authentication/Register';
 import GuardedRoute from '../hoc/GuardedRoute/GuardedRoute';
-import { NotFound } from '../pages/NotFound';
+import NotFound from '../pages/NotFound';
 
 const routeDefinition: RouteObject[] = createRoutesFromElements(
   <Route path='/' element={<Layout />}>
