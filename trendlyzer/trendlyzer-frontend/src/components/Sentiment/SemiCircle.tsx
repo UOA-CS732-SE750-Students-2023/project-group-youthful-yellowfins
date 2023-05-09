@@ -16,7 +16,7 @@ const Piechart = ({ positive, negative, neutral }: IChartValues) => {
       text: 'Sentiment Overview',
     },
     subtitle: {
-      text: '10 Tweets Analyzed',
+      text: 'Tweets Analyzed',
       align: 'center',
       verticalAlign: 'middle',
       y: 80,

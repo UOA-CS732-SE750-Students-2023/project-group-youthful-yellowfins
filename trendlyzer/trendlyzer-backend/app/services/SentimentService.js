@@ -88,7 +88,6 @@ function cleanTweetText(req) {
   text = text.replace(/[^a-zA-Z]/g, ' ', text); // transform to remove hastags character
   text = text.replace(ignoreWordRegex, ' ');
   text = text.replace(/\s{2,20}/, ' '); // transform to remove more than 2 whitspaces
-  console.log(text);
   return text;
 }
 

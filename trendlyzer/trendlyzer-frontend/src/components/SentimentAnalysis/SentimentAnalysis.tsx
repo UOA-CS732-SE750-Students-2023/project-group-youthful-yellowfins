@@ -33,7 +33,7 @@ const SentimentAnalysisComponent = () => {
     setShowNavigation(true);
     getSentimentAnalysis({
       keyword: trendDetails.title,
-      limit: 5,
+      limit: 500,
     })
       .then((response: any) => {
         setTweets(response.data.result);
