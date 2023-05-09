@@ -57,6 +57,7 @@
   transition: background-color 300ms ease, border 300ms ease, color 300ms ease;
   color: #0a58ca;
  line-height: 21px;
+ background-color: white;
   font-weight: 400;
   letter-spacing: 2px;
   text-decoration: none;

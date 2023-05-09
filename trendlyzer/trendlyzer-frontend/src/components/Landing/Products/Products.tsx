@@ -2,8 +2,14 @@ import React from 'react';
 // import './Product.css';
 import Atropos from 'atropos/react';
 import classes from '../../../pages/HomePage/HomePage.module.css';
+import { useNavigate } from 'react-router';
 
 function Products() {
+  const navigate = useNavigate();
+  const navigateTo404Page = () => {
+    navigate('*');
+  };
+
   return (
     <div id="products" className={`${classes.section} ${classes.accent}`}>
       <div className={classes.container}>
@@ -26,7 +32,7 @@ function Products() {
               </Atropos>
               <h3 className={classes.whiteText}>TREND ANALYSIS</h3>
               <p className={classes.whiteText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius.</p>
-              <a href="#" className={classes.hollowButton}>LEARN MORE</a>
+              <button onClick={navigateTo404Page} className={classes.hollowButton}>LEARN MORE</button>
             </div>
           </div>
           <div className="col col-6">
@@ -43,7 +49,7 @@ function Products() {
               sizes="(max-width: 479px) 85vw, (max-width: 767px) 88vw, (max-width: 991px) 324px, 430px" alt="" className={classes.fullwidthImage}/> */}
               <h3 className={classes.whiteText}>SENTIMENT ANALYSIS</h3>
               <p className={classes.whiteText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius.</p>
-              <a href="#" className={`${classes.hollowButton} ${classes.allCaps}`}>Learn more</a>
+              <button onClick={navigateTo404Page} className={`${classes.hollowButton} ${classes.allCaps}`}>Learn more</button>
             </div>
           </div>
         </div>
