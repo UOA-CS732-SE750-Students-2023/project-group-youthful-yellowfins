@@ -1,5 +1,7 @@
+import TweetSentimentAnalysisComponent from '../../components/TweetSentimentAnalysis/TweetSentimentAnalysis';
+
 const Sentiment = () => {
-  return <h1>Sentiment</h1>;
+  return <TweetSentimentAnalysisComponent />;
 };
 
 export default Sentiment;

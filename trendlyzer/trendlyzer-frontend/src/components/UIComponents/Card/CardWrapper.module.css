@@ -1,0 +1,12 @@
+.articleStyle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: ltr;
+  max-width: 100%;
+  padding: 1px 10px;
+}
+
+.cardClass {
+  width: '45%';
+}

@@ -59,6 +59,15 @@
     animation: 1s infinite ease alternate bounce;
 }
 
+.sectionSubheading {
+    color: #8e8e9c;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
 @-webkit-keyframes bounce {
     100%{
         transform: translateY(20px)

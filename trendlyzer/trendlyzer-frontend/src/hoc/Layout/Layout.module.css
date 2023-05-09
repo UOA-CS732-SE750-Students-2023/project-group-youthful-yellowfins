@@ -1,8 +1,9 @@
-.containerFlex {
-  display: flex;
-  height: 100vh;
-}
-
 .outlet {
   width: 100%;
+}
+
+.appOutlet {
+  position: absolute;
+  right: 0;
+  width: 80%;
 }

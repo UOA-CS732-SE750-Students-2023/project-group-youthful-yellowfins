@@ -1,38 +1,46 @@
 const Twitter = require('twitter-lite');
 const URLs = require('../helper/URLs');
 const user = new Twitter({
-    consumer_key: "Xwjtm4EA5HnmJw84vUME5LBMB",
-    consumer_secret: "645OutrwashtTed7joXGEZko6MBRV3LGnBmaGsXJyDRMbJQkvj",
+    consumer_key: "mLm51PhVD1pDuZVeu8Oqe5EjK",
+    consumer_secret: "6inmSuQEC5zkHLT1yhWZxv8QvfuCjjfpUjWKMRVjFj5qReYKBQ",
 });
 
-module.exports = {
-    GetTweetsByKeywords : async (query)=> {
-        try {
-            let response = await user.getBearerToken();
-            const app = new Twitter({
-                bearer_token: response.access_token,
-            });
-    
-            response = await app.get(URLs.GET_TWEETS_BY_KEYWORD, {
-                q: query,
-                lang: "en",
-                count: 2,
-                tweet_mode : 'extended'
-            });
-    
-            let allTweets = "";
-            for (tweet of response.statuses) {
-                console.log(tweet.full_text);
-                //allTweets += tweet.text + "\n";
-            }
-    
-            // const sentimentScore = await getSentimentScore(allTweets);
-            // console.log(`The sentiment about ${query} is: ${sentimentScore}`);
-    
-        } catch(e) {
-            console.log("There was an error calling the Twitter API");
-            console.dir(e);
-        }
-    }
 
+async function GetTweetsByKeywords(keyword,limit,isSentimentAnalysis) {
+    try {
+        let response = await user.getBearerToken();
+        const app = new Twitter({
+            bearer_token: response.access_token,
+        });
+        response = await app.get(URLs.GET_TWEETS_BY_KEYWORD, {
+            q: keyword,
+            lang: "en",
+            max_results: limit,
+            tweet_mode: 'extended',
+            filter:'retweets'
+        });
+        let allTweets = [];
+
+        for (tweet of response.statuses) {
+            if (isSentimentAnalysis){
+                if(tweet?.retweeted_status && !allTweets.includes(tweet?.retweeted_status.full_text)){
+                    allTweets.push(tweet.retweeted_status.full_text.trim());
+                } else if(!allTweets.includes(tweet.full_text)) {
+                    allTweets.push(tweet.full_text.trim());
+                }
+            } else {
+                allTweets.push(tweet)
+            }
+        }
+
+        return allTweets;
+
+    } catch (e) {
+        console.log("There was an error calling the Twitter API");
+        console.dir(e);
+    }
 }
+
+module.exports = {
+    GetTweetsByKeywords
+};
