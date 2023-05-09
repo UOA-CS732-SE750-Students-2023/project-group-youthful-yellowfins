@@ -12,6 +12,11 @@ const DailyTrendsComponent = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const { countriesList, selectedCountry, handleCountryChange } = useContext(CountriesContext);
 
+  const disableDays = (day: any) => {
+    const result = selectedDate.subtract(15, 'days');
+    return day.isBefore(result, 'days') || day.isAfter(dayjs(), 'days');
+  };
+
   return (
     <>
       <div>
@@ -37,6 +42,7 @@ const DailyTrendsComponent = () => {
             value={selectedDate}
             label={headingsLabels.DATE}
             onChange={(newValue) => setSelectedDate(dayjs(newValue))}
+            shouldDisableDate={disableDays}
           />
         </FormControl>
       </div>

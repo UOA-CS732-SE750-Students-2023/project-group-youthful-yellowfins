@@ -36,7 +36,7 @@ const RealTimeDetailsComponent = ({ country, category }: any) => {
     setLoading(true);
     getDailyTrends({
       geocode: country,
-      category: 'All',
+      category,
     })
       .then((response) => {
         if (response.data.status) {
@@ -49,7 +49,7 @@ const RealTimeDetailsComponent = ({ country, category }: any) => {
         setError(error.message);
         setShowError(true);
       });
-  }, [country]);
+  }, [country, category]);
 
   return (
     <>

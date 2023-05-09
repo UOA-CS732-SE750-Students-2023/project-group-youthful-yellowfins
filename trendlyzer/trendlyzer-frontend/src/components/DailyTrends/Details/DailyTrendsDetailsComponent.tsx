@@ -9,6 +9,7 @@ import { getDailyTrends } from '../../../services/dashboardService';
 import { TrendsListResponse, WrapperProps } from '../../../models/common';
 import { TrendDetailsContext } from '../../../context/TrendDetailsContext';
 import Loader from '../../UIComponents/Loader/LoaderComponent';
+import NoResultFoundComponent from '../../NoResultFound/NoResultFoundComponent';
 
 const DailyTrendsDetailsComponent = ({ country, date }: any) => {
   const [trendsList, setTrendsList] = useState<TrendsListResponse[]>([
@@ -70,16 +71,18 @@ const DailyTrendsDetailsComponent = ({ country, date }: any) => {
       )}
       {!loading && !error && (
         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-          {trendsList[0].trendingStories.map((story: WrapperProps, index) => {
-            return (
-              <CardWrapperComponent
-                key={index}
-                {...story}
-                id={index + 1}
-                handleMoreDetails={() => handleMoreDetails({ ...story, id: index + 1 })}
-              />
-            );
-          })}
+          {trendsList.length > 0 &&
+            trendsList[0].trendingStories.map((story: WrapperProps, index) => {
+              return (
+                <CardWrapperComponent
+                  key={index}
+                  {...story}
+                  id={index + 1}
+                  handleMoreDetails={() => handleMoreDetails({ ...story, id: index + 1 })}
+                />
+              );
+            })}
+          {!trendsList.length && <NoResultFoundComponent />}
         </Box>
       )}
     </>

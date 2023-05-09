@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router';
 import {
+  Alert,
   Button,
   TextField,
   FormControlLabel,
@@ -10,12 +11,19 @@ import {
   Grid,
   Box,
   Typography,
+  Snackbar,
 } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
 
 const Register = () => {
-  const { handleRegisterMethod } = useContext(AuthContext);
+  const {
+    auth: { loading, authError },
+    handleRegisterMethod,
+    handleGoogleAuth,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isEmailValid, setIsEmailValid] = useState<boolean>();
+  const [showError, setShowError] = useState<any>(!!authError);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -28,7 +36,7 @@ const Register = () => {
       .then((response: any) => {
         navigate('/dashboard');
       })
-      .catch((e: any) => console.log(e));
+      .catch((e: any) => setShowError(true));
   };
 
   const handleChange = (value: any) => {
@@ -37,8 +45,30 @@ const Register = () => {
     setIsEmailValid(emailValid);
   };
 
+  const handleGoogleSubmit = (event: any) => {
+    event.preventDefault();
+    handleGoogleAuth()
+      .then((response: any) => {
+        navigate('/dashboard');
+      })
+      .catch((e: any) => setShowError(true));
+  };
+
   return (
     <>
+      {showError && (
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={showError}
+          key='topright'
+          onClose={() => setShowError(false)}
+          autoHideDuration={5000}
+        >
+          <Alert severity='error' sx={{ width: '100%' }}>
+            {authError}
+          </Alert>
+        </Snackbar>
+      )}
       <Box
         sx={{
           marginTop: 8,
@@ -125,6 +155,16 @@ const Register = () => {
               </Link>
             </Grid>
           </Grid>
+          <Button
+            fullWidth
+            variant='contained'
+            sx={{ mt: 3, mb: 2, background: '#800080' }}
+            disabled={loading}
+            onClick={(event) => handleGoogleSubmit(event)}
+          >
+            <GoogleIcon sx={{ mr: 1 }} /> Sign up using Google
+          </Button>
+          ;
         </Box>
       </Box>
     </>

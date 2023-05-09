@@ -25,6 +25,10 @@ export const headingsLabels = {
   NEGATIVE_TWEETS: 'Negative Tweets',
 };
 
+export const commonMessages = {
+  NO_RESULT: 'No Results Found',
+};
+
 export const headingsValue = {
   DAILY_TRENDS: 'dailyTrends',
   INTEREST_BY_REGION: 'interestByRegion',
