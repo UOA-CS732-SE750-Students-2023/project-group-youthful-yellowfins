@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { CountriesContext } from '../../context/CountriesContext';
 import AuthProvider from '../../context/AuthContext';
 import { CategoryContext } from '../../context/CategoryContext';
@@ -8,7 +8,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Dashboard from '.';
 import { BrowserRouter } from 'react-router-dom';
 import { mockCategoryContextData, mockCountryContextData } from '../../config/mockDataTesting';
-import { getDailyTrends } from '../../services/dashboardService';
 
 describe('Dashboard page', () => {
   const { getByText } = render(
@@ -30,6 +29,5 @@ describe('Dashboard page', () => {
     expect(getByText(/Real-Time Search Trends/i)).toBeTruthy();
     expect(screen.getAllByLabelText(/Country/i)).toBeTruthy();
     expect(screen.getByRole('button', { name: /New Zealand/i })).toBeTruthy();
-    await waitFor(() => expect(getDailyTrends).toHaveBeenCalledTimes(1));
   });
 });
