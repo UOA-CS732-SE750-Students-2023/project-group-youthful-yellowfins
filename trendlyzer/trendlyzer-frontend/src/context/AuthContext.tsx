@@ -156,8 +156,8 @@ const AuthProvider = ({ children }: any) => {
 
   const handlelogout = async () => {
     try {
-      await signOut(authInstance);
       sessionStorage.removeItem('token');
+      await signOut(authInstance);
       setAuth({
         userId: '',
         userName: '',

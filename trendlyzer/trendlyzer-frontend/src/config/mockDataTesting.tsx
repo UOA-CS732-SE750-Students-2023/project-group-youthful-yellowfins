@@ -33,6 +33,7 @@ export const mockCountryContextData = {
   selectedCountry: 'NZ',
   handleCountryChange: () => {},
   mapTopology: {},
+  worldMapTopology: {},
 };
 
 export const mockCategoryContextData = {

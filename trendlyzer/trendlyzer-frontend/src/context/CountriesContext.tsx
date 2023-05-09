@@ -9,6 +9,7 @@ const defaultState = {
   selectedCountry: 'NZ',
   handleCountryChange: () => {},
   mapTopology: {},
+  worldMapTopology: {},
 };
 
 export const CountriesContext = createContext<ICountryContext>(defaultState);
@@ -17,6 +18,7 @@ const CountryProvider = ({ children }: any) => {
   const [countriesList, setCountriesList] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState('NZ');
   const [mapTopology, setMapTopology] = useState({});
+  const [worldMapTopology, setWorldMapTopology] = useState({});
 
   const handleCountryChange = (value: SelectChangeEvent) => setSelectedCountry(value.target.value);
 
@@ -34,20 +36,20 @@ const CountryProvider = ({ children }: any) => {
   }, []);
 
   useEffect(() => {
-    if (selectedCountry === 'All') {
-      getWorldGeoJSON()
-        .then((response) => {
-          setMapTopology(response.data);
-        })
-        .catch(() => {});
-    } else {
-      getGeoJSON(selectedCountry.toLowerCase())
-        .then((response) => {
-          setMapTopology(response.data);
-        })
-        .catch(() => {});
-    }
+    getGeoJSON(selectedCountry.toLowerCase())
+      .then((response) => {
+        setMapTopology(response.data);
+      })
+      .catch(() => {});
   }, [selectedCountry]);
+
+  useEffect(() => {
+    getWorldGeoJSON()
+      .then((response) => {
+        setWorldMapTopology(response.data);
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <CountriesContext.Provider
@@ -56,6 +58,7 @@ const CountryProvider = ({ children }: any) => {
         selectedCountry,
         handleCountryChange,
         mapTopology,
+        worldMapTopology,
       }}
     >
       {children}
