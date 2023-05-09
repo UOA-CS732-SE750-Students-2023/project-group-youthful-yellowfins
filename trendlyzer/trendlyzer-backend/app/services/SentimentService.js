@@ -1,3 +1,10 @@
+/**
+ * Author:  Shubham Gujare
+ * Created: 17.04.2023
+ * Purpose: This function gets tweets regarding requested keyword, cleans tweets and calls google nlp and 
+ * performs sentiment analysis calculations.
+ **/
+
 const express = require('express');
 const aposToLexForm = require('apos-to-lex-form');
 const SpellCorrector = require('spelling-corrector');
@@ -16,13 +23,6 @@ const ignoreWords = ['\\brt\\b','\\bfor\\b', '\\bon\\b', '\\ban\\b', '\\ba\\b'
 const ignoreWordRegex = new RegExp(ignoreWords.join("|"), "gi");
 
 
-
-/**
- * Author:  Shubham Gujare
- * Created: 17.04.2023
- * Purpose: This function gets tweets regarding requested keyword, cleans tweets and calls google nlp and 
- * performs sentiment analysis calculations.
- **/
 
 async function getSentimentStats(tweets) {
   let response = {
