@@ -33,7 +33,7 @@ const RegionDetailsComponent = ({
   const [trendsList, setTrendsList] = useState<RegionTrendsResponse[]>(defaultState);
   const [options, setOptions] = useState<any | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
-  const { mapTopology } = useContext(CountriesContext);
+  const { mapTopology, worldMapTopology } = useContext(CountriesContext);
   const [error, setError] = useState('');
   const [showError, setShowError] = useState<boolean>(false);
   const [rows, setRows] = useState<GridRowsProp>([]);
@@ -72,15 +72,18 @@ const RegionDetailsComponent = ({
         .then((response) => {
           if (response.data.status) {
             let newData: any;
-            mapTopology.title = 'Region wise trends heat map';
-            mapTopology.features.forEach((feature: any) => {
-              newData = {
-                ...newData,
-                [(feature.properties.name || feature.properties.region).replace(/\s+/g, '')]: {
-                  ...feature.properties,
-                  value: 0,
-                },
-              };
+            const topology: any = country === 'All' ? worldMapTopology : mapTopology;
+            topology.title = 'Region wise trends heat map';
+            topology.features.forEach((feature: any) => {
+              if (feature.properties.name || feature.properties.region) {
+                newData = {
+                  ...newData,
+                  [(feature.properties.name || feature.properties.region).replace(/\s+/g, '')]: {
+                    ...feature.properties,
+                    value: 0,
+                  },
+                };
+              }
             });
 
             const x = response.data.result;
@@ -98,11 +101,9 @@ const RegionDetailsComponent = ({
               });
               return [list['hc-key'], list.value];
             });
-            setTrendsList(x);
-            setRows(rowData);
             setOptions({
               title: {
-                text: title || mapTopology.title,
+                text: title || topology.title,
               },
               colorAxis: {
                 min: 0,
@@ -117,7 +118,7 @@ const RegionDetailsComponent = ({
               },
               series: [
                 {
-                  mapData: mapTopology,
+                  mapData: topology,
                   data: dataset,
                   name: 'Search trends',
                   states: {
@@ -128,6 +129,8 @@ const RegionDetailsComponent = ({
                 },
               ],
             });
+            setTrendsList(x);
+            setRows(rowData);
             setLoading(false);
           }
         })

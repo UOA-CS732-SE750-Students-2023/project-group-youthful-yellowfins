@@ -12,6 +12,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { getTweets } from '../../services/trendDetailsService';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import Loader from '../UIComponents/Loader/LoaderComponent';
+import HourglassBottomTwoToneIcon from '@mui/icons-material/HourglassBottomTwoTone';
 
 const RelatedTweetsComponent = ({ keyword }: string | any) => {
   const [tweets, setTweets] = useState([]);
@@ -73,8 +74,23 @@ const RelatedTweetsComponent = ({ keyword }: string | any) => {
           tweets.map((tweet: any) => {
             return (
               <AccordionDetails key={tweet.title} sx={{ display: 'inline-flex' }}>
-                <div style={{ height: '250px', overflow: 'scroll' }}>
-                  <TwitterTweetEmbed tweetId={tweet.id_str} key={tweet.id} />
+                <div style={{ height: '250px', overflowY: 'scroll' }}>
+                  <TwitterTweetEmbed
+                    tweetId={tweet.id_str}
+                    key={tweet.id}
+                    placeholder={
+                      <Box
+                        sx={{
+                          display: 'grid',
+                          placeItems: 'center',
+                          width: '200px',
+                          paddingTop: '40px',
+                        }}
+                      >
+                        <HourglassBottomTwoToneIcon /> Loading...
+                      </Box>
+                    }
+                  />
                 </div>
               </AccordionDetails>
             );
