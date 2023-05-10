@@ -13,14 +13,14 @@ const unsupportedCountries = ['Barbados', 'Réunion', 'Suriname', 'Namibia','Gui
  'Morocco','Saint Pierre and Miquelon','Greenland','Nicaragua','Qatar','Syria','Belize','Falkland Islands','Venezuela','Bahrain','Cocos (Keeling) Islands','Northern Mariana Islands','Cameroon','Cyprus','Angola','Tunisia','Monaco','Rwanda','Trinidad and Tobago','Malta', 'Mayotte', 
  'Antigua and Barbuda','Tokelau','Niger','Albania','Somalia','Liberia', 'Myanmar','Tanzania','Iraq','South Georgia','Saint Vincent and the Grenadines','Libya','Sierra Leone','Sint Maarten','Serbia','Heard Island and McDonald Islands','Ghana','South Sudan','Faroe Islands','Guinea-Bissau',
  'Palau','Bulgaria','Nauru', 'Cambodia','Jersey','Palestine','Mali','Iran','Niue','Tajikistan', 'Kosovo','Saint Helena, Ascension and Tristan da Cunha','Norfolk Island','Oman','El Salvador','Lebanon','Vatican City','Ecuador','Guam','Croatia','Solomon Islands','Honduras','Christmas Island',
- 'Puerto Rico'];
+ 'Puerto Rico', 'Hong Kong'];
 
 
 async function getRealTimeTrends(req) {
   let response = null;
     let data = await googleTrends.realTimeTrends({
         geo: req.geocode,
-        category: "all"
+        category: req.category
     });
     if(data){
        try {
