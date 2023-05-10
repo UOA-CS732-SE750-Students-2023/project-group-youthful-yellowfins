@@ -7,13 +7,13 @@ const TrendReasonComponent = ({ trendBackground, trendReason }: string | any) =>
       <Typography component='h5' variant='h6' sx={{ pt: 2, color: '#560badff' }}>
         Background information about this trend
       </Typography>
-      <Typography component='p' variant='subtitle1' sx={{ pt: 2 }}>
+      <Typography component='p' variant='subtitle1' sx={{ pt: 2, textAlign: 'justify' }}>
         {trendBackground}
       </Typography>
       <Typography component='h5' variant='h6' sx={{ pt: 3, color: '#560badff' }}>
         Why is it trending?
       </Typography>
-      <Typography component='p' variant='subtitle1' sx={{ pt: 2 }}>
+      <Typography component='p' variant='subtitle1' sx={{ pt: 2, textAlign: 'justify' }}>
         {trendReason}
       </Typography>
     </Box>

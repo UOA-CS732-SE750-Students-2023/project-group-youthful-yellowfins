@@ -23,9 +23,15 @@ const TrendAnalysisComponent = () => {
     setShowNavigation(true);
     getChatgptData({ message: trendDetails.title })
       .then((response) => {
-        setTrendReason(response.data.result.promptTrendingReason);
-        setTrendBackground(response.data.result.promptBackground);
-        setLoading(false);
+        if (response.data.status) {
+          setTrendReason(response.data.result.promptTrendingReason);
+          setTrendBackground(response.data.result.promptBackground);
+          setLoading(false);
+        } else {
+          setLoading(false);
+          setError('');
+          setShowError(false);
+        }
       })
       .catch((error) => {
         setLoading(false);

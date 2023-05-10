@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Alert, Box, Button, Snackbar } from '@mui/material';
+import { Alert, Box, Button, Grid, Snackbar } from '@mui/material';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 import Piechart from '../Sentiment/SemiCircle';
@@ -24,6 +24,7 @@ const SentimentAnalysisComponent = () => {
     positiveSentiment: 0,
     neutralSentiments: 0,
     negativeSentiments: 0,
+    totalTweetsAnalysed: 0,
   });
 
   const handleOnIconClicked = () => setShowModal(!showModal);
@@ -85,6 +86,7 @@ const SentimentAnalysisComponent = () => {
                 positive={tweets.positiveSentiments}
                 negative={tweets.negativeSentiments}
                 neutral={tweets.neutralSentiments}
+                totalTweetsAnalysed={tweets.totalTweetsAnalysed}
               />
             </div>
             <div style={{ width: '50%' }}>
@@ -94,26 +96,26 @@ const SentimentAnalysisComponent = () => {
               />
             </div>
           </Box>
-          <Box sx={{ m: 4, display: 'flex', justifyContent: 'space-between' }}>
-            <div>
+          <Grid container spacing={2} sx={{ mt: 2 }}>
+            <Grid item md={4}>
               <TweetDetailsComponent
                 title={headingsLabels.POSITIVE_TWEETS}
                 tweets={tweets.positiveTweets}
               />
-            </div>
-            <div>
+            </Grid>
+            <Grid item md={4}>
               <TweetDetailsComponent
                 title={headingsLabels.NEUTRAL_TWEETS}
                 tweets={tweets.neutralTweets}
               />
-            </div>
-            <div>
+            </Grid>
+            <Grid item md={4}>
               <TweetDetailsComponent
                 title={headingsLabels.NEGATIVE_TWEETS}
                 tweets={tweets.negativeTweets}
               />
-            </div>
-          </Box>
+            </Grid>
+          </Grid>
         </>
       )}
     </>

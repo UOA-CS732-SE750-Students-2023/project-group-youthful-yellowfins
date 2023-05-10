@@ -42,6 +42,12 @@ const RealTimeDetailsComponent = ({ country, category }: any) => {
         if (response.data.status) {
           setTrendsList(response.data.result);
           setLoading(false);
+          setShowError(false);
+          setError('');
+        } else {
+          setLoading(false);
+          setError(response.data.message);
+          setShowError(true);
         }
       })
       .catch((error) => {

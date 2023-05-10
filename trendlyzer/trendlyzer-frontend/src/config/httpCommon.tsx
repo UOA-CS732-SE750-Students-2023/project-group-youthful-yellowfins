@@ -32,7 +32,7 @@ axiosInstance.interceptors.response.use(
     // Any HTTP Code which is not 2xx will be considered as error
     const statusCode = error.response.status;
     if (statusCode === 401 || statusCode === 403) {
-      window.location.href = '/login';
+      window.location.href = '/';
     }
     return await Promise.reject(error);
   },

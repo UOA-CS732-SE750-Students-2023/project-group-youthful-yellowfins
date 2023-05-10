@@ -157,7 +157,6 @@ const AuthProvider = ({ children }: any) => {
   const handlelogout = async () => {
     try {
       sessionStorage.removeItem('token');
-      await signOut(authInstance);
       setAuth({
         userId: '',
         userName: '',
@@ -167,6 +166,7 @@ const AuthProvider = ({ children }: any) => {
         isAuthenticated: false,
         loading: false,
       });
+      await signOut(authInstance);
     } catch (error: any) {
       setAuth({
         ...auth,
