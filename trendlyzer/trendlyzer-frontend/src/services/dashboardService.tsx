@@ -18,6 +18,12 @@ export const getGeoJSON = async (geoCode: string) => {
   );
 };
 
+export const customChinaData = async () => {
+  return await http.get<any>(
+    'https://code.highcharts.com/mapdata/countries/cn/custom/cn-all-sar.geo.json',
+  );
+};
+
 export const getWorldGeoJSON = async () => {
   return await http.get<any>('https://code.highcharts.com/mapdata/custom/world.geo.json');
 };

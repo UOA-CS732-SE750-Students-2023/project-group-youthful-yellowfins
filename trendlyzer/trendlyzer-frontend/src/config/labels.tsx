@@ -1,4 +1,4 @@
-import DailyTrendsComponent from '../components/DailyTrends/DailyTrendscomponent';
+import DailyTrendsComponent from '../components/DailyTrends/DailyTrendsComponent';
 import RealTimeTrendsComponent from '../components/RealTimeTrends';
 import SentimentAnalysisComponent from '../components/SentimentAnalysis/SentimentAnalysis';
 import TrendAnalysisComponent from '../components/TrendAnalysis/TrendAnalysisComponent';

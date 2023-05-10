@@ -44,6 +44,12 @@ const DailyTrendsDetailsComponent = ({ country, date }: any) => {
         if (response.data.status) {
           setTrendsList(response.data.result);
           setLoading(false);
+          setError('');
+          setShowError(false);
+        } else {
+          setLoading(false);
+          setError(response.data.message);
+          setShowError(true);
         }
       })
       .catch((error) => {

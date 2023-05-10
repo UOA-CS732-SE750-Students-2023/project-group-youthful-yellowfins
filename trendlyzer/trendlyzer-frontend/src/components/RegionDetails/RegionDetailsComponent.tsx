@@ -11,6 +11,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { CountriesContext } from '../../context/CountriesContext';
 import highchartsMap from 'highcharts/modules/map';
 import Loader from '../UIComponents/Loader/LoaderComponent';
+import NoResultFoundComponent from '../NoResultFound/NoResultFoundComponent';
 
 highchartsMap(Highcharts);
 
@@ -62,7 +63,7 @@ const RegionDetailsComponent = ({
       setTrendsList(defaultState);
       const params: any = {
         keyword: searchKeyword,
-        startTime: dayjs(startDate).format('YYYY-MM-DD'),
+        startTime: dayjs(startDate).subtract(15, 'days').format('YYYY-MM-DD'),
         endTime: dayjs(endDate).format('YYYY-MM-DD'),
       };
       if (country !== 'All') {
@@ -132,6 +133,10 @@ const RegionDetailsComponent = ({
             setTrendsList(x);
             setRows(rowData);
             setLoading(false);
+          } else {
+            setError('');
+            setShowError(false);
+            setLoading(false);
           }
         })
         .catch((error) => {
@@ -144,10 +149,13 @@ const RegionDetailsComponent = ({
 
   return (
     <Box sx={{ mt: 4 }}>
-      {!loading && showTable && trendsList.length <= 1 && (
+      {!loading && !searchKeyword && showTable && trendsList.length <= 1 && (
         <Typography variant='body2' component='p' sx={{ ml: 4 }}>
           Start by providing keyword for trends updated based on region
         </Typography>
+      )}
+      {!loading && searchKeyword && showTable && trendsList.length <= 1 && (
+        <NoResultFoundComponent />
       )}
       {loading && showTable && <Loader />}
       {error && (
@@ -180,7 +188,7 @@ const RegionDetailsComponent = ({
                 initialState={{
                   pagination: { paginationModel: { pageSize: 5 } },
                   sorting: {
-                    sortModel: [{ field: 'region', sort: 'asc' }],
+                    sortModel: [{ field: 'searches', sort: 'desc' }],
                   },
                 }}
                 pageSizeOptions={[5, 10, 15]}

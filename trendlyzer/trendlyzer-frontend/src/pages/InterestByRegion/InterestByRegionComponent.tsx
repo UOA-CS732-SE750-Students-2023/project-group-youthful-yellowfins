@@ -19,7 +19,7 @@ import useDebounce from '../../hooks/useDebounce';
 
 const InterestByRegionComponent = () => {
   const { countriesList, selectedCountry, handleCountryChange } = useContext(CountriesContext);
-  const [selectedStartDate, setSelectedStartDate] = useState(dayjs());
+  const [selectedStartDate, setSelectedStartDate] = useState(dayjs().subtract(15, 'days'));
   const [selectedEndDate, setSelectedEndDate] = useState(dayjs());
   const [selectedKeyword, setSelectedKeyword] = useState('');
   const [countryList, setCountryList] = useState<any>([]);
@@ -31,11 +31,6 @@ const InterestByRegionComponent = () => {
   const debouncedSearchTerm: string = useDebounce<string>(selectedKeyword, 500);
 
   const handleKeywordChange = (value: any) => setSelectedKeyword(value.target.value);
-
-  const disableStartDays = (day: any) => {
-    const result = selectedStartDate.subtract(15, 'days');
-    return day.isBefore(result, 'days') || day.isAfter(dayjs(), 'days');
-  };
 
   const disableEndDays = (day: any) => {
     const result = selectedEndDate.subtract(15, 'days');
@@ -89,7 +84,6 @@ const InterestByRegionComponent = () => {
             defaultValue={selectedStartDate}
             value={selectedStartDate}
             onChange={(newValue) => setSelectedStartDate(dayjs(newValue))}
-            shouldDisableDate={disableStartDays}
           />
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 80 }}>
