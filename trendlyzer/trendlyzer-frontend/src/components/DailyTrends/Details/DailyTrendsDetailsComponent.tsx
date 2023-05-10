@@ -37,7 +37,7 @@ const DailyTrendsDetailsComponent = ({ country, date }: any) => {
     setLoading(true);
     getDailyTrends({
       geocode: country,
-      category: 'All',
+      category: 'all',
       date: dayjs(date).format('YYYY-MM-DD'),
     })
       .then((response) => {
