@@ -96,7 +96,7 @@ const Login = () => {
               onChange={handleChange}
               {...(!isEmailValid && isEmailValid !== undefined ? { error: true } : {})}
               variant='outlined'
-              helperText={!isEmailValid ? 'Enter valid email' : ''}
+              helperText={!isEmailValid && isEmailValid !== undefined ? 'Enter valid email' : ''}
             />
             <TextField
               margin='normal'

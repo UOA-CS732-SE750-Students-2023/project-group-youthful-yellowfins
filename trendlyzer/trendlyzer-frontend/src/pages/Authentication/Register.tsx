@@ -120,7 +120,7 @@ const Register = () => {
             onChange={handleChange}
             {...(!isEmailValid && isEmailValid !== undefined ? { error: true } : {})}
             variant='outlined'
-            helperText={!isEmailValid ? 'Enter valid email' : ''}
+            helperText={!isEmailValid && isEmailValid !== undefined ? 'Enter valid email' : ''}
           />
           <TextField
             margin='normal'
@@ -164,7 +164,6 @@ const Register = () => {
           >
             <GoogleIcon sx={{ mr: 1 }} /> Sign up using Google
           </Button>
-          ;
         </Box>
       </Box>
     </>
