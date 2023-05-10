@@ -3,9 +3,18 @@ const googleTrends = require("google-trends-api");
 const axios = require('axios');
 const URLs = require("../helper/URLs");
 var redisClient = require('../models/redisClient');
+const unsupportedCountries = ['Barbados', 'Réunion', 'Suriname', 'Namibia','Guinea','Vanuatu', 'Samoa', 'Andorra', 'Azerbaijan', 'Maldives', 'French Polynesia', 'Saint Lucia', 'Panama', 'Timor-Leste', 'North Macedonia', 'Estonia', 'Bahamas', 'Uruguay', 
+'Åland Islands', 'Comoros', 'Cook Islands', 'Costa Rica', 'Togo', 'São Tomé and Príncipe', 'Nepal', 'Cuba', 'North Korea', 'French Guiana', 'Moldova', 'Zambia', 'Dominica', 'Marshall Islands', 'Tonga', 'Cape Verde', 'Kiribati', 'Ivory Coast', 'Martinique',
+ 'Pakistan', 'Djibouti', 'Turks and Caicos Islands', 'Micronesia', 'Slovenia', 'Kyrgyzstan', 'Caribbean Netherlands', 'French Southern and Antarctic Lands', 'Saint Barthélemy', 'Kuwait', 'Seychelles', 'United States Virgin Islands', 'Fiji', 'Yemen', 'British Virgin Islands', 
+ 'Bouvet Island', 'Central African Republic', 'Curaçao', 'Madagascar', 'Latvia', 'Zimbabwe', 'Antarctica', 'Guernsey', 'Gabon', 'BD', 'Montserrat', 'Jordan', 'Mozambique', 'Eritrea', 'Isle of Man', 'Afghanistan', 'United Arab Emirates', 'Malawi', 'Belarus', 'Montenegro', 
+ 'Bosnia and Herzegovina', 'Eswatini', 'Lithuania', 'Turkmenistan', 'Ethiopia', 'Anguilla', 'American Samoa', 'Chad','Guadeloupe','San Marino', 'Haiti', 'Botswana','Guyana','New Caledonia','Saint Martin','Mauritius','Gibraltar','Saint Kitts and Nevis','Iceland', 'Svalbard and Jan Mayen',
+ 'United States Minor Outlying Islands','Kazakhstan','China','Macau','Armenia','Bolivia','Sudan','Wallis and Futuna','Burundi','Lesotho','Bermuda','Guatemala','Uzbekistan','Cayman Islands','Senegal','Gambia','Liechtenstein','Pitcairn Islands','Tuvalu','Equatorial Guinea','Bhutan','Aruba',
+ 'Paraguay','Grenada','Papua New Guinea','Jamaica','Republic of the Congo','Mauritania','Western Sahara','Burkina Faso','DR Congo','Benin','Uganda','Mongolia','Laos','Algeria','Brunei','Sri Lanka','Dominican Republic','Luxembourg','Georgia','Slovakia','British Indian Ocean Territory',
+ 'Morocco','Saint Pierre and Miquelon','Greenland','Nicaragua','Qatar','Syria','Belize','Falkland Islands','Venezuela','Bahrain','Cocos (Keeling) Islands','Northern Mariana Islands','Cameroon','Cyprus','Angola','Tunisia','Monaco','Rwanda','Trinidad and Tobago','Malta', 'Mayotte', 
+ 'Antigua and Barbuda','Tokelau','Niger','Albania','Somalia','Liberia', 'Myanmar','Tanzania','Iraq','South Georgia','Saint Vincent and the Grenadines','Libya','Sierra Leone','Sint Maarten','Serbia','Heard Island and McDonald Islands','Ghana','South Sudan','Faroe Islands','Guinea-Bissau',
+ 'Palau','Bulgaria','Nauru', 'Cambodia','Jersey','Palestine','Mali','Iran','Niue','Tajikistan', 'Kosovo','Saint Helena, Ascension and Tristan da Cunha','Norfolk Island','Oman','El Salvador','Lebanon','Vatican City','Ecuador','Guam','Croatia','Solomon Islands','Honduras','Christmas Island',
+ 'Puerto Rico'];
 
-
-// function for searching top 13 articles for given geography and given category (coudl be b-> business, e-> economics etc, 'all'-> all)
 
 async function getRealTimeTrends(req) {
   let response = null;
@@ -14,8 +23,12 @@ async function getRealTimeTrends(req) {
         category: "all"
     });
     if(data){
-      response =  JSON.parse(data);
-      return translateRealTimeTrendsResponse(response)
+       try {
+        response =  JSON.parse(data);
+        return translateRealTimeTrendsResponse(response)
+      } catch (e) {
+        response = null;
+      }
     } else {
       return null;
     }
@@ -66,8 +79,6 @@ async function getTrendsByRegion(req) {
       }
     }
     catch (error) {
-      console.log("Error in calling the Country Codes API");
-      console.dir(error);
       response = null;
     }
     return response;
@@ -182,8 +193,9 @@ async function fetchCountryCodes() {
                       cca2: country.cca2,
                   };
               });
-              await redisClient.set('masterCountries', JSON.stringify(countryCodes));
-              return countryCodes;
+                const filteredCountryCodes = countryCodes.filter(country => !unsupportedCountries.includes(country.name));
+              await redisClient.set('masterCountries', JSON.stringify(filteredCountryCodes));
+                return filteredCountryCodes;
           } else {
               console.log("The server returned no data or the data is undefined.");
               return;

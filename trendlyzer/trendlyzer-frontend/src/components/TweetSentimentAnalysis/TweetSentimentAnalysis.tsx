@@ -35,7 +35,7 @@ const TweetSentimentAnalysisComponent = () => {
       setLoading(true);
       getSentimentAnalysis({
         keyword: debouncedSearchTerm,
-        limit: 5,
+        limit: 500,
       })
         .then((response: any) => {
           setTweets(response.data.result);

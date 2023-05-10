@@ -1,3 +1,10 @@
+/**
+ * Author:  Shubham Gujare
+ * Created: 01.05.2023
+ * Purpose: This files serves as a default home page to the 
+ * application and demonstrates the features of the application in a attractive ui ux manner
+ **/
+
 import { useContext, useEffect } from 'react';
 import classes from './HomePage.module.css';
 import NavBar from '../../components/Landing/NavBar/NavBar';

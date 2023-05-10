@@ -81,6 +81,9 @@ li::before{
         transform: translateY(20px)
       }
 }
+button{
+    background-color: white;
+}
 
 .animated.bounce {
     -webkit-animation-name: bounce;

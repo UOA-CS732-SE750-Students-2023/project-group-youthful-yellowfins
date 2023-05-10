@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Avatar, Collapse, ListItemButton, Stack, Typography } from '@mui/material';
+import CopyrightIcon from '@mui/icons-material/Copyright';
+
 import classes from './index.module.css';
 import { TrendDetailsContext } from '../../context/TrendDetailsContext';
 import { AuthContext } from '../../context/AuthContext';
@@ -69,17 +71,22 @@ const Navigation = () => {
             </ListItemButton>
           </Link>
         </Stack>
-        <div className={classes.userDetails}>
-          {/* <ListItemButton sx={{ position: 'fixed', bottom: 0, mb: 2 }}>
-          </ListItemButton> */}
-          <Avatar sx={{ width: 28, height: 28 }} />
-          <Typography
-            sx={{ ml: 2, overflowWrap: 'anywhere', fontSize: '18px' }}
-            variant='body2'
-            component='p'
-          >
-            {auth.userName ? auth.userName : auth.email}
-          </Typography>
+        <div>
+          <div className={classes.userDetails}>
+            <Avatar sx={{ width: 28, height: 28 }} />
+            <Typography
+              sx={{ ml: 2, overflowWrap: 'anywhere', fontSize: '18px' }}
+              variant='body2'
+              component='p'
+            >
+              {auth.userName ? auth.userName : auth.email}
+            </Typography>
+          </div>
+          <div className={classes.copyright}>
+            <Typography variant='body2' component='p'>
+              <CopyrightIcon fontSize='small' /> Trendlyzer Inc 2023
+            </Typography>
+          </div>
         </div>
       </div>
     </>

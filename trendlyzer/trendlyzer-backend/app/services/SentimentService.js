@@ -1,3 +1,10 @@
+/**
+ * Author:  Shubham Gujare
+ * Created: 17.04.2023
+ * Purpose: This function gets tweets regarding requested keyword, cleans tweets and calls google nlp and 
+ * performs sentiment analysis calculations.
+ **/
+
 const express = require('express');
 const aposToLexForm = require('apos-to-lex-form');
 const SpellCorrector = require('spelling-corrector');
@@ -16,16 +23,6 @@ const ignoreWords = ['\\brt\\b','\\bfor\\b', '\\bon\\b', '\\ban\\b', '\\ba\\b'
 const ignoreWordRegex = new RegExp(ignoreWords.join("|"), "gi");
 
 
-// function for searching top 13 articles for given geography and given category (coudl be b-> business, e-> economics etc, 'all'-> all)
-
-
-
-/**
- * Author:  Shubham Gujare
- * Created: 17.04.2023
- * Purpose: This function gets tweets regarding requested keyword, cleans tweets and calls google nlp and 
- * performs sentiment analysis calculations.
- **/
 
 async function getSentimentStats(tweets) {
   let response = {
@@ -91,7 +88,6 @@ function cleanTweetText(req) {
   text = text.replace(/[^a-zA-Z]/g, ' ', text); // transform to remove hastags character
   text = text.replace(ignoreWordRegex, ' ');
   text = text.replace(/\s{2,20}/, ' '); // transform to remove more than 2 whitspaces
-  console.log(text);
   return text;
 }
 
