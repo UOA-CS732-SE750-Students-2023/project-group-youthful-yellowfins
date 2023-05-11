@@ -1,3 +1,11 @@
+/**
+ * Author: Ankita Mohata, Ashish Agnihotri
+ *
+ * This is the context for authentication.
+ * It has properties for checking the authentication of the user.
+ * It handles the various ways to register, login and logout in and out of the application
+ */
+
 import React, { createContext, useEffect, useState } from 'react';
 import { IAuthContext } from '../models/ContextModel';
 import { initializeApp } from 'firebase/app';
@@ -12,6 +20,7 @@ import {
 } from 'firebase/auth';
 import { IUser } from '../models/common';
 
+// Firebase configuration file to access firebase APIs
 const firebaseConfig = {
   apiKey: 'AIzaSyB6e095KfXmT9siWND-3SvdjUsrD1TXGoI',
   authDomain: 'trendlyzer.firebaseapp.com',
@@ -22,9 +31,12 @@ const firebaseConfig = {
   measurementId: 'G-9G1B2DLPPY',
 };
 
+// Initializing the firebase app
 const app = initializeApp(firebaseConfig);
+// Getting the authentication instance
 const authInstance = getAuth(app);
 
+// Default context state
 const defaultState: IAuthContext = {
   auth: {
     userId: '',
@@ -41,8 +53,13 @@ const defaultState: IAuthContext = {
   handlelogout: () => {},
 };
 
+// Creating the authentication context
 export const AuthContext = createContext<IAuthContext>(defaultState);
 
+/**
+ * Creating the authentication context provider so that
+ * the authentication state can be used throughout the application
+ */
 const AuthProvider = ({ children }: any) => {
   const [auth, setAuth] = useState(defaultState.auth);
   const googleProvider = new GoogleAuthProvider();
@@ -75,6 +92,7 @@ const AuthProvider = ({ children }: any) => {
     });
   }, []);
 
+  // Method for registering the new user
   const handleRegisterMethod = async ({ firstName, lastName, email, password }: IUser) => {
     try {
       setAuth({ ...auth, loading: true });
@@ -102,6 +120,7 @@ const AuthProvider = ({ children }: any) => {
     }
   };
 
+  // Method for logging in the user
   const handleLogInMethod = async ({ email, password }: any) => {
     try {
       setAuth({ ...auth, loading: true });
@@ -129,6 +148,7 @@ const AuthProvider = ({ children }: any) => {
     }
   };
 
+  // Method to authenticate the user via google
   const handleGoogleAuth = async () => {
     try {
       const result = await signInWithPopup(authInstance, googleProvider);
@@ -154,6 +174,7 @@ const AuthProvider = ({ children }: any) => {
     }
   };
 
+  // Method to log out the user
   const handlelogout = async () => {
     try {
       sessionStorage.removeItem('token');

@@ -1,3 +1,10 @@
+/**
+ * Author: Ankita Mohata
+ *
+ * This is the context for storing the selected trend and its details.
+ *
+ */
+
 import React, { createContext, useState } from 'react';
 
 const defaultState: any = {

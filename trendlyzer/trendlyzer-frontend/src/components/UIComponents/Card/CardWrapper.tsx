@@ -29,7 +29,7 @@ const CardWrapperComponent = (trendsList: WrapperProps) => {
 
     for (let article = 0; article < articleLength; article++) {
       content.push(
-        <Box sx={{ padding: '0 10px' }}>
+        <Box sx={{ padding: '0 10px' }} key={article}>
           <Box sx={{ display: 'flex' }}>
             <ArticleOutlinedIcon sx={{ paddingRight: '7px' }} />
             <Tooltip

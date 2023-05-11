@@ -28,14 +28,7 @@ axiosInstance.interceptors.request.use(
 // Configure incoming response interceptor logic
 axiosInstance.interceptors.response.use(
   (response) => response,
-  async (error) => {
-    // Any HTTP Code which is not 2xx will be considered as error
-    const statusCode = error.response.status;
-    if (statusCode === 401 || statusCode === 403) {
-      window.location.href = '/';
-    }
-    return await Promise.reject(error);
-  },
+  async (error) => await Promise.reject(error),
 );
 
 export default axiosInstance;

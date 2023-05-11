@@ -52,17 +52,27 @@ export const tabsList = [
   },
 ];
 
-export const tabsDetailsList = [
+export const tabsDetailsList = ({
+  trendData,
+  setTrendData,
+  sentimentData,
+  setSentimentData,
+}: any) => [
   {
     id: 0,
     label: headingsLabels.TREND_ANALYSIS,
     value: headingsValue.TREND_ANALYSIS,
-    element: <TrendAnalysisComponent />,
+    element: <TrendAnalysisComponent trendData={trendData} setTrendData={setTrendData} />,
   },
   {
     id: 2,
     label: headingsLabels.SENTIMENT_ANALYSIS,
     value: headingsValue.SENTIMENT_ANALYSIS,
-    element: <SentimentAnalysisComponent />,
+    element: (
+      <SentimentAnalysisComponent
+        sentimentData={sentimentData}
+        setSentimentData={setSentimentData}
+      />
+    ),
   },
 ];

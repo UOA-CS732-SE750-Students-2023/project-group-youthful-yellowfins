@@ -1,3 +1,12 @@
+/**
+ * Author: Ankita Mohata
+ *
+ * This is the context for getting the countries list to be available for filtering.
+ * It has properties for getting the selected country and a function to update the country.
+ * It also fetched the map topology of the world and selected country for mapcharts.
+ *
+ */
+
 import React, { createContext, useState, useEffect } from 'react';
 import { SelectChangeEvent } from '@mui/material';
 import {
@@ -25,9 +34,11 @@ const CountryProvider = ({ children }: any) => {
   const [mapTopology, setMapTopology] = useState({});
   const [worldMapTopology, setWorldMapTopology] = useState({});
 
+  // This function updates the selected category value
   const handleCountryChange = (value: SelectChangeEvent) => setSelectedCountry(value.target.value);
 
   useEffect(() => {
+    // This fetches the countries code
     getAllCountriesCode()
       .then((response) => {
         const list = response.data.result.map((country: ICountryResponse) => ({
@@ -41,6 +52,7 @@ const CountryProvider = ({ children }: any) => {
   }, []);
 
   useEffect(() => {
+    // This fetches the selected country map topology
     if (selectedCountry !== 'All') {
       if (selectedCountry === 'HK') {
         customChinaData()
@@ -59,6 +71,7 @@ const CountryProvider = ({ children }: any) => {
   }, [selectedCountry]);
 
   useEffect(() => {
+    // This fetches the world map topology
     getWorldGeoJSON()
       .then((response) => {
         setWorldMapTopology(response.data);
