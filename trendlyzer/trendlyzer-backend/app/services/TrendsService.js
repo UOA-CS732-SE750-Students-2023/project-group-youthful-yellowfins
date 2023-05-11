@@ -3,6 +3,7 @@ const googleTrends = require("google-trends-api");
 const axios = require('axios');
 const URLs = require("../helper/URLs");
 var redisClient = require('../models/redisClient');
+const { google } = require("@google-cloud/language/build/protos/protos");
 const unsupportedCountries = ['Barbados', 'Réunion', 'Suriname', 'Namibia','Guinea','Vanuatu', 'Samoa', 'Andorra', 'Azerbaijan', 'Maldives', 'French Polynesia', 'Saint Lucia', 'Panama', 'Timor-Leste', 'North Macedonia', 'Estonia', 'Bahamas', 'Uruguay', 
 'Åland Islands', 'Comoros', 'Cook Islands', 'Costa Rica', 'Togo', 'São Tomé and Príncipe', 'Nepal', 'Cuba', 'North Korea', 'French Guiana', 'Moldova', 'Zambia', 'Dominica', 'Marshall Islands', 'Tonga', 'Cape Verde', 'Kiribati', 'Ivory Coast', 'Martinique',
  'Pakistan', 'Djibouti', 'Turks and Caicos Islands', 'Micronesia', 'Slovenia', 'Kyrgyzstan', 'Caribbean Netherlands', 'French Southern and Antarctic Lands', 'Saint Barthélemy', 'Kuwait', 'Seychelles', 'United States Virgin Islands', 'Fiji', 'Yemen', 'British Virgin Islands', 
@@ -16,6 +17,25 @@ const unsupportedCountries = ['Barbados', 'Réunion', 'Suriname', 'Namibia','Gui
  'Puerto Rico', 'Hong Kong'];
 
 
+ async function getAutocomplete(query){
+  try{
+    if(!query){
+      return [];
+    }
+    const response = await googleTrends.autoComplete({keyword:query});
+    const suggestions = JSON.parse(response).default.topics;
+    const autoComplete = suggestions.map((suggestion) => {
+      return {
+        title: suggestion.title
+      };
+    });
+    return autoComplete;
+  } catch(err){
+    console.log("There was an error calling the Google Trends Autocomplete API");
+    console.dir(err);
+  }
+  
+ }
 async function getRealTimeTrends(req) {
   let response = null;
     let data = await googleTrends.realTimeTrends({
@@ -211,7 +231,8 @@ module.exports = {
   getRealTimeTrends,
   getDailyTrends,
   getTrendsByRegion,
-  fetchCountryCodes
+  fetchCountryCodes,
+  getAutocomplete
 };
 
 // interestByRegion();

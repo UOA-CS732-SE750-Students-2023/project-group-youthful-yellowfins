@@ -5,7 +5,9 @@ const checkIfAuthenticated = require( '../Middleware/AuthenticationService');
 
 /* Google Trends Route */
 router.get('/getTrendsByDate', checkIfAuthenticated,trendsController.getTrendsByDate);
-router.post('/getTrendByRegion',checkIfAuthenticated, trendsController.getTrendByRegion);
+router.post('/getTrendByRegion', checkIfAuthenticated, trendsController.getTrendByRegion);
+router.get('/getAutocomplete', checkIfAuthenticated, trendsController.getAutocomplete);
+
 
 /* Chatgpt Route */
 router.get('/getTrendingReasons',checkIfAuthenticated, trendsController.sendMessage);

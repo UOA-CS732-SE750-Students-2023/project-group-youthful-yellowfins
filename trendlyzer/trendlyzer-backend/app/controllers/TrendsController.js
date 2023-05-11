@@ -11,6 +11,26 @@ const Constants = require("../helper/Constants");
 const chatgptService = require('../services/ChatgptService');
 var ApiException = require('././../models/Error');
 
+exports.getAutocomplete = async(req, res) => {
+  const query = req.query.keyword;
+
+  // try{
+  //   if(!req.query?.keyword){
+  //     throw new ApiException(Constants.INTERNAL_SERVER_ERROR_CODE, 
+  //       Constants.BAD_REQUEST_ERROR_CODE);
+  //   }
+    
+    const response = await TrendsService.getAutocomplete(query);
+    res.json({   status: true, message : 'success', result : response});
+
+  // } catch(err) {
+  //   if(err instanceof ApiException){
+  //     res.status(err.statusCode).json({ message: err.message , status : false});
+  //   } else {
+  //     res.status(Constants.INTERNAL_SERVER_ERROR_CODE).json({ message: err.message , status : false});
+  //   }
+  // }
+}
 
 exports.getCountryCodes = async (req, res) => {
   
