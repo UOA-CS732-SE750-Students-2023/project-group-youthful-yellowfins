@@ -1,3 +1,7 @@
+/**
+ * Purpose: This files contain test cases for daily trends component
+ **/
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AuthProvider from '../../context/AuthContext';

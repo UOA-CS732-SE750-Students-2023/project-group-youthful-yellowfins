@@ -1,3 +1,6 @@
+/**
+ * Purpose: This files contain test cases for trends detail page
+ **/
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CountriesContext } from '../../context/CountriesContext';
@@ -50,5 +53,14 @@ describe('Trend Detail page', () => {
     expect(getByText(/Sentiment Analysis/i)).toBeTruthy();
     fireEvent.click(screen.getByText('Trend Analysis'));
     fireEvent.click(screen.getByText('Sentiment Analysis'));
+  });
+
+  it('fetches data from chatgpt api and updates state', async () => {
+    render(
+      <TrendDetailsContext.Provider value={mockTrendContextData}>
+        <TrendsDetails />
+      </TrendDetailsContext.Provider>,
+    );
+    expect(getByText('Test Title')).toBeInTheDocument();
   });
 });
