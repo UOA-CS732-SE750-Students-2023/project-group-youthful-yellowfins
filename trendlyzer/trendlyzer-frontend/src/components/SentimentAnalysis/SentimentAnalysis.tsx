@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Alert, Box, Button, Grid, Snackbar } from '@mui/material';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 import Piechart from '../Sentiment/SemiCircle';
-import { getSentimentAnalysis } from '../../services/trendDetailsService';
-import { TrendDetailsContext } from '../../context/TrendDetailsContext';
 import Loader from '../UIComponents/Loader/LoaderComponent';
 import MagnitudeChartComponent from '../Sentiment/MagnitudeChart';
 import ModalComponent from '../UIComponents/Modals';
@@ -13,42 +11,11 @@ import TweetDetailsComponent from '../TweetsDetails/TweetsDetailsComponent';
 import { headingsLabels } from '../../config/labels';
 import NoResultFoundComponent from '../NoResultFound/NoResultFoundComponent';
 
-const SentimentAnalysisComponent = () => {
-  const { trendDetails, setShowNavigation } = useContext(TrendDetailsContext);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [showError, setShowError] = useState<boolean>(false);
+const SentimentAnalysisComponent = ({ sentimentData, setSentimentData }: any) => {
   const [showModal, setShowModal] = useState<boolean>(false);
-
-  const [tweets, setTweets] = useState<any>({
-    positiveSentiment: 0,
-    neutralSentiments: 0,
-    negativeSentiments: 0,
-    totalTweetsAnalysed: 0,
-  });
+  const { error, loading, showError, tweets } = sentimentData;
 
   const handleOnIconClicked = () => setShowModal(!showModal);
-
-  useEffect(() => {
-    setLoading(true);
-    setShowNavigation(true);
-    getSentimentAnalysis({
-      keyword: trendDetails.title,
-      limit: 500,
-    })
-      .then((response: any) => {
-        setTweets(response.data.result);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(error.message);
-        setShowError(true);
-      });
-    return () => {
-      setShowNavigation(false);
-    };
-  }, []);
 
   return (
     <>
@@ -58,7 +25,7 @@ const SentimentAnalysisComponent = () => {
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
           open={showError}
           key='topright'
-          onClose={() => setShowError(false)}
+          onClose={() => setSentimentData((prevState: any) => ({ ...prevState, showError: false }))}
           autoHideDuration={5000}
         >
           <Alert severity='error' sx={{ width: '100%' }}>

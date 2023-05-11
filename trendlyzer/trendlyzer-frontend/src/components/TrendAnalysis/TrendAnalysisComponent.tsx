@@ -1,47 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Alert, Box, Snackbar } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { TrendDetailsContext } from '../../context/TrendDetailsContext';
 import RelatedArticlesComponent from '../RelatedArticles/RelatedArticlesComponent';
 import RelatedTweetsComponent from '../RelatedTweets/RelatedTweetsComponent';
 import TrendReasonComponent from '../TrendReason/TrendReasonComponent';
 import Loader from '../UIComponents/Loader/LoaderComponent';
-import { getChatgptData } from '../../services/trendDetailsService';
 import RegionDetailsComponent from '../RegionDetails/RegionDetailsComponent';
+import { TrendDetailsContext } from '../../context/TrendDetailsContext';
 
-const TrendAnalysisComponent = () => {
+const TrendAnalysisComponent = ({ trendData, setTrendData }: any) => {
   const { id } = useParams();
-  const { trendDetails, setShowNavigation } = useContext(TrendDetailsContext);
-  const [loading, setLoading] = useState(false);
-  const [trendReason, setTrendReason] = useState('');
-  const [trendBackground, setTrendBackground] = useState('');
-  const [error, setError] = useState('');
-  const [showError, setShowError] = useState<boolean>(false);
-
-  useEffect(() => {
-    setLoading(true);
-    setShowNavigation(true);
-    getChatgptData({ message: trendDetails.title })
-      .then((response) => {
-        if (response.data.status) {
-          setTrendReason(response.data.result.promptTrendingReason);
-          setTrendBackground(response.data.result.promptBackground);
-          setLoading(false);
-        } else {
-          setLoading(false);
-          setError('');
-          setShowError(false);
-        }
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(error.message);
-        setShowError(true);
-      });
-    return () => {
-      setShowNavigation(false);
-    };
-  }, []);
+  const { trendDetails } = useContext(TrendDetailsContext);
+  const { loading, error, showError, trendBackground, trendReason } = trendData;
 
   return (
     <>
@@ -51,7 +21,7 @@ const TrendAnalysisComponent = () => {
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
           open={showError}
           key='topright'
-          onClose={() => setShowError(false)}
+          onClose={() => setTrendData((prevState: any) => ({ ...prevState, showError: false }))}
           autoHideDuration={5000}
         >
           <Alert severity='error' sx={{ width: '100%' }}>

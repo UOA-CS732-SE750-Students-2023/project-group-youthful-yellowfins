@@ -1,3 +1,11 @@
+/**
+ * Author: Ankita Mohata
+ *
+ * This is the context for getting the categories list to be available for filtering.
+ * It has properties for getting the selected category and a function to update the category.
+ *
+ */
+
 import React, { createContext, useState } from 'react';
 import { SelectChangeEvent } from '@mui/material';
 import { ICategoryContext } from '../models/ContextModel';
@@ -14,6 +22,7 @@ export const CategoryContext = createContext<ICategoryContext>(defaultState);
 const CategoryProvider = ({ children }: any) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
+  // This function updates the selected category value
   const handleCategoryChange = (value: SelectChangeEvent) =>
     setSelectedCategory(value.target.value);
 

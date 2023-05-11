@@ -1,3 +1,8 @@
+/**
+ * Author: Ankita Mohata
+ *
+ * This file contains the data models for variables/functions types for context files.
+ */
 export interface IAuth {
   userId: string | null;
   email: string | null;
