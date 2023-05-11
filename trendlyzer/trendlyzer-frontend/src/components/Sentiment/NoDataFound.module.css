@@ -1,0 +1,14 @@
+.root {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .text {
+    margin-bottom: 2rem;
+  }
+  
+  .button {
+    margin-right: 2rem;
+  }

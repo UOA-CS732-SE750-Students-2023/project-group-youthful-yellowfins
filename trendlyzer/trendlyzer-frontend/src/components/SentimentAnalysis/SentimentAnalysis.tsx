@@ -10,6 +10,7 @@ import { sentimentInfo } from '../../config/sentimentInformation';
 import TweetDetailsComponent from '../TweetsDetails/TweetsDetailsComponent';
 import { headingsLabels } from '../../config/labels';
 import NoResultFoundComponent from '../NoResultFound/NoResultFoundComponent';
+import NoDataFound from '../Sentiment/NoDataFound';
 
 const SentimentAnalysisComponent = ({ sentimentData, setSentimentData }: any) => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -35,7 +36,8 @@ const SentimentAnalysisComponent = ({ sentimentData, setSentimentData }: any) =>
       )}
       {showModal && <ModalComponent isModalOpen={showModal} data={sentimentInfo} />}
       {!loading && error && <NoResultFoundComponent />}
-      {!loading && !error && (
+      {!loading && tweets.totalTweetsAnalysed === 0 && <NoDataFound />}
+      {!loading && !error && tweets.totalTweetsAnalysed !== 0  &&(
         <>
           <Button
             variant='text'
