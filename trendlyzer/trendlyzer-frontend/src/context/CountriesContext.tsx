@@ -1,6 +1,11 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { SelectChangeEvent } from '@mui/material';
-import { getAllCountriesCode, getGeoJSON, getWorldGeoJSON } from '../services/dashboardService';
+import {
+  customChinaData,
+  getAllCountriesCode,
+  getGeoJSON,
+  getWorldGeoJSON,
+} from '../services/dashboardService';
 import { ICountryResponse } from '../models/common';
 import { ICountryContext } from '../models/ContextModel';
 
@@ -36,11 +41,21 @@ const CountryProvider = ({ children }: any) => {
   }, []);
 
   useEffect(() => {
-    getGeoJSON(selectedCountry.toLowerCase())
-      .then((response) => {
-        setMapTopology(response.data);
-      })
-      .catch(() => {});
+    if (selectedCountry !== 'All') {
+      if (selectedCountry === 'HK') {
+        customChinaData()
+          .then((response) => {
+            setMapTopology(response.data);
+          })
+          .catch(() => {});
+      } else {
+        getGeoJSON(selectedCountry.toLowerCase())
+          .then((response) => {
+            setMapTopology(response.data);
+          })
+          .catch(() => {});
+      }
+    }
   }, [selectedCountry]);
 
   useEffect(() => {

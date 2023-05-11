@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Box, Button, FormControl, TextField, Typography, Snackbar } from '@mui/material';
+import {
+  Alert,
+  Box,
+  Button,
+  FormControl,
+  Grid,
+  TextField,
+  Typography,
+  Snackbar,
+} from '@mui/material';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 import Piechart from '../Sentiment/SemiCircle';
@@ -24,6 +33,7 @@ const TweetSentimentAnalysisComponent = () => {
     positiveSentiment: 0,
     neutralSentiments: 0,
     negativeSentiments: 0,
+    totalTweetsAnalysed: 0,
   });
 
   const handleKeywordChange = (value: any) => setSelectedKeyword(value.target.value);
@@ -99,6 +109,7 @@ const TweetSentimentAnalysisComponent = () => {
                 positive={tweets.positiveSentiments}
                 negative={tweets.negativeSentiments}
                 neutral={tweets.neutralSentiments}
+                totalTweetsAnalysed={tweets.totalTweetsAnalysed}
               />
             </div>
             <div style={{ width: '50%' }}>
@@ -108,26 +119,26 @@ const TweetSentimentAnalysisComponent = () => {
               />
             </div>
           </Box>
-          <Box sx={{ m: 4, display: 'flex', justifyContent: 'space-between' }}>
-            <div>
+          <Grid container spacing={1} sx={{ mt: 2 }}>
+            <Grid item md={4}>
               <TweetDetailsComponent
                 title={headingsLabels.POSITIVE_TWEETS}
                 tweets={tweets.positiveTweets}
               />
-            </div>
-            <div>
+            </Grid>
+            <Grid item md={4}>
               <TweetDetailsComponent
                 title={headingsLabels.NEUTRAL_TWEETS}
                 tweets={tweets.neutralTweets}
               />
-            </div>
-            <div>
+            </Grid>
+            <Grid item md={4} sx={{ pr: 1 }}>
               <TweetDetailsComponent
                 title={headingsLabels.NEGATIVE_TWEETS}
                 tweets={tweets.negativeTweets}
               />
-            </div>
-          </Box>
+            </Grid>
+          </Grid>
         </>
       )}
     </>

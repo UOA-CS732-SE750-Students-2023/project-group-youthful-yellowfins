@@ -3,7 +3,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { IChartValues } from '../../models/common';
 
-const Piechart = ({ positive, negative, neutral }: IChartValues) => {
+const Piechart = ({ positive, negative, neutral, totalTweetsAnalysed }: IChartValues) => {
   const options: Highcharts.Options = {
     colors: ['#b5179eff', '#7209b7ff', '#3a0ca3ff'],
     chart: {
@@ -16,7 +16,7 @@ const Piechart = ({ positive, negative, neutral }: IChartValues) => {
       text: 'Sentiment Overview',
     },
     subtitle: {
-      text: 'Tweets Analyzed',
+      text: `${totalTweetsAnalysed.toString()} Tweets Analyzed`,
       align: 'center',
       verticalAlign: 'middle',
       y: 80,

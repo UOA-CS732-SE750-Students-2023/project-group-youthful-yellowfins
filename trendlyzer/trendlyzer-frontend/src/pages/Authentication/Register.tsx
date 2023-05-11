@@ -12,6 +12,7 @@ import {
   Box,
   Typography,
   Snackbar,
+  Card,
 } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 
@@ -71,101 +72,122 @@ const Register = () => {
       )}
       <Box
         sx={{
-          marginTop: 8,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
         }}
       >
-        <Typography component='h1' variant='h5'>
-          Sign Up
-        </Typography>
-        <Box component='form' onSubmit={handleSubmit} sx={{ mt: 1 }}>
-          <TextField
-            margin='normal'
-            required
-            fullWidth
-            id='firstname'
-            label='First name'
-            name='firstname'
-            autoComplete='firstname'
-            autoFocus
-          />
-          <TextField
-            margin='normal'
-            required
-            fullWidth
-            id='lastname'
-            label='Last name'
-            name='lastname'
-            autoComplete='lastname'
-          />
-          <TextField
-            margin='normal'
-            required
-            fullWidth
-            id='username'
-            label='Username'
-            name='username'
-            autoComplete='username'
-          />
-          <TextField
-            margin='normal'
-            required
-            fullWidth
-            id='email'
-            label='Email Address'
-            name='email'
-            autoComplete='email'
-            onChange={handleChange}
-            {...(!isEmailValid && isEmailValid !== undefined ? { error: true } : {})}
-            variant='outlined'
-            helperText={!isEmailValid ? 'Enter valid email' : ''}
-          />
-          <TextField
-            margin='normal'
-            required
-            fullWidth
-            name='password'
-            label='Password'
-            type='password'
-            id='password'
-            autoComplete='current-password'
-          />
-          <FormControlLabel
-            control={<Checkbox value='remember' color='success' />}
-            label='Remember me'
-          />
-          <Button
-            type='submit'
-            fullWidth
-            variant='contained'
-            sx={{ mt: 3, mb: 2, background: '#800080' }}
+        <Card
+          sx={{
+            margin: '60px',
+            padding: '30px',
+            justifyContent: 'space-between',
+            boxShadow: '0px 0px 5px 5px rgb(192,192,192)',
+            borderRadius: '3%',
+            display: 'flex',
+            flexDirection: 'column',
+            maxWidth: '50%',
+          }}
+        >
+          <Box
+            sx={{
+              marginTop: 3,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
           >
-            Sign Up
-          </Button>
-          <Grid container sx={{ justifyContent: 'center' }}>
-            <Grid item>
-              <Link
-                href='/login'
-                variant='body2'
-                style={{ textDecoration: '#800080', color: '#800080' }}
+            <img src='homepage-logo.jpg' className='logo-img' />
+            <Typography component='h1' variant='h5'>
+              Sign Up
+            </Typography>
+            <Box component='form' onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <TextField
+                margin='normal'
+                required
+                fullWidth
+                id='firstname'
+                label='First name'
+                name='firstname'
+                autoComplete='firstname'
+                autoFocus
+              />
+              <TextField
+                margin='normal'
+                required
+                fullWidth
+                id='lastname'
+                label='Last name'
+                name='lastname'
+                autoComplete='lastname'
+              />
+              <TextField
+                margin='normal'
+                required
+                fullWidth
+                id='username'
+                label='Username'
+                name='username'
+                autoComplete='username'
+              />
+              <TextField
+                margin='normal'
+                required
+                fullWidth
+                id='email'
+                label='Email Address'
+                name='email'
+                autoComplete='email'
+                onChange={handleChange}
+                {...(!isEmailValid && isEmailValid !== undefined ? { error: true } : {})}
+                variant='outlined'
+                helperText={!isEmailValid && isEmailValid !== undefined ? 'Enter valid email' : ''}
+              />
+              <TextField
+                margin='normal'
+                required
+                fullWidth
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                autoComplete='current-password'
+              />
+              <FormControlLabel
+                control={<Checkbox value='remember' color='success' />}
+                label='Remember me'
+              />
+              <Button
+                type='submit'
+                fullWidth
+                variant='contained'
+                sx={{ mt: 3, mb: 2, background: '#800080' }}
               >
-                {'Already have an account? Sign In'}
-              </Link>
-            </Grid>
-          </Grid>
-          <Button
-            fullWidth
-            variant='contained'
-            sx={{ mt: 3, mb: 2, background: '#800080' }}
-            disabled={loading}
-            onClick={(event) => handleGoogleSubmit(event)}
-          >
-            <GoogleIcon sx={{ mr: 1 }} /> Sign up using Google
-          </Button>
-          ;
-        </Box>
+                Sign Up
+              </Button>
+              <Grid container sx={{ justifyContent: 'center' }}>
+                <Grid item>
+                  <Link
+                    href='/login'
+                    variant='body2'
+                    style={{ textDecoration: '#800080', color: '#800080' }}
+                  >
+                    {'Already have an account? Sign In'}
+                  </Link>
+                </Grid>
+              </Grid>
+              <Button
+                fullWidth
+                variant='contained'
+                sx={{ mt: 3, mb: 2, background: '#800080' }}
+                disabled={loading}
+                onClick={(event) => handleGoogleSubmit(event)}
+              >
+                <GoogleIcon sx={{ mr: 1 }} /> Sign up using Google
+              </Button>
+            </Box>
+          </Box>
+        </Card>
       </Box>
     </>
   );

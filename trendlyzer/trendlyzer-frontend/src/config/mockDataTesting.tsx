@@ -15,17 +15,17 @@ export const countriesList = [
 
 export const categoryList = [
   {
-    name: 'All categories',
-    code: 'All',
+    name: 'all',
+    code: 'a',
   },
   {
-    name: 'Arts & Entertainment',
-    code: 3,
+    name: 'Business',
+    code: 'b',
   },
   {
-    name: 'Autos & Vehicles',
-    code: 47,
-  },
+    name: 'Health',
+    code: 'm',
+  }
 ];
 
 export const mockCountryContextData = {

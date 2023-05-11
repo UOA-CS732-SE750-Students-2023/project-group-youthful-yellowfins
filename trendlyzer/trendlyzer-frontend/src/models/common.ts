@@ -65,6 +65,7 @@ export interface IChartValues {
   positive: number;
   neutral: number;
   negative: number;
+  totalTweetsAnalysed: number;
 }
 
 export interface IUser {

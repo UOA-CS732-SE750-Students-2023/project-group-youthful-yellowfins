@@ -12,7 +12,7 @@ const defaultState = {
 export const CategoryContext = createContext<ICategoryContext>(defaultState);
 
 const CategoryProvider = ({ children }: any) => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   const handleCategoryChange = (value: SelectChangeEvent) =>
     setSelectedCategory(value.target.value);
