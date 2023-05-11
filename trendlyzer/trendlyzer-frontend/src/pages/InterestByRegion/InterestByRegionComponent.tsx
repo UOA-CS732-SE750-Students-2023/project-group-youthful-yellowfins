@@ -32,9 +32,8 @@ const InterestByRegionComponent = () => {
 
   const handleKeywordChange = (value: any) => setSelectedKeyword(value.target.value);
 
-  const disableEndDays = (day: any) => {
-    const result = selectedEndDate.subtract(15, 'days');
-    return day.isBefore(result, 'days') || day.isAfter(dayjs(), 'days');
+  const disabledays = (day: any) => {
+    return day.isAfter(dayjs(), 'days');
   };
 
   useEffect(() => {
@@ -84,6 +83,7 @@ const InterestByRegionComponent = () => {
             defaultValue={selectedStartDate}
             value={selectedStartDate}
             onChange={(newValue) => setSelectedStartDate(dayjs(newValue))}
+            shouldDisableDate={disabledays}
           />
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 80 }}>
@@ -92,7 +92,7 @@ const InterestByRegionComponent = () => {
             defaultValue={selectedEndDate}
             value={selectedEndDate}
             onChange={(newValue: any) => setSelectedEndDate(dayjs(newValue))}
-            shouldDisableDate={disableEndDays}
+            shouldDisableDate={disabledays}
           />
         </FormControl>
         <FormControl sx={{ m: 1, minWidth: 120 }}>
