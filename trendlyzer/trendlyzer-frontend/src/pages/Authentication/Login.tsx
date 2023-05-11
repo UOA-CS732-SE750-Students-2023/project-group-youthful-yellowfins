@@ -13,6 +13,7 @@ import {
   TextField,
   Typography,
   Snackbar,
+  Card,
 } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import Loader from '../../components/UIComponents/Loader/LoaderComponent';
@@ -73,86 +74,110 @@ const Login = () => {
       <Container component='main' maxWidth={false}>
         <Box
           sx={{
-            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <Typography component='h1' variant='h5'>
-            Sign in
-          </Typography>
-          <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              id='email'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
-              autoFocus
-              disabled={loading}
-              onChange={handleChange}
-              {...(!isEmailValid && isEmailValid !== undefined ? { error: true } : {})}
-              variant='outlined'
-              helperText={!isEmailValid && isEmailValid !== undefined ? 'Enter valid email' : ''}
-            />
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
-              disabled={loading}
-            />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='success' />}
-              label='Remember me'
-            />
-            <Button
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2, background: '#800080' }}
-              disabled={loading || !isEmailValid}
+          <Card
+            sx={{
+              margin: '60px',
+              padding: '30px',
+              justifyContent: 'space-between',
+              boxShadow: '0px 0px 5px 5px rgb(192,192,192)',
+              borderRadius: '3%',
+              display: 'flex',
+              flexDirection: 'column',
+              maxWidth: '50%',
+            }}
+          >
+            <Box
+              sx={{
+                marginTop: 3,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
-              Sign In
-              {loading && <Loader />}
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link
-                  href='#'
-                  variant='body2'
-                  style={{ textDecoration: '#800080', color: '#800080' }}
+              <img src='homepage-logo.jpg' className='logo-img' />
+              <Typography component='h1' variant='h5'>
+                Sign in
+              </Typography>
+              <Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <TextField
+                  margin='normal'
+                  required
+                  fullWidth
+                  id='email'
+                  label='Email Address'
+                  name='email'
+                  autoComplete='email'
+                  autoFocus
+                  disabled={loading}
+                  onChange={handleChange}
+                  {...(!isEmailValid && isEmailValid !== undefined ? { error: true } : {})}
+                  variant='outlined'
+                  helperText={
+                    !isEmailValid && isEmailValid !== undefined ? 'Enter valid email' : ''
+                  }
+                />
+                <TextField
+                  margin='normal'
+                  required
+                  fullWidth
+                  name='password'
+                  label='Password'
+                  type='password'
+                  id='password'
+                  autoComplete='current-password'
+                  disabled={loading}
+                />
+                <FormControlLabel
+                  control={<Checkbox value='remember' color='success' />}
+                  label='Remember me'
+                />
+                <Button
+                  type='submit'
+                  fullWidth
+                  variant='contained'
+                  sx={{ mt: 3, mb: 2, background: '#800080' }}
+                  disabled={loading || !isEmailValid}
                 >
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link
-                  href='/register'
-                  variant='body2'
-                  style={{ textDecoration: '#800080', color: '#800080' }}
+                  Sign In
+                  {loading && <Loader />}
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link
+                      href='#'
+                      variant='body2'
+                      style={{ textDecoration: '#800080', color: '#800080' }}
+                    >
+                      Forgot password?
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link
+                      href='/register'
+                      variant='body2'
+                      style={{ textDecoration: '#800080', color: '#800080' }}
+                    >
+                      Dont have an account? Sign Up
+                    </Link>
+                  </Grid>
+                </Grid>
+                <Button
+                  fullWidth
+                  variant='contained'
+                  sx={{ mt: 3, mb: 2, background: '#800080' }}
+                  disabled={loading}
+                  onClick={(event) => handleGoogleSubmit(event)}
                 >
-                  Dont have an account? Sign Up
-                </Link>
-              </Grid>
-            </Grid>
-            <Button
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2, background: '#800080' }}
-              disabled={loading}
-              onClick={(event) => handleGoogleSubmit(event)}
-            >
-              <GoogleIcon sx={{ mr: 1 }} /> Sign in using Google
-            </Button>
-          </Box>
+                  <GoogleIcon sx={{ mr: 1 }} /> Sign in using Google
+                </Button>
+              </Box>
+            </Box>
+          </Card>
         </Box>
       </Container>
     </>
