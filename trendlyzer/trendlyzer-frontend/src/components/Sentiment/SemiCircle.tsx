@@ -5,7 +5,7 @@ import { IChartValues } from '../../models/common';
 
 const Piechart = ({ positive, negative, neutral, totalTweetsAnalysed }: IChartValues) => {
   const options: Highcharts.Options = {
-    colors: ['#b5179eff', '#7209b7ff', '#3a0ca3ff'],
+    colors: ['#34c52a', '#fcdc0c', '#c6102c'],
     chart: {
       plotBackgroundColor: undefined,
       plotBorderWidth: 0,

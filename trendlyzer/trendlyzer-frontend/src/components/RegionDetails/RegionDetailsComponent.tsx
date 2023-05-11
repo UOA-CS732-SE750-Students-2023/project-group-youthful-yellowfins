@@ -12,6 +12,7 @@ import { CountriesContext } from '../../context/CountriesContext';
 import highchartsMap from 'highcharts/modules/map';
 import Loader from '../UIComponents/Loader/LoaderComponent';
 import NoResultFoundComponent from '../NoResultFound/NoResultFoundComponent';
+import styled from '@emotion/styled';
 
 highchartsMap(Highcharts);
 
@@ -56,6 +57,15 @@ const RegionDetailsComponent = ({
       resizable: false,
     },
   ];
+
+  const StyledDataGrid = styled(DataGrid)((theme) => ({
+    '& .MuiDataGrid-sortIcon': {
+    color: 'white',
+    },
+    '& .MuiDataGrid-menuIconButton': {
+    color: 'white'
+    },
+    }));
 
   useEffect(() => {
     if (searchKeyword) {
@@ -182,7 +192,7 @@ const RegionDetailsComponent = ({
           </div>
           {showTable && (
             <Box sx={{ height: 400, width: '100%' }}>
-              <DataGrid
+              <StyledDataGrid
                 rows={rows}
                 columns={columns}
                 initialState={{
