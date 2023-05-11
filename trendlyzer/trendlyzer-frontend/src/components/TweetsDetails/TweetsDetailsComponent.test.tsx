@@ -1,3 +1,6 @@
+/**
+ * Purpose: This files contain test cases for tweet details component
+ **/
 import { render, screen } from '@testing-library/react';
 import TweetDetailsComponent from './TweetsDetailsComponent';
 

@@ -1,3 +1,6 @@
+/**
+ * Purpose: This files contain test cases for real time component
+ **/
 import { render, screen } from '@testing-library/react';
 import RealTimeTrendsComponent from './index';
 import { CountriesContext } from '../../context/CountriesContext';

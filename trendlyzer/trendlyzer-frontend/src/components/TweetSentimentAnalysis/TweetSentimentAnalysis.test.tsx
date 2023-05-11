@@ -1,3 +1,6 @@
+/**
+ * Purpose: This files contain test cases for tweet sentimental analysis component
+ **/
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

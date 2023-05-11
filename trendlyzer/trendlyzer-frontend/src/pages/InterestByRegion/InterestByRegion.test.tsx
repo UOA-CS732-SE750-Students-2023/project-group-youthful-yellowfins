@@ -1,3 +1,6 @@
+/**
+ * Purpose: This files contain test cases for interest by region page
+ **/
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import InterestByRegionComponent from './InterestByRegionComponent';
