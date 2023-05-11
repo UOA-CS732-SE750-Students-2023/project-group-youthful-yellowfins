@@ -51,7 +51,7 @@ exports.getTweets = async (req, res) => {
         throw new ApiException(Constants.SEARCH_KEYWORD_MISSING_ERROR_MESSAGE,
           Constants.BAD_REQUEST_ERROR_CODE);
       }
-      let limit = 500;
+      let limit = 10;
       let response = null;
       if (req.query?.limit) {
         limit = req.query?.limit
