@@ -1,3 +1,6 @@
+/**
+ * Purpose: This files contain test cases for dashboard
+ **/
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { CountriesContext } from '../../context/CountriesContext';
