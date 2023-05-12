@@ -165,7 +165,7 @@ const RegionDetailsComponent = ({
         </Typography>
       )}
       {!loading && searchKeyword && showTable && trendsList.length <= 1 && (
-        <NoResultFoundComponent />
+        <NoResultFoundComponent data= {'Please try changing keywords, dates or region.'}/>
       )}
       {loading && showTable && <Loader />}
       {error && (

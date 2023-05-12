@@ -5,8 +5,6 @@ import {
   Alert,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Box,
@@ -163,10 +161,6 @@ const Register = () => {
                     ? 'Password should be at least 6 characters'
                     : ''
                 }
-              />
-              <FormControlLabel
-                control={<Checkbox value='remember' color='success' />}
-                label='Remember me'
               />
               <Button
                 type='submit'
