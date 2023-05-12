@@ -26,7 +26,7 @@ const Piechart = ({ positive, negative, neutral, totalTweetsAnalysed }: IChartVa
       y: 80,
     },
     tooltip: {
-      pointFormat: '<b>{point.percentage:.1f}%</b>',
+      pointFormat: '<b>{point.percentage:.2f}%</b>',
     },
     accessibility: {
       point: {
@@ -57,9 +57,9 @@ const Piechart = ({ positive, negative, neutral, totalTweetsAnalysed }: IChartVa
         name: 'Sentiment',
         innerSize: '50%',
         data: [
-          [`Positive ${positivePercentage.toFixed(1)}%`, positivePercentage],
-          [`Neutral ${neutralPercentage.toFixed(1)}%`, neutralPercentage],
-          [`Negative ${negativePercentage.toFixed(1)}%`, negativePercentage],
+          [`Positive ${positivePercentage.toFixed(2)}%`, positivePercentage],
+          [`Neutral ${neutralPercentage.toFixed(2)}%`, neutralPercentage],
+          [`Negative ${negativePercentage.toFixed(2)}%`, negativePercentage],
         ],
       },
     ],
