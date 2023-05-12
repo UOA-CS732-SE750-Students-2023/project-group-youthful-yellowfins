@@ -1,3 +1,12 @@
+/**
+ * Author:  Ashish Agnihotri
+ * Purpose: This function powers the explore trend page on the website, allows users to use different filters including
+ * searching trends region wise, date wise, autocompleting trends based off of user inputs. This component also has a function
+ * getCountryCodes - thats used by the frontend to convert the country related content from cca2 code to something interpretable
+ * by regular English speaking users
+ **/
+
+
 const BlogModel = require("../models/Trends");
 const googleTrends = require("google-trends-api");
 const axios = require('axios');
@@ -16,7 +25,7 @@ const unsupportedCountries = ['Barbados', 'Réunion', 'Suriname', 'Namibia','Gui
  'Palau','Bulgaria','Nauru', 'Cambodia','Jersey','Palestine','Mali','Iran','Niue','Tajikistan', 'Kosovo','Saint Helena, Ascension and Tristan da Cunha','Norfolk Island','Oman','El Salvador','Lebanon','Vatican City','Ecuador','Guam','Croatia','Solomon Islands','Honduras','Christmas Island',
  'Puerto Rico', 'Hong Kong'];
 
-
+// Retrieves autocomplete suggestions for a given query
  async function getAutocomplete(query){
   try{
     if(!query){
@@ -36,6 +45,8 @@ const unsupportedCountries = ['Barbados', 'Réunion', 'Suriname', 'Namibia','Gui
   }
   
  }
+
+ // Fetches real-time trends for a given request
 async function getRealTimeTrends(req) {
   let response = null;
     let data = await googleTrends.realTimeTrends({
@@ -55,7 +66,7 @@ async function getRealTimeTrends(req) {
 
   }
 
-// Search top 20 trending search keywords in past 24 hrs - segregation by date, adds 7 articles hyperlinks per trending keyword
+// Fetches daily trends for a given request
 async function getDailyTrends (req)  {
   let response = null;
     let data = await googleTrends.dailyTrends({
@@ -73,7 +84,8 @@ async function getDailyTrends (req)  {
     return response;
 }
 
-// gives list of places/countries (based on input) where popularity of keyword - Doubt - ordering how?
+
+// Fetches trends by region for a given request
 async function getTrendsByRegion(req) {
   let response = null;
   try {
@@ -104,24 +116,8 @@ async function getTrendsByRegion(req) {
     return response;
 }
 
-// related queries - start and end date - default start - some date in 2004 (ranked List), just queries, no subsequent articles
-async function relatedQueries(){
-    const data = await googleTrends.relatedQueries({
-        keyword: "COVID",
-        geo: "NZ"
-    });
 
-}
-
-// just gives related topics - no further hyperlinks - title, topic segregation - potential use if use with dailyTrends api (but user has to mention country)
-async function autoComplete(){
-    const data = await googleTrends.autoComplete({
-        keyword: "DONALD "
-    });
-
-}
-
-
+// Translates response from the interestByRegion endpoint
 function translateTrendsByRegionResponse(response){
   let trendingItemsList = [];
   if(response?.default?.geoMapData?.length){
@@ -138,6 +134,7 @@ function translateTrendsByRegionResponse(response){
   return trendingItemsList;
 }
 
+// Translates response from the realTimeTrends endpoint
 function translateRealTimeTrendsResponse(response){
   let trendingItemsList = [];
   if(response?.storySummaries?.trendingStories.length){
@@ -160,7 +157,7 @@ function translateRealTimeTrendsResponse(response){
   return trendingItemsList;
 }
 
-
+// Translates response from the dailyTrends endpoint
 function translateTrendsByDateResponse(response){
   let trendingItemsList = [];
   if(response?.default?.trendingSearchesDays?.length){
@@ -195,7 +192,7 @@ function translateTrendsByDateResponse(response){
 }
 
 
-
+// Fetches country codes and converts them to human-readable country names
 async function fetchCountryCodes() {
   try {
     const cachedCountryResults = await redisClient.get('masterCountries');
@@ -234,21 +231,3 @@ module.exports = {
   fetchCountryCodes,
   getAutocomplete
 };
-
-// interestByRegion();
- 
-
-// exports.createBlog = async (blog) => {
-//   return await BlogModel.create(blog);
-// };
-// exports.getBlogById = async (id) => {
-//   return await BlogModel.findById(id);
-// };
- 
-// exports.updateBlog = async (id, blog) => {
-//   return await BlogModel.findByIdAndUpdate(id, blog);
-// };
-
-// exports.deleteBlog = async (id) => {
-//   return await BlogModel.findByIdAndDelete(id);
-// };

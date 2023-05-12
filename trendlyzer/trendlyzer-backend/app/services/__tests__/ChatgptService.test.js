@@ -1,3 +1,10 @@
+/**
+ * Author: Ashish Agnihotri
+ * Created: 11.06.2023
+ * Purpose: Unit test cases 
+ **/
+
+
 const axios = require('axios');
 const nock = require('nock');
 const ChatGPTService = require('../ChatgptService');
