@@ -52,5 +52,7 @@ Clone the repository
 4.	Start the frontend react project on port 3001 and start the backend project on port 3000.
 5.	Download the credentials given to you and keep it in the trendlyzer-backend folder as mentioned below.
 ![image](https://github.com/UOA-CS732-SE750-Students-2023/project-group-youthful-yellowfins/assets/30353201/62660bbd-cfbe-449e-af36-e548440728c1)
-6.	Run the command in trendlyzer-backend on your terminal in the folder to setup Google environment variable using -
+6.	If you are using Mac then please make sure the downloaded environment file has .env file as an extension type.
+7.	Run the command in trendlyzer-backend on your terminal in the folder to setup Google environment variable using
  **set GOOGLE_APPLICATION_CREDENTIALS=./secret.json**
+
