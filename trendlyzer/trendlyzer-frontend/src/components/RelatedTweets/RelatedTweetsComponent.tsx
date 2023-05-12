@@ -76,7 +76,7 @@ const RelatedTweetsComponent = ({ keyword }: string | any) => {
               <AccordionDetails key={tweet.title} sx={{ display: 'inline-flex' }}>
                 <div style={{ height: '250px', overflowY: 'scroll' }}>
                   <TwitterTweetEmbed
-                    tweetId={tweet.id_str}
+                    tweetId={tweet.id}
                     key={tweet.id}
                     placeholder={
                       <Box
