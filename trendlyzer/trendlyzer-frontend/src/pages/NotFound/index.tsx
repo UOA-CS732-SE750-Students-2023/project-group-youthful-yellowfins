@@ -21,7 +21,7 @@ const NotFound = () => {
         </Grid>
         <Grid item>
           <Typography variant='h5' align='center' className={classes.text}>
-            The page you requested is on a coffee break. We`ll let you know when it`s back.
+            The page you requested is on a coffee break. Coming soon.
           </Typography>
         </Grid>
         <Grid item>

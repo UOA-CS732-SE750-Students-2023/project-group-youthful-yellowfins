@@ -13,7 +13,7 @@ const DailyTrendsComponent = () => {
   const { countriesList, selectedCountry, handleCountryChange } = useContext(CountriesContext);
 
   const disableDays = (day: any) => {
-    const result = selectedDate.subtract(15, 'days');
+    const result = dayjs().subtract(15, 'days');
     return day.isBefore(result, 'days') || day.isAfter(dayjs(), 'days');
   };
 

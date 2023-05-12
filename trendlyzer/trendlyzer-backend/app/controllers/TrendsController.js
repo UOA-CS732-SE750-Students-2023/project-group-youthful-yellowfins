@@ -11,27 +11,15 @@ const Constants = require("../helper/Constants");
 const chatgptService = require('../services/ChatgptService');
 var ApiException = require('././../models/Error');
 
+// Fetches autocomplete suggestions for a given keyword
 exports.getAutocomplete = async(req, res) => {
   const query = req.query.keyword;
-
-  // try{
-  //   if(!req.query?.keyword){
-  //     throw new ApiException(Constants.INTERNAL_SERVER_ERROR_CODE, 
-  //       Constants.BAD_REQUEST_ERROR_CODE);
-  //   }
     
     const response = await TrendsService.getAutocomplete(query);
     res.json({   status: true, message : 'success', result : response});
-
-  // } catch(err) {
-  //   if(err instanceof ApiException){
-  //     res.status(err.statusCode).json({ message: err.message , status : false});
-  //   } else {
-  //     res.status(Constants.INTERNAL_SERVER_ERROR_CODE).json({ message: err.message , status : false});
-  //   }
-  // }
 }
 
+// Fetches the country codes (code conversion used in frontend)
 exports.getCountryCodes = async (req, res) => {
   
   try {
@@ -50,6 +38,7 @@ exports.getCountryCodes = async (req, res) => {
 };
 }
 
+// Sends a message to the ChatGPT API and returns its response
 exports.sendMessage = async (req, res) => {
   
   try {
@@ -69,7 +58,7 @@ exports.sendMessage = async (req, res) => {
 }
 };
  
-
+// Fetches trends by date and geocode
   exports.getTrendsByDate = async (req, res) => {
     try {
       let response = null;
@@ -95,7 +84,7 @@ exports.sendMessage = async (req, res) => {
     }
   };
 
-
+// Fetches trends by region for a given keyword
   exports.getTrendByRegion = async (req, res) => {
     try {
       let response = null;
@@ -116,40 +105,3 @@ exports.sendMessage = async (req, res) => {
       }
     }
   };
-
-
-// exports.createBlog = async (req, res) => {
-//   try {
-//     const blog = await blogService.createBlog(req.body);
-//     res.json({ data: blog, status: "success" });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
-// exports.getBlogById = async (req, res) => {
-//   try {
-//     const blog = await blogService.getBlogById(req.params.id);
-//     res.json({ data: blog, status: "success" });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
-// exports.updateBlog = async (req, res) => {
-//   try {
-//     const blog = await blogService.updateBlog(req.params.id, req.body);
-//     res.json({ data: blog, status: "success" });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };
-
-// exports.deleteBlog = async (req, res) => {
-//   try {
-//     const blog = await blogService.deleteBlog(req.params.id);
-//     res.json({ data: blog, status: "success" });
-//   } catch (err) {
-//     res.status(500).json({ error: err.message });
-//   }
-// };

@@ -8,7 +8,7 @@ const ModalComponent = ({ isModalOpen, data }: any) => {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 600,
+    width: 1000,
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
@@ -23,10 +23,20 @@ const ModalComponent = ({ isModalOpen, data }: any) => {
           {data.map((info: any, index: number) => {
             return (
               <>
-                <Typography id={`modal-modal-title-${index}`} variant='subtitle1' component='h5'>
+                <Typography
+                  id={`modal-modal-title-${index}`}
+                  variant='subtitle2'
+                  component='h5'
+                  sx={{ mt: 2 }}
+                >
                   {info.title}
                 </Typography>
-                <Typography id={`modal-modal-description-${index}`} sx={{ mt: 2 }}>
+                <Typography
+                  variant='body2'
+                  component='p'
+                  id={`modal-modal-description-${index}`}
+                  sx={{ whiteSpace: 'pre-line' }}
+                >
                   {info.description}
                 </Typography>
               </>

@@ -1,3 +1,6 @@
+/**
+ * Purpose: This files contain test cases for daily trends details header component
+ **/
 import { render } from '@testing-library/react';
 import { TrendDetailsContext } from '../../context/TrendDetailsContext';
 import TrendDetailsHeaderComponent from './TrendDetailsHeaderComponent';

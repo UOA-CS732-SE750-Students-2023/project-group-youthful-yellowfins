@@ -4,8 +4,12 @@ import HighchartsReact from 'highcharts-react-official';
 import { IChartValues } from '../../models/common';
 
 const Piechart = ({ positive, negative, neutral, totalTweetsAnalysed }: IChartValues) => {
+  const positivePercentage = (positive / totalTweetsAnalysed) * 100;
+  const negativePercentage = (negative / totalTweetsAnalysed) * 100;
+  const neutralPercentage = (neutral / totalTweetsAnalysed) * 100;
+
   const options: Highcharts.Options = {
-    colors: ['#b5179eff', '#7209b7ff', '#3a0ca3ff'],
+    colors: ['#34c52a', '#fcdc0c', '#c6102c'],
     chart: {
       plotBackgroundColor: undefined,
       plotBorderWidth: 0,
@@ -22,7 +26,7 @@ const Piechart = ({ positive, negative, neutral, totalTweetsAnalysed }: IChartVa
       y: 80,
     },
     tooltip: {
-      pointFormat: '<b>{point.percentage:.1f}%</b>',
+      pointFormat: '<b>{point.percentage:.2f}%</b>',
     },
     accessibility: {
       point: {
@@ -53,9 +57,9 @@ const Piechart = ({ positive, negative, neutral, totalTweetsAnalysed }: IChartVa
         name: 'Sentiment',
         innerSize: '50%',
         data: [
-          [`Positive ${positive}%`, positive],
-          [`Neutral ${neutral}%`, neutral],
-          [`Negative ${negative}%`, negative],
+          [`Positive ${positivePercentage.toFixed(2)}%`, positivePercentage],
+          [`Neutral ${neutralPercentage.toFixed(2)}%`, neutralPercentage],
+          [`Negative ${negativePercentage.toFixed(2)}%`, negativePercentage],
         ],
       },
     ],

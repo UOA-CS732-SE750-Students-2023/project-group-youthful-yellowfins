@@ -1,3 +1,8 @@
+/**
+ * Author: Ankita Mohata
+ *
+ * This file contains the data models for variables/functions types.
+ */
 export interface ICountryResponse {
   cca2: string;
   name: { common: string };

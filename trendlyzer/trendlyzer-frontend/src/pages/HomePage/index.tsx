@@ -1,7 +1,7 @@
 /**
  * Author:  Shubham Gujare
  * Created: 01.05.2023
- * Purpose: This files serves as a default home page to the 
+ * Purpose: This files serves as a default home page to the
  * application and demonstrates the features of the application in a attractive ui ux manner
  **/
 
@@ -28,7 +28,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && sessionStorage.getItem('token')) {
       navigate('/dashboard');
     }
   }, [isAuthenticated]);
@@ -40,17 +40,22 @@ const HomePage = () => {
         <div id='home' className={classes.main}>
           <NavBar></NavBar>
           <div className={classes.heroSection}>
-        <div className={classes.leftSection} >
-          <h1 className={classes.pageTitle}>Welcome, Trendlyzers</h1>
-          <h4 className={classes.subTitle}>Your place to deep dive down into the analytics and sentiments behind the buzzing topics !</h4>
-          <button className={classes.getStartedBtn}
-           onClick={navigateToRegister}> Get Started</button>
-        </div>
-        <div className={classes.rightSection}>
-        <Atropos>
-            <img style={{ height: '675px'}} src= "main-theme.jpg" data-atropos-offset="-5"  />
-        </Atropos>
-        </div>
+            <div className={classes.leftSection}>
+              <h1 className={classes.pageTitle}>Welcome, Trendlyzers</h1>
+              <h4 className={classes.subTitle}>
+                Your place to deep dive down into the analytics and sentiments behind the buzzing
+                topics !
+              </h4>
+              <button className={classes.getStartedBtn} onClick={navigateToRegister}>
+                {' '}
+                Get Started
+              </button>
+            </div>
+            <div className={classes.rightSection}>
+              <Atropos>
+                <img style={{ height: '675px' }} src='main-theme.jpg' data-atropos-offset='-5' />
+              </Atropos>
+            </div>
           </div>
           <Why></Why>
           <Products></Products>

@@ -1,3 +1,11 @@
+/**
+ * Author: Ankita Mohata
+ *
+ * This custom hook manages the delay time for making an API call.
+ * This can be used with search component to hold the api call
+ * until the user is finished typing the search keyword.
+ */
+
 import { useEffect, useState } from 'react';
 
 // T is a generic type for value parameter, our case this will be string

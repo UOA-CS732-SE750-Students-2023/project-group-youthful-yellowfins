@@ -1,8 +1,16 @@
+/**
+ * Author:  Ashish Agnihotri
+ * Purpose: This function sends two prompts to ChatGPT based on input from frontend and  
+ * sends back the response to the frontend to be displayed
+ **/
+
+
 const axios = require('axios');
 const URLs = require('../helper/URLs');
 
 const CHATGPT_API_KEY = process.env.CHATGPT_API_KEY;
 
+// Generates a response from the ChatGPT API for a given message using two user based prompts
 async function generateResponse(message) {
   const prompt1 = `Can you give me some background information on ${message}`;
   const prompt2 = `Why would ${message} be trending?`;

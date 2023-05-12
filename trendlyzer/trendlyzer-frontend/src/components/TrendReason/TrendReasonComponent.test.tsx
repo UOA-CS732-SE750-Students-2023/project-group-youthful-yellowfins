@@ -1,3 +1,6 @@
+/**
+ * Purpose: This files contain test cases for trends reason component
+ **/
 import React from 'react';
 import { render } from '@testing-library/react';
 import TrendReasonComponent from './TrendReasonComponent';
