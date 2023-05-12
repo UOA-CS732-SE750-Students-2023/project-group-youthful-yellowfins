@@ -25,6 +25,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [isEmailValid, setIsEmailValid] = useState<boolean>();
   const [showError, setShowError] = useState<any>(!!authError);
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>();
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -45,6 +46,8 @@ const Register = () => {
     const emailValid = regEx.test(value.target.value);
     setIsEmailValid(emailValid);
   };
+
+  const handlePasswordChange = (value: any) => setIsPasswordValid(value.target.value.length > 5);
 
   const handleGoogleSubmit = (event: any) => {
     event.preventDefault();
@@ -152,6 +155,14 @@ const Register = () => {
                 type='password'
                 id='password'
                 autoComplete='current-password'
+                onChange={handlePasswordChange}
+                {...(!isPasswordValid && isPasswordValid !== undefined ? { error: true } : {})}
+                variant='outlined'
+                helperText={
+                  !isPasswordValid && isPasswordValid !== undefined
+                    ? 'Password should be at least 6 characters'
+                    : ''
+                }
               />
               <FormControlLabel
                 control={<Checkbox value='remember' color='success' />}
@@ -162,6 +173,12 @@ const Register = () => {
                 fullWidth
                 variant='contained'
                 sx={{ mt: 3, mb: 2, background: '#800080' }}
+                disabled={
+                  !isEmailValid ||
+                  isEmailValid === undefined ||
+                  !isPasswordValid ||
+                  isPasswordValid === undefined
+                }
               >
                 Sign Up
               </Button>

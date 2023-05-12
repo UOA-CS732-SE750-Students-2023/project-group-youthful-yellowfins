@@ -5,9 +5,11 @@ import TabPanel from '../../components/UIComponents/TabPanel';
 import { TrendDetailsContext } from '../../context/TrendDetailsContext';
 import TrendDetailsHeaderComponent from '../../components/TrendDetailsHeader/TrendDetailsHeaderComponent';
 import { getChatgptData, getSentimentAnalysis } from '../../services/trendDetailsService';
+import { CountriesContext } from '../../context/CountriesContext';
 
 const TrendsDetails = () => {
   const { trendDetails, setShowNavigation } = useContext(TrendDetailsContext);
+  const { selectedCountry } = useContext(CountriesContext);
   const [tabValue, setTabValue] = useState(headingsValue.TREND_ANALYSIS);
   const [trendData, setTrendData] = useState<any>({
     loading: true,
@@ -32,7 +34,7 @@ const TrendsDetails = () => {
 
   useEffect(() => {
     // Fetching the information about the trends using chatgpt
-    getChatgptData({ message: trendDetails.title })
+    getChatgptData({ message: trendDetails.title, country: selectedCountry })
       .then((response) => {
         if (response.data.status) {
           setTrendData({
