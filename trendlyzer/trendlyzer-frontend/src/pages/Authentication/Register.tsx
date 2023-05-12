@@ -5,8 +5,6 @@ import {
   Alert,
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Box,
@@ -25,6 +23,7 @@ const Register = () => {
   const navigate = useNavigate();
   const [isEmailValid, setIsEmailValid] = useState<boolean>();
   const [showError, setShowError] = useState<any>(!!authError);
+  const [isPasswordValid, setIsPasswordValid] = useState<boolean>();
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -45,6 +44,8 @@ const Register = () => {
     const emailValid = regEx.test(value.target.value);
     setIsEmailValid(emailValid);
   };
+
+  const handlePasswordChange = (value: any) => setIsPasswordValid(value.target.value.length > 5);
 
   const handleGoogleSubmit = (event: any) => {
     event.preventDefault();
@@ -152,16 +153,26 @@ const Register = () => {
                 type='password'
                 id='password'
                 autoComplete='current-password'
-              />
-              <FormControlLabel
-                control={<Checkbox value='remember' color='success' />}
-                label='Remember me'
+                onChange={handlePasswordChange}
+                {...(!isPasswordValid && isPasswordValid !== undefined ? { error: true } : {})}
+                variant='outlined'
+                helperText={
+                  !isPasswordValid && isPasswordValid !== undefined
+                    ? 'Password should be at least 6 characters'
+                    : ''
+                }
               />
               <Button
                 type='submit'
                 fullWidth
                 variant='contained'
                 sx={{ mt: 3, mb: 2, background: '#800080' }}
+                disabled={
+                  !isEmailValid ||
+                  isEmailValid === undefined ||
+                  !isPasswordValid ||
+                  isPasswordValid === undefined
+                }
               >
                 Sign Up
               </Button>

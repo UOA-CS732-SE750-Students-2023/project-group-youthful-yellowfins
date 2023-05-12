@@ -18,6 +18,7 @@ function Why() {
                 <img src="decode-sentiments.png" width="210" height="132" alt="" className={classes.gridImage}  />
                 <h3>Decode Sentiments</h3>
                 <p> Decode sentiments, uncover untold stories. </p>
+                <br></br>
               </div>
             </div>
             <div className="col col-4">
@@ -32,6 +33,7 @@ function Why() {
                 <img src="stats.jpg" alt="" height="132" width="210" className={classes.gridImage} />
                 <h3>Market Analysis</h3>
                 <p> Navigate business tides with market analysis, turn data into success. </p>
+                <br></br>
               </div>
             </div>
 

@@ -6,8 +6,6 @@ import {
   Box,
   Button,
   Container,
-  Checkbox,
-  FormControlLabel,
   Link,
   Grid,
   TextField,
@@ -132,10 +130,6 @@ const Login = () => {
                   autoComplete='current-password'
                   disabled={loading}
                 />
-                <FormControlLabel
-                  control={<Checkbox value='remember' color='success' />}
-                  label='Remember me'
-                />
                 <Button
                   type='submit'
                   fullWidth
@@ -148,13 +142,6 @@ const Login = () => {
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link
-                      href='#'
-                      variant='body2'
-                      style={{ textDecoration: '#800080', color: '#800080' }}
-                    >
-                      Forgot password?
-                    </Link>
                   </Grid>
                   <Grid item>
                     <Link
