@@ -43,7 +43,7 @@ topics across the globe and provide data analysis and sentiment analysis over th
     b.	You can use this feature by using the analyse sentiment section or by going inside the trend details page.
     
     
-**How to run the application **
+**How to run the application**
 
 Clone the repository 
 1.	Install the node module by using the command NPM Install in the Trendlyzer-Frontend folder and Trendlyzer-Backend folder
