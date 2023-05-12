@@ -60,12 +60,12 @@ const RegionDetailsComponent = ({
 
   const StyledDataGrid = styled(DataGrid)((theme) => ({
     '& .MuiDataGrid-sortIcon': {
-    color: 'white',
+      color: 'white',
     },
     '& .MuiDataGrid-menuIconButton': {
-    color: 'white'
+      color: 'white',
     },
-    }));
+  }));
 
   useEffect(() => {
     if (searchKeyword) {
@@ -165,7 +165,9 @@ const RegionDetailsComponent = ({
         </Typography>
       )}
       {!loading && searchKeyword && showTable && trendsList.length <= 1 && (
-        <NoResultFoundComponent data= {'Please try changing keywords, dates or region.'}/>
+        <Box sx={{ m: 2 }}>
+          <NoResultFoundComponent data={'Please try changing keywords, dates or region.'} />
+        </Box>
       )}
       {loading && showTable && <Loader />}
       {error && (
