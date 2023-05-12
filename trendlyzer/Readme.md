@@ -43,7 +43,7 @@ topics across the globe and provide data analysis and sentiment analysis over th
     b.	You can use this feature by using the analyse sentiment section or by going inside the trend details page.
     
     
-How to run the application 
+**How to run the application **
 
 Clone the repository 
 1.	Install the node module by using the command NPM Install in the Trendlyzer-Frontend folder and Trendlyzer-Backend folder
@@ -59,6 +59,7 @@ Clone the repository
 
 
 **Minutes of Meeting**
+
 6March2023 | 10am- 12:30pm	| In-Person
 - Discussion regarding project topics and research
 - Project Topic discussed- sentimental analysis for trends, Data analysis on bush fires & earthquake etc, Health predictor app.
