@@ -35,8 +35,8 @@ const SentimentAnalysisComponent = ({ sentimentData, setSentimentData }: any) =>
       )}
       {showModal && <ModalComponent isModalOpen={showModal} data={sentimentInfo} />}
       {!loading && error && <NoResultFoundComponent />}
-      {!loading && tweets.totalTweetsAnalysed === 0 && <NoResultFoundComponent />}
-      {!loading && !error && tweets.totalTweetsAnalysed !== 0 && (
+      {!loading && !tweets.totalTweetsAnalysed && <NoResultFoundComponent />}
+      {!loading && !error && tweets.totalTweetsAnalysed > 0 && (
         <>
           <Button
             variant='text'
