@@ -65,7 +65,7 @@ const TrendsDetails = () => {
     // Fetching the sentiment analysis about the trend
     getSentimentAnalysis({
       keyword: trendDetails.title,
-      limit: 500,
+      limit: 10,
     })
       .then((response: any) => {
         if (response.data.status) {
