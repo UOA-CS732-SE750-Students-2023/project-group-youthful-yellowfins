@@ -53,6 +53,7 @@ Clone the repository
 5.	Download the credentials given to you and keep it in the trendlyzer-backend folder as mentioned below.
 ![image](https://github.com/UOA-CS732-SE750-Students-2023/project-group-youthful-yellowfins/assets/30353201/62660bbd-cfbe-449e-af36-e548440728c1)
 6.	If you are using Mac then please make sure the downloaded environment file has .env file as an extension type.
-7.	Run the command in trendlyzer-backend on your terminal in the folder to setup Google environment variable using
+7.	Run the command in trendlyzer-backend on your terminal in the folder to setup Google environment variable using below command
  **set GOOGLE_APPLICATION_CREDENTIALS=./secret.json**
+ 8. To test run the frontend and backend project, please input the command **npm test** in the trendlyzer-frontend and trendlyzer-backend folder.
 
