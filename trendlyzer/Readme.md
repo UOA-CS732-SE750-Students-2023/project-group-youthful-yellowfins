@@ -57,3 +57,98 @@ Clone the repository
  **set GOOGLE_APPLICATION_CREDENTIALS=./secret.json**
  8. To test run the frontend and backend project, please input the command **npm test** in the trendlyzer-frontend and trendlyzer-backend folder.
 
+
+**Minutes of Meeting**
+6March2023 | 10am- 12:30pm	| In-Person
+- Discussion regarding project topics and research
+- Project Topic discussed- sentimental analysis for trends, Data analysis on bush fires & earthquake etc, Health predictor app.
+- Research done on third party apis like sentimental analysis, web scraping etc for an hour individually on all the topic
+- Sentimental analysis topic selected and sub task for research got divided
+- Sentiment Analysis API - Shubham (https://www.edenai.co/post/how-to-use-sentiment-analysis-api-with-javascript-in-5-minutes)
+- ChatGPT API - Ankita M
+- Trends- Ashish, Ankita D
+- Discussion on Technologies to use and weekly sprint.
+- Weekly meeting time to be decided
+- Individual Progress
+    - Ashish 
+        - Researched on sentiment analysis API.
+        - Checked google trends API.
+        - Worked on Lab Modules 
+    - Ankita D
+        - Searched for Machine Learning tools or data analysis for health predictor
+        - Research for sentiment analysis API, Eden AI (https://www.edenai.co/)
+        - Lab Modules - Vite 
+    - Ankita M, Shubham
+        - Researched on sentiment analysis API.
+    - Ughanthi
+        - Learning Git command, Javascript
+
+11March2023 | 11am- 12:00pm | Zoom
+- Discussed research on chatgpt, sentimental analysis and trends in first 30 mins.
+- Trending to be wrapped by Sunday (Ashish and Ankita D)
+- Project Proposal 
+    - Shubham - intro 
+    - Ankita M -  Project Management and strategies
+    - Monday and Friday regular meetings 
+    - Ughanthi 
+      - Related work and sample for project proposal 
+      - Learning JS and github 
+
+15March2023 | 10:30am- 11:00pm | Zoom
+- Feature Discussion
+- Landing Page (About Us) 
+- showcasing CSS skills
+- Sign Up and Sign In Button
+- Auth0, Firebase
+- Password Management
+- Trends Dashboard
+- Filters: Region Countrywise and Time week, months
+- Download Report
+- Nice to have feature: Free and premium accounts save it on premium accounts
+- Trending Details Page (Uses Google Trends)
+- Sections on frontend (Menu)
+- Why using Chapgpt
+- Tweets on recent based on word, articles
+- Sentimental Analysis
+- Word wise chart based from positive to negative scale
+- Nice to have feature: Can be split on free and premium.
+
+23March2023 | 4pm- 5:30pm | In-Person
+- Discussed layout for UI - Ankita, Shubahm, Ashish
+- Wireframe task - Ankita D
+- Explore Chatgpt API complete - Ankita
+- Progress on Landing page UI (Ughanthi and Ankita D)
+
+10April2023 | 11am-12pm | Zoom
+- APIs (Shubham and Ashish)
+- Get daily trends api
+- Get real-time trends api
+- Chatgpt api
+- Country code api
+- Progress on landing page UI (Ughanthi and Ankita D)
+- Authentication using firebase (Ughanthi)
+- Progress on the application UI (Ankita)
+
+17April2023 | 9pm-10pm | Zoom
+- Progress on the application UI (Ankita)
+- Working on Landing page (Ughanthi)
+- Integration with backend 
+- Low level wireframe done (Ankita D)
+- APIs in progress (Shubham and Ashish)
+
+22April2023 | 9pm-10pm | Zoom
+- Backend APIs are complete (Shubham and Ashish)
+- UI Progress (Ankita)
+- Dashboard complete
+- Explore trends complete
+- Other UI pages in progress (Ankita)
+
+28April2023 | 9pm-10pm | Zoom
+- UI progress (Ankita)
+- Analyze sentiment complete
+- Trends Details in progress
+- Backend unit testing (Ashish & Shubham)
+
+8May2023 | 2pm-5pm | In-Person
+Sat together, discussed and did testing (Ashish, Ankita, Ankita, Shubham, Ughanthi)
+
